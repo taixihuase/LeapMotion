@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Define;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Core.MVC
 {
-    public class Notifier
+    public class Notifier : INotifier
     {
-        public delegate void MyDelegate(params object[] args);
+        private Dictionary<string, VariadicDelegate> events = new Dictionary<string, VariadicDelegate>();
 
-        private Dictionary<string, MyDelegate> events = new Dictionary<string, MyDelegate>();
-
-        public void AddEventHandler(string eventName, MyDelegate func)
+        public void AddEventHandler(string eventName, VariadicDelegate func)
         {
             if(events.ContainsKey(eventName))
             {
@@ -20,7 +19,7 @@ namespace Core.MVC
             events[eventName] = func;
         }
 
-        public void RemoveEventHandler(string eventName, MyDelegate func)
+        public void RemoveEventHandler(string eventName, VariadicDelegate func)
         {
             if(events.ContainsKey(eventName))
             {
@@ -30,7 +29,7 @@ namespace Core.MVC
 
         public void RaiseEvent(string eventName, params object[] e)
         {
-            MyDelegate func = null;
+            VariadicDelegate func = null;
             if(events.TryGetValue(eventName, out func))
             {
                 if(func != null)
@@ -49,7 +48,7 @@ namespace Core.MVC
                     Delegate[] arr = events[eventName].GetInvocationList();
                     for(int i = 0; i < arr.Length; i++)
                     {
-                        MyDelegate func = arr[i] as MyDelegate;
+                        VariadicDelegate func = arr[i] as VariadicDelegate;
                         RemoveEventHandler(eventName, func);
                     }
                 }

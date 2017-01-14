@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Define;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +9,14 @@ namespace Core.MVC
     {
         protected Model model;
 
-        Dictionary<string, Notifier.MyDelegate> events = new Dictionary<string, Notifier.MyDelegate>();
+        Dictionary<string, VariadicDelegate> events = new Dictionary<string, VariadicDelegate>();
 
         public virtual void Init(Model model)
         {
             this.model = model;
         }
 
-        protected void Bind(Enum attribute, Notifier.MyDelegate func)
+        protected void Bind(Enum attribute, VariadicDelegate func)
         {
             if(model != null)
             {
@@ -30,7 +31,7 @@ namespace Core.MVC
             }
         }
 
-        protected void UnBind(Enum attribute, Notifier.MyDelegate func)
+        protected void UnBind(Enum attribute, VariadicDelegate func)
         {
             if(model != null)
             {
