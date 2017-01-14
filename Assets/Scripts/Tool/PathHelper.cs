@@ -28,6 +28,12 @@ namespace Tool
             }
         }
 
+        private string GetAssetName(string fullPath)
+        {
+            int index = fullPath.LastIndexOf('/');
+            return fullPath.Substring(index + 1, fullPath.Length - index - 1);
+        }
+
         public const string WindowPath = "UI/Window";
 
         public const string ScenePath = "Scene";
