@@ -5,7 +5,7 @@ using Define;
 
 namespace Core.Manager
 {
-    public class FrameManager : MonoSingleton<FrameManager>
+    public sealed class FrameManager : MonoSingleton<FrameManager>
     {
         private event Action onUpdate;
 

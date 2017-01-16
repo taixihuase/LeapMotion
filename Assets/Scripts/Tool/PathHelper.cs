@@ -6,11 +6,18 @@ using UnityEngine;
 
 namespace Tool
 {
-    public class PathHelper : Singleton<PathHelper>
+    public sealed class PathHelper : Singleton<PathHelper>
     {
         private Dictionary<ResourceType, string> resPath = new Dictionary<ResourceType, string>();
 
         public const string FilePrefix = "file:///";
+
+        public const string ABPostfix = ".assetbundle";
+
+        public PathHelper()
+        {
+            InitResourcePath();
+        }
 
         public string AddFileProtocol(string path)
         {
@@ -28,15 +35,27 @@ namespace Tool
             }
         }
 
+        public string AddAssetbundlePostfix(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                return null;
+            }
+            else if (path.Contains(ABPostfix) == false)
+            {
+                return path + ABPostfix;
+            }
+            else
+            {
+                return path;
+            }
+        }
+
         private string GetAssetName(string fullPath)
         {
             int index = fullPath.LastIndexOf('/');
             return fullPath.Substring(index + 1, fullPath.Length - index - 1);
         }
-
-        public const string WindowPath = "UI/Window";
-
-        public const string ScenePath = "Scene";
 
         public string AssetBundlePath
         {
@@ -80,6 +99,21 @@ namespace Tool
             }
         }
 
+        #region Resource Path
 
+        public const string WindowPath = "UI/Window";
+
+        public const string IconPath = "UI/Icon";
+
+        public const string ScenePath = "Scene";
+
+        #endregion
+
+        private void InitResourcePath()
+        {
+            resPath.Add(ResourceType.UI, WindowPath);
+            resPath.Add(ResourceType.Scene, ScenePath);
+            resPath.Add(ResourceType.Icon, IconPath);
+        }
     }
 }

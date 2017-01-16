@@ -7,7 +7,7 @@ using System;
 
 namespace Core.Manager
 {
-    public class ResourceManager
+    public sealed class ResourceManager : Singleton<ResourceManager>
     {
         private Dictionary<string, UnityEngine.Object> loadedAssets = new Dictionary<string, UnityEngine.Object>();
 
@@ -38,7 +38,7 @@ namespace Core.Manager
             return www;
         }
 
-        public void LoadAsset(ResourceType type, string name, bool isAsync = false, Action<UnityEngine.Object> callback = null)
+        public void LoadAsset(ResourceType type, string name, Action<UnityEngine.Object> callback = null, bool isAsync = false)
         {
             string path = PathHelper.Instance.GetResourcePath(type, name);
             if (string.IsNullOrEmpty(path) == false)
@@ -51,59 +51,78 @@ namespace Core.Manager
 
                 if (isAsync)
                 {
-                    CoroutineManager.Instance.StartCoroutine(LoadAssetAsync(path, typeof(UnityEngine.Object), callback));
+                    CoroutineManager.Instance.StartCoroutine(LoadAssetAsync(path, callback));
                 }
                 else
                 {
-                    LoadAsset(path, typeof(UnityEngine.Object), callback);
+                    LoadAsset(path, callback);
                 }
             }
         }
 
-        private void LoadAsset(string path, Type type, Action<UnityEngine.Object> callback)
+        private void LoadAsset(string path, Action<UnityEngine.Object> callback)
         {
             AssetBundle ab = null;
             UnityEngine.Object obj = null;
-#if !UNITY_EDITOR
-            string fullPath = PathHelper.Instance.CombineStreamingFile(path).ToLower();
+            #if !UNITY_EDITOR
+            string fullPath = PathHelper.Instance.AddAssetbundlePostfix(PathHelper.Instance.CombineStreamingFile(path)).ToLower();
             ab = AssetBundle.LoadFromFile(fullPath);
-#endif
+            #endif
             if (ab != null)
             {
                 string[] str = ab.GetAllAssetNames();
-                if(str.Length > 0)
+                if (str.Length > 0)
                 {
                     obj = ab.LoadAsset(str[0]);
                     loadedAssets.Add(path, obj);
+                    if(callback != null)
+                    {
+                        callback(obj);
+                    }
                 }
                 ab.Unload(false);
             }
             else
             {
-                string fullPath = PathHelper.Instance.CombineLocalFile(path);
-                obj = Resources.Load(fullPath);
+                obj = Resources.Load(path);
+                if(obj == null)
+                {
+                    Debug.LogError(string.Format("加载资源 \"{0}\" 失败", path));
+                    return;
+                }
                 loadedAssets.Add(path, obj);
+                if (callback != null)
+                {
+                    callback(obj);
+                }
             }
         }
 
-        private IEnumerator LoadAssetAsync(string path, Type type, Action<UnityEngine.Object> callback)
+        private IEnumerator LoadAssetAsync(string path, Action<UnityEngine.Object> callback)
         {
             string fullPath = PathHelper.Instance.CombineStreamingFile(path).ToLower();
-            string url = PathHelper.Instance.AddFileProtocol(fullPath);
+            string url = PathHelper.Instance.AddAssetbundlePostfix(PathHelper.Instance.AddFileProtocol(fullPath));
             WWW www = new WWW(url);
             loadingAssets.Add(path, www);
             yield return www;
 
             if (string.IsNullOrEmpty(www.error))
             {
+                UnityEngine.Object obj = null;
                 AssetBundle ab = AssetBundle.LoadFromMemory(www.bytes);
-                loadedAssets.Add(path, ab);
+                string[] str = ab.GetAllAssetNames();
+                if (str.Length > 0)
+                {
+                    obj = ab.LoadAsset(str[0]);
+                    loadedAssets.Add(path, obj);
+                }
                 loadingAssets.Remove(path);
                 Debug.Log(string.Format("加载资源包 \"{0}\" 成功", path));
                 if (callback != null)
                 {
-                    callback(ab);
+                    callback(obj);
                 }
+                ab.Unload(false);
             }
             else
             {

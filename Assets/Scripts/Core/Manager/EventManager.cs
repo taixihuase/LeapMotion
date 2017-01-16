@@ -3,7 +3,7 @@ using Define;
 
 namespace Core.Manager
 {
-    public class EventManager : Singleton<EventManager>, INotifier
+    public sealed class EventManager : Singleton<EventManager>, INotifier
     {
         private Notifier notifier = new Notifier();
 

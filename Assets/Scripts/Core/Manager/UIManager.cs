@@ -11,12 +11,23 @@ namespace Core.Manager
             get { return uiCamera; }
         }
 
+        private Transform root;
+
+        public Transform Root
+        {
+            get
+            {
+                return root;
+            }
+        }
+
         private void Awake()
         {
             GameObject root = new GameObject("UIRoot");
             root.transform.parent = transform;
             root.transform.localPosition = new Vector3(9999, 9999, 0);
             root.layer = LayerMask.NameToLayer("UI");
+            this.root = root.transform;
 
             UIRoot uiRoot = root.AddComponent<UIRoot>();
             uiRoot.scalingStyle = UIRoot.Scaling.Constrained;

@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace Core.Manager
 {
-    public class CoroutineManager : MonoSingleton<CoroutineManager>
+    public sealed class CoroutineManager : MonoSingleton<CoroutineManager>
     {
-        public Coroutine StartCoroutine(IEnumerator func)
+        public new Coroutine StartCoroutine(IEnumerator func)
         {
             return base.StartCoroutine(func);
         }
 
-        public void StopCoroutine(IEnumerator func)
+        public new void StopCoroutine(IEnumerator func)
         {
             base.StopCoroutine(func);
         }
 
-        public void StopAllCoroutines()
+        public new void StopAllCoroutines()
         {
             base.StopAllCoroutines();
         }
