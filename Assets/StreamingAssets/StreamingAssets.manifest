@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2002067826
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ui/window/wintest.assetbundle
+      Dependencies: {}
