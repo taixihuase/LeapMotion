@@ -9,27 +9,30 @@ namespace Test
     {
         private void OnEnable()
         {
-            Debug.Log(Core.Manager.SceneManager.Instance.CurrentSceneName + " loaded");
             Core.Manager.CoroutineManager.Instance.StartCoroutine(LoadScene());
         }
 
         IEnumerator LoadScene()
         {
+            yield return null;
+
             UnityAction<Scene> unloaded = (sc) =>
             {
                 Debug.Log(sc.name + " unloaded");
             };
-
             Core.Manager.SceneManager.Instance.AddUnloadedEventHandler(Define.SceneType.TestLoad, unloaded);
-            yield return new WaitForSecondsRealtime(5f);
+
+            UnityAction<Scene, Scene> changed = (sc1, sc2) =>
+            {
+                Debug.Log("Change to " + sc2.name);
+            };
+            Core.Manager.SceneManager.Instance.AddChangedEventHandler(Define.SceneType.TestScene, changed);
+
+            yield return new WaitForSeconds(5f);
 
             Core.Manager.SceneManager.Instance.LoadScene(Define.SceneType.TestScene, LoadSceneMode.Single, (sc, mode) =>
             {
-                Debug.Log(sc.name + " loaded");
-                if(Core.Manager.SceneManager.Instance.IsContainSceneEventHandler(Define.SceneType.TestLoad))
-                {
-                    Core.Manager.SceneManager.Instance.RemoveUnloadedEventHandler(Define.SceneType.TestLoad, unloaded);
-                }
+                Debug.Log(Core.Manager.SceneManager.Instance.CurrentSceneName + " loaded");
             });
         }
     }

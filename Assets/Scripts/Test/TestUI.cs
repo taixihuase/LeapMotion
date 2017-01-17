@@ -33,7 +33,7 @@ namespace Test
 
         IEnumerator LoadScene()
         {
-            yield return new WaitForSecondsRealtime(5f);
+            yield return new WaitForSeconds(5f);
 
             SceneManager.Instance.LoadScene(SceneType.TestLoad);
         }
