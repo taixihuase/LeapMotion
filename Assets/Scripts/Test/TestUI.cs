@@ -2,6 +2,7 @@
 using Core.Manager;
 using Define;
 using System;
+using System.Collections;
 
 namespace Test
 {
@@ -26,6 +27,15 @@ namespace Test
                 }
             };
             ResourceManager.Instance.LoadAsset(ResourceType.UI, "WinTest", act, true);
+
+            CoroutineManager.Instance.StartCoroutine(LoadScene());
+        }
+
+        IEnumerator LoadScene()
+        {
+            yield return new WaitForSecondsRealtime(5f);
+
+            SceneManager.Instance.LoadScene(SceneType.TestLoad);
         }
     }
 }
