@@ -25,7 +25,7 @@ namespace Test
                     instance.transform.localScale = Vector3.one;
                 }
             };
-            ResourceManager.Instance.LoadAsset(ResourceType.UI, "WinTest", act);
+            ResourceManager.Instance.LoadAsset(ResourceType.UI, "WinTest", act, true);
         }
     }
 }

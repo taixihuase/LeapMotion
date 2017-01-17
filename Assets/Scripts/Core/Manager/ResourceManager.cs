@@ -11,7 +11,7 @@ namespace Core.Manager
     {
         private Dictionary<string, UnityEngine.Object> loadedAssets = new Dictionary<string, UnityEngine.Object>();
 
-        private Dictionary<string, WWW> loadingAssets = new Dictionary<string, WWW>();
+        private Dictionary<string, object> loadingAssets = new Dictionary<string, object>();
 
         private Dictionary<ResourceType, List<string>> allAssets = new Dictionary<ResourceType, List<string>>();
 
@@ -32,13 +32,33 @@ namespace Core.Manager
 
         public WWW GetLoadingWWW(ResourceType type, string name)
         {
-            WWW www = null;
+            object www = null;
             string path = PathHelper.Instance.GetResourcePath(type, name);
-            loadingAssets.TryGetValue(path, out www);
-            return www;
+            if (loadingAssets.TryGetValue(path, out www))
+            {
+                if (www is WWW)
+                {
+                    return www as WWW;
+                }
+            }
+            return null;
         }
 
-        public void LoadAsset(ResourceType type, string name, Action<UnityEngine.Object> callback = null, bool isAsync = false)
+        public AssetBundleCreateRequest GetLoadingRequest(ResourceType type, string name)
+        {
+            object req = null;
+            string path = PathHelper.Instance.GetResourcePath(type, name);
+            if (loadingAssets.TryGetValue(path, out req))
+            {
+                if (req is AssetBundleCreateRequest)
+                {
+                    return req as AssetBundleCreateRequest;
+                }
+            }
+            return null;
+        }
+
+        public void LoadAsset(ResourceType type, string name, Action<UnityEngine.Object> callback = null, bool isAsync = false, bool fromServer = false)
         {
             string path = PathHelper.Instance.GetResourcePath(type, name);
             if (string.IsNullOrEmpty(path) == false)
@@ -51,7 +71,10 @@ namespace Core.Manager
 
                 if (isAsync)
                 {
-                    CoroutineManager.Instance.StartCoroutine(LoadAssetAsync(path, callback));
+                    if (fromServer)
+                        CoroutineManager.Instance.StartCoroutine(LoadAssetAsync(path, callback));
+                    else
+                        CoroutineManager.Instance.StartCoroutine(LoadAssetFromFileAsync(path, callback));
                 }
                 else
                 {
@@ -64,10 +87,10 @@ namespace Core.Manager
         {
             AssetBundle ab = null;
             UnityEngine.Object obj = null;
-            #if !UNITY_EDITOR
+#if !UNITY_EDITOR
             string fullPath = PathHelper.Instance.AddAssetbundlePostfix(PathHelper.Instance.CombineStreamingFile(path)).ToLower();
             ab = AssetBundle.LoadFromFile(fullPath);
-            #endif
+#endif
             if (ab != null)
             {
                 string[] str = ab.GetAllAssetNames();
@@ -75,7 +98,7 @@ namespace Core.Manager
                 {
                     obj = ab.LoadAsset(str[0]);
                     loadedAssets.Add(path, obj);
-                    if(callback != null)
+                    if (callback != null)
                     {
                         callback(obj);
                     }
@@ -85,7 +108,7 @@ namespace Core.Manager
             else
             {
                 obj = Resources.Load(path);
-                if(obj == null)
+                if (obj == null)
                 {
                     Debug.LogError(string.Format("加载资源 \"{0}\" 失败", path));
                     return;
@@ -102,34 +125,65 @@ namespace Core.Manager
         {
             string fullPath = PathHelper.Instance.CombineStreamingFile(path).ToLower();
             string url = PathHelper.Instance.AddAssetbundlePostfix(PathHelper.Instance.AddFileProtocol(fullPath));
-            WWW www = new WWW(url);
-            loadingAssets.Add(path, www);
-            yield return www;
+            using (WWW www = new WWW(url))
+            {
+                loadingAssets.Add(path, www);
+                yield return www;
 
-            if (string.IsNullOrEmpty(www.error))
-            {
-                UnityEngine.Object obj = null;
-                AssetBundle ab = AssetBundle.LoadFromMemory(www.bytes);
-                string[] str = ab.GetAllAssetNames();
-                if (str.Length > 0)
+                if (string.IsNullOrEmpty(www.error))
                 {
-                    obj = ab.LoadAsset(str[0]);
-                    loadedAssets.Add(path, obj);
+                    UnityEngine.Object obj = null;
+                    AssetBundle ab = AssetBundle.LoadFromMemory(www.bytes);
+                    string[] str = ab.GetAllAssetNames();
+                    if (str.Length > 0)
+                    {
+                        obj = ab.LoadAsset(str[0]);
+                        loadedAssets.Add(path, obj);
+                    }
+                    Debug.Log(string.Format("加载资源包 \"{0}\" 成功", path));
+                    if (callback != null)
+                    {
+                        callback(obj);
+                    }
+                    ab.Unload(false);
+                }
+                else
+                {
+                    Debug.LogError(string.Format("加载资源包 \"{0}\" 失败", path));
                 }
                 loadingAssets.Remove(path);
-                Debug.Log(string.Format("加载资源包 \"{0}\" 成功", path));
-                if (callback != null)
-                {
-                    callback(obj);
-                }
-                ab.Unload(false);
-            }
-            else
-            {
-                loadingAssets.Remove(path);
-                Debug.LogError(string.Format("加载资源包 \"{0}\" 失败", path));
             }
         }
+
+        private IEnumerator LoadAssetFromFileAsync(string path, Action<UnityEngine.Object> callback)
+        {
+            string fullPath = PathHelper.Instance.AddAssetbundlePostfix(PathHelper.Instance.CombineStreamingFile(path).ToLower());
+            AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(fullPath);
+            loadingAssets.Add(path, req);
+            yield return req;
+
+            while (req.isDone == false || req.progress < 0.99f)
+            {
+                Debug.Log(req.progress);
+                yield return new WaitForSecondsRealtime(0.1f);
+            }
+
+            UnityEngine.Object obj = null;
+            AssetBundle ab = req.assetBundle;
+            string[] str = ab.GetAllAssetNames();
+            if (str.Length > 0)
+            {
+                obj = ab.LoadAsset(str[0]);
+                loadedAssets.Add(path, obj);
+            }
+            loadingAssets.Remove(path);
+            Debug.Log(string.Format("加载资源包 \"{0}\" 成功", path));
+            if (callback != null)
+            {
+                callback(obj);
+            }
+            ab.Unload(false);
+        }    
 
         public bool IsResLoading(ResourceType type, string name)
         {
