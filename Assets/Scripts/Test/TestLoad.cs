@@ -30,9 +30,10 @@ namespace Test
 
             yield return new WaitForSeconds(5f);
 
-            Core.Manager.SceneManager.Instance.LoadScene(Define.SceneType.TestScene, LoadSceneMode.Single, (sc, mode) =>
+            Core.Manager.SceneManager.Instance.LoadSceneAsync(Define.SceneType.TestScene, LoadSceneMode.Additive, (sc, mode) =>
             {
                 Debug.Log(Core.Manager.SceneManager.Instance.CurrentSceneName + " loaded");
+                Debug.Log(SceneManager.GetActiveScene().name + " is active");
             });
         }
     }

@@ -50,10 +50,12 @@ namespace Core.MVC
             {
                 if(events.Count > 0)
                 {
-                    foreach(var pair in events)
+                    var iter = events.GetEnumerator();
+                    while(iter.MoveNext())
                     {
-                        model.RemoveEventHandler(pair.Key, pair.Value);
+                        model.RemoveEventHandler(iter.Current.Key, iter.Current.Value);
                     }
+                    iter.Dispose();
                 }
                 model = null;
                 events.Clear();

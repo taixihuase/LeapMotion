@@ -64,7 +64,13 @@ namespace Core.Manager
             if (string.IsNullOrEmpty(path) == false)
             {
                 if (loadedAssets.ContainsKey(path))
+                {
+                    if(callback != null)
+                    {
+                        callback(loadedAssets[path]);
+                    }
                     return;
+                }
 
                 if (loadingAssets.ContainsKey(path))
                     return;
