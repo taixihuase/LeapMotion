@@ -1,0 +1,46 @@
+ManifestFileVersion: 0
+CRC: 3654389270
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 733ddf0b5ebc07c0ea52b634ec15aa3c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5319cef05634d6d5b56e593c4e602c39
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8bcd03e00992e084c8be61565d44b8bd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9e0ed5922e911b343b8400997c95409c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c8db2ca3caad750429c7c1db202bbf5f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 26ef1796ac5a44944bd1f1345855a535, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c592f16851a620743868a31232613370, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 215a4d49fc705b74a9d3c5cbfa2c9601, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 025cc0fa7b46aa541aba29d28d35ac09, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 134
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Leap/LeapHandController.prefab
+Dependencies: []

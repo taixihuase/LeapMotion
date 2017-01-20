@@ -1,8 +1,8 @@
 fileFormatVersion: 2
 guid: 822c6ebd0a0e1664aa1b2a749d1cc011
-timeCreated: 1484831867
+timeCreated: 1484899303
 licenseType: Pro
 NativeFormatImporter:
   userData: 
-  assetBundleName: scene/interactioncube.assetbundle
+  assetBundleName: leap/interaction/interactioncube.assetbundle
   assetBundleVariant: 

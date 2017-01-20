@@ -107,6 +107,10 @@ namespace Tool
 
         public const string ScenePath = "Scene";
 
+        public const string LeapPath = "Leap";
+
+        public const string InteractionPath = "Leap/Interaction";
+
         #endregion
 
         private void InitResourcePath()
@@ -114,6 +118,8 @@ namespace Tool
             resPath.Add(ResourceType.UI, WindowPath);
             resPath.Add(ResourceType.Scene, ScenePath);
             resPath.Add(ResourceType.Icon, IconPath);
+            resPath.Add(ResourceType.Leap, LeapPath);
+            resPath.Add(ResourceType.Interaction, InteractionPath);
         }
     }
 }

@@ -1,7 +1,13 @@
 ManifestFileVersion: 0
-CRC: 968048803
+CRC: 80018551
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: ui/window/wintest.assetbundle
+      Dependencies: {}
+    Info_1:
+      Name: leap/leap.assetbundle
+      Dependencies: {}
+    Info_2:
+      Name: leap/interaction/interactioncube.assetbundle
       Dependencies: {}
