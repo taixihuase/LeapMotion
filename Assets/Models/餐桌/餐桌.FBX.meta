@@ -1,0 +1,557 @@
+fileFormatVersion: 2
+guid: f53e68ae0bf35184292561eb369eec03
+timeCreated: 1486044441
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 02
+    100002: 03
+    100004: 04
+    100006: 05
+    100008: 06
+    100010: 1
+    100012: Cylinder01
+    100014: Line01
+    100016: Line02
+    100018: Line03
+    100020: Line05
+    100022: Line06
+    100024: Line07
+    100026: Line07 1
+    100028: Line08
+    100030: Line09
+    100032: Line1789526863
+    100034: Line1789526864
+    100036: Line1789526865
+    100038: Line1789526866
+    100040: Line1789526867
+    100042: Line1789526868
+    100044: Line1789526869
+    100046: Line1789526870
+    100048: Line1789526871
+    100050: Line1789526872
+    100052: Line1789526873
+    100054: Line1789526874
+    100056: Line1789526875
+    100058: Line1789526876
+    100060: Line1789526877
+    100062: Loft01
+    100064: Loft01 1
+    100066: Loft01 2
+    100068: Loft02
+    100070: Loft02 1
+    100072: Loft02 2
+    100074: Loft04
+    100076: Loft06
+    100078: Loft07
+    100080: Loft08
+    100082: Loft09
+    100084: Loft10
+    100086: Loft11
+    100088: Loft12
+    100090: Loft13
+    100092: Loft14
+    100094: Loft15
+    100096: Loft16
+    100098: Loft17
+    100100: Loft18
+    100102: Loft19
+    100104: Loft20
+    100106: Loft21
+    100108: Loft22
+    100110: Loft23
+    100112: Loft24
+    100114: Loft25
+    100116: Loft26
+    100118: Loft27
+    100120: Loft28
+    100122: Loft29
+    100124: Loft30
+    100126: Loft31
+    100128: Loft32
+    100130: Loft33
+    100132: Loft34
+    100134: Loft35
+    100136: Loft36
+    100138: Loft37
+    100140: Loft38
+    100142: Loft39
+    100144: Loft40
+    100146: Loft41
+    100148: Loft42
+    100150: Loft43
+    100152: Loft44
+    100154: obj_01
+    100156: obj_01 1
+    100158: obj_02
+    100160: obj_02 1
+    100162: obj_02 1_MeshPart0
+    100164: obj_02 1_MeshPart1
+    100166: obj_03
+    100168: obj_03 1
+    100170: obj_04
+    100172: Rectangle14
+    100174: Rectangle27335
+    100176: Rectangle27336
+    100178: Rectangle27337
+    100180: Rectangle27338
+    100182: Rectangle27339
+    100184: "\u53F6\u5B50"
+    100186: "\u53F6\u5B50 1"
+    100188: "\u53F6\u5B50_MeshPart0"
+    100190: "\u53F6\u5B50_MeshPart1"
+    100192: "\u7BEE\u5B50"
+    100194: //RootNode
+    400000: 02
+    400002: 03
+    400004: 04
+    400006: 05
+    400008: 06
+    400010: 1
+    400012: Cylinder01
+    400014: Line01
+    400016: Line02
+    400018: Line03
+    400020: Line05
+    400022: Line06
+    400024: Line07
+    400026: Line07 1
+    400028: Line08
+    400030: Line09
+    400032: Line1789526863
+    400034: Line1789526864
+    400036: Line1789526865
+    400038: Line1789526866
+    400040: Line1789526867
+    400042: Line1789526868
+    400044: Line1789526869
+    400046: Line1789526870
+    400048: Line1789526871
+    400050: Line1789526872
+    400052: Line1789526873
+    400054: Line1789526874
+    400056: Line1789526875
+    400058: Line1789526876
+    400060: Line1789526877
+    400062: Loft01
+    400064: Loft01 1
+    400066: Loft01 2
+    400068: Loft02
+    400070: Loft02 1
+    400072: Loft02 2
+    400074: Loft04
+    400076: Loft06
+    400078: Loft07
+    400080: Loft08
+    400082: Loft09
+    400084: Loft10
+    400086: Loft11
+    400088: Loft12
+    400090: Loft13
+    400092: Loft14
+    400094: Loft15
+    400096: Loft16
+    400098: Loft17
+    400100: Loft18
+    400102: Loft19
+    400104: Loft20
+    400106: Loft21
+    400108: Loft22
+    400110: Loft23
+    400112: Loft24
+    400114: Loft25
+    400116: Loft26
+    400118: Loft27
+    400120: Loft28
+    400122: Loft29
+    400124: Loft30
+    400126: Loft31
+    400128: Loft32
+    400130: Loft33
+    400132: Loft34
+    400134: Loft35
+    400136: Loft36
+    400138: Loft37
+    400140: Loft38
+    400142: Loft39
+    400144: Loft40
+    400146: Loft41
+    400148: Loft42
+    400150: Loft43
+    400152: Loft44
+    400154: obj_01
+    400156: obj_01 1
+    400158: obj_02
+    400160: obj_02 1
+    400162: obj_02 1_MeshPart0
+    400164: obj_02 1_MeshPart1
+    400166: obj_03
+    400168: obj_03 1
+    400170: obj_04
+    400172: Rectangle14
+    400174: Rectangle27335
+    400176: Rectangle27336
+    400178: Rectangle27337
+    400180: Rectangle27338
+    400182: Rectangle27339
+    400184: "\u53F6\u5B50"
+    400186: "\u53F6\u5B50 1"
+    400188: "\u53F6\u5B50_MeshPart0"
+    400190: "\u53F6\u5B50_MeshPart1"
+    400192: "\u7BEE\u5B50"
+    400194: //RootNode
+    2300000: 02
+    2300002: 03
+    2300004: 04
+    2300006: 05
+    2300008: 06
+    2300010: 1
+    2300012: Cylinder01
+    2300014: Line01
+    2300016: Line02
+    2300018: Line03
+    2300020: Line05
+    2300022: Line06
+    2300024: Line07
+    2300026: Line07 1
+    2300028: Line08
+    2300030: Line09
+    2300032: Line1789526863
+    2300034: Line1789526864
+    2300036: Line1789526865
+    2300038: Line1789526866
+    2300040: Line1789526867
+    2300042: Line1789526868
+    2300044: Line1789526869
+    2300046: Line1789526870
+    2300048: Line1789526871
+    2300050: Line1789526872
+    2300052: Line1789526873
+    2300054: Line1789526874
+    2300056: Line1789526875
+    2300058: Line1789526876
+    2300060: Line1789526877
+    2300062: Loft01
+    2300064: Loft01 1
+    2300066: Loft01 2
+    2300068: Loft02
+    2300070: Loft02 1
+    2300072: Loft02 2
+    2300074: Loft04
+    2300076: Loft06
+    2300078: Loft07
+    2300080: Loft08
+    2300082: Loft09
+    2300084: Loft10
+    2300086: Loft11
+    2300088: Loft12
+    2300090: Loft13
+    2300092: Loft14
+    2300094: Loft15
+    2300096: Loft16
+    2300098: Loft17
+    2300100: Loft18
+    2300102: Loft19
+    2300104: Loft20
+    2300106: Loft21
+    2300108: Loft22
+    2300110: Loft23
+    2300112: Loft24
+    2300114: Loft25
+    2300116: Loft26
+    2300118: Loft27
+    2300120: Loft28
+    2300122: Loft29
+    2300124: Loft30
+    2300126: Loft31
+    2300128: Loft32
+    2300130: Loft33
+    2300132: Loft34
+    2300134: Loft35
+    2300136: Loft36
+    2300138: Loft37
+    2300140: Loft38
+    2300142: Loft39
+    2300144: Loft40
+    2300146: Loft41
+    2300148: Loft42
+    2300150: Loft43
+    2300152: Loft44
+    2300154: obj_01
+    2300156: obj_01 1
+    2300158: obj_02
+    2300160: obj_02 1_MeshPart0
+    2300162: obj_02 1_MeshPart1
+    2300164: obj_03
+    2300166: obj_03 1
+    2300168: obj_04
+    2300170: Rectangle14
+    2300172: Rectangle27335
+    2300174: Rectangle27336
+    2300176: Rectangle27337
+    2300178: Rectangle27338
+    2300180: Rectangle27339
+    2300182: "\u53F6\u5B50 1"
+    2300184: "\u53F6\u5B50_MeshPart0"
+    2300186: "\u53F6\u5B50_MeshPart1"
+    2300188: "\u7BEE\u5B50"
+    3300000: 02
+    3300002: 03
+    3300004: 04
+    3300006: 05
+    3300008: 06
+    3300010: 1
+    3300012: Cylinder01
+    3300014: Line01
+    3300016: Line02
+    3300018: Line03
+    3300020: Line05
+    3300022: Line06
+    3300024: Line07
+    3300026: Line07 1
+    3300028: Line08
+    3300030: Line09
+    3300032: Line1789526863
+    3300034: Line1789526864
+    3300036: Line1789526865
+    3300038: Line1789526866
+    3300040: Line1789526867
+    3300042: Line1789526868
+    3300044: Line1789526869
+    3300046: Line1789526870
+    3300048: Line1789526871
+    3300050: Line1789526872
+    3300052: Line1789526873
+    3300054: Line1789526874
+    3300056: Line1789526875
+    3300058: Line1789526876
+    3300060: Line1789526877
+    3300062: Loft01
+    3300064: Loft01 1
+    3300066: Loft01 2
+    3300068: Loft02
+    3300070: Loft02 1
+    3300072: Loft02 2
+    3300074: Loft04
+    3300076: Loft06
+    3300078: Loft07
+    3300080: Loft08
+    3300082: Loft09
+    3300084: Loft10
+    3300086: Loft11
+    3300088: Loft12
+    3300090: Loft13
+    3300092: Loft14
+    3300094: Loft15
+    3300096: Loft16
+    3300098: Loft17
+    3300100: Loft18
+    3300102: Loft19
+    3300104: Loft20
+    3300106: Loft21
+    3300108: Loft22
+    3300110: Loft23
+    3300112: Loft24
+    3300114: Loft25
+    3300116: Loft26
+    3300118: Loft27
+    3300120: Loft28
+    3300122: Loft29
+    3300124: Loft30
+    3300126: Loft31
+    3300128: Loft32
+    3300130: Loft33
+    3300132: Loft34
+    3300134: Loft35
+    3300136: Loft36
+    3300138: Loft37
+    3300140: Loft38
+    3300142: Loft39
+    3300144: Loft40
+    3300146: Loft41
+    3300148: Loft42
+    3300150: Loft43
+    3300152: Loft44
+    3300154: obj_01
+    3300156: obj_01 1
+    3300158: obj_02
+    3300160: obj_02 1_MeshPart0
+    3300162: obj_02 1_MeshPart1
+    3300164: obj_03
+    3300166: obj_03 1
+    3300168: obj_04
+    3300170: Rectangle14
+    3300172: Rectangle27335
+    3300174: Rectangle27336
+    3300176: Rectangle27337
+    3300178: Rectangle27338
+    3300180: Rectangle27339
+    3300182: "\u53F6\u5B50 1"
+    3300184: "\u53F6\u5B50_MeshPart0"
+    3300186: "\u53F6\u5B50_MeshPart1"
+    3300188: "\u7BEE\u5B50"
+    4300000: Cylinder01
+    4300002: Line09
+    4300004: Line08
+    4300006: Line07
+    4300008: Line02
+    4300010: Line01
+    4300012: Line06
+    4300014: Loft02
+    4300016: Loft01
+    4300018: obj_01
+    4300020: obj_04
+    4300022: obj_03
+    4300024: obj_02
+    4300026: "\u53F6\u5B50_MeshPart0"
+    4300028: "\u53F6\u5B50_MeshPart1"
+    4300030: Loft02
+    4300032: Loft01
+    4300034: "\u7BEE\u5B50"
+    4300036: "\u53F6\u5B50"
+    4300038: obj_01
+    4300040: obj_03
+    4300042: obj_02_MeshPart0
+    4300044: obj_02_MeshPart1
+    4300046: 1
+    4300048: Loft01
+    4300050: Loft02
+    4300052: Loft06
+    4300054: Loft07
+    4300056: Line03
+    4300058: Line05
+    4300060: Loft04
+    4300062: Loft08
+    4300064: Rectangle14
+    4300066: Loft09
+    4300068: Line07
+    4300070: 02
+    4300072: Loft10
+    4300074: Loft11
+    4300076: Loft12
+    4300078: Loft13
+    4300080: Line1789526863
+    4300082: Line1789526864
+    4300084: Loft14
+    4300086: Loft15
+    4300088: Rectangle27335
+    4300090: Loft16
+    4300092: Line1789526865
+    4300094: 03
+    4300096: Loft17
+    4300098: Loft18
+    4300100: Loft19
+    4300102: Loft20
+    4300104: Line1789526866
+    4300106: Line1789526867
+    4300108: Loft21
+    4300110: Loft22
+    4300112: Rectangle27336
+    4300114: Loft23
+    4300116: Line1789526868
+    4300118: 04
+    4300120: Loft24
+    4300122: Loft25
+    4300124: Loft26
+    4300126: Loft27
+    4300128: Line1789526869
+    4300130: Line1789526870
+    4300132: Loft28
+    4300134: Loft29
+    4300136: Rectangle27337
+    4300138: Loft30
+    4300140: Line1789526871
+    4300142: Line1789526872
+    4300144: 05
+    4300146: Loft31
+    4300148: Loft32
+    4300150: Loft33
+    4300152: Loft34
+    4300154: Line1789526873
+    4300156: Line1789526874
+    4300158: Loft35
+    4300160: Loft36
+    4300162: Rectangle27338
+    4300164: Loft37
+    4300166: 06
+    4300168: Loft38
+    4300170: Loft39
+    4300172: Loft40
+    4300174: Loft41
+    4300176: Line1789526875
+    4300178: Line1789526876
+    4300180: Loft42
+    4300182: Loft43
+    4300184: Rectangle27339
+    4300186: Loft44
+    4300188: Line1789526877
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
