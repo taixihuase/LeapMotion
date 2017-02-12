@@ -6,5 +6,8 @@ namespace Define
     {
         [Description("WinTest")]
         WinTest = 0,
+
+        [Description("UGUITest")]
+        UGUITest = 0,
     }
 }

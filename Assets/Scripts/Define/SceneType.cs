@@ -12,5 +12,8 @@ namespace Define
 
         [Description("TestLoad")]
         TestLoad = 1,
+
+        [Description("MainScene")]
+        MainScene = 2,
     }
 }

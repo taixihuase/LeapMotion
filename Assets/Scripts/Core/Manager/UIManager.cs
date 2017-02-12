@@ -4,6 +4,9 @@ using UnityEngine;
 using Tool;
 using System.Collections.Generic;
 using System.Linq;
+using Leap.Unity;
+using Leap.Unity.InputModule;
+using UnityEngine.EventSystems;
 
 namespace Core.Manager
 {
@@ -20,11 +23,16 @@ namespace Core.Manager
 
         public Transform Root
         {
-            get
-            {
-                return root;
-            }
+            get { return root; }
         }
+
+        private GameObject eventSystem;
+
+        public GameObject EventSystem
+        {
+            get { return eventSystem; }
+        }
+
 
         private void Awake()
         {
@@ -33,40 +41,43 @@ namespace Core.Manager
 
         private void Init()
         {
-            GameObject root = new GameObject("UIRoot");
-            root.transform.parent = transform;
-            root.transform.localPosition = new Vector3(9999, 9999, 0);
-            root.layer = LayerMask.NameToLayer("UI");
-            this.root = root.transform;
+            //GameObject root = new GameObject("UIRoot");
+            //root.transform.parent = transform;
+            //root.transform.localPosition = new Vector3(9999, 9999, 0);
+            //root.layer = LayerMask.NameToLayer("UI");
+            //this.root = root.transform;
 
-            UIRoot uiRoot = root.AddComponent<UIRoot>();
-            uiRoot.scalingStyle = UIRoot.Scaling.Constrained;
-            uiRoot.manualWidth = 1366;
-            uiRoot.manualHeight = 768;
-            uiRoot.fitWidth = true;
-            uiRoot.fitHeight = false;
+            //UIRoot uiRoot = root.AddComponent<UIRoot>();
+            //uiRoot.scalingStyle = UIRoot.Scaling.Constrained;
+            //uiRoot.manualWidth = 1366;
+            //uiRoot.manualHeight = 768;
+            //uiRoot.fitWidth = true;
+            //uiRoot.fitHeight = false;
 
-            root.AddComponent<UIPanel>();
+            //root.AddComponent<UIPanel>();
 
-            Rigidbody rigidbody = root.AddComponent<Rigidbody>();
-            rigidbody.useGravity = false;
-            rigidbody.isKinematic = true;
+            //Rigidbody rigidbody = root.AddComponent<Rigidbody>();
+            //rigidbody.useGravity = false;
+            //rigidbody.isKinematic = true;
 
-            uiCamera = new GameObject("UICamera");
-            uiCamera.transform.parent = root.transform;
-            uiCamera.transform.localPosition = Vector3.zero;
-            uiCamera.layer = root.layer;
+            //uiCamera = new GameObject("UICamera");
+            //uiCamera.transform.parent = root.transform;
+            //uiCamera.transform.localPosition = Vector3.zero;
+            //uiCamera.layer = root.layer;
 
-            Camera camera = uiCamera.AddComponent<Camera>();
-            camera.clearFlags = CameraClearFlags.Depth;
-            camera.cullingMask = 1 << uiCamera.layer;
-            camera.orthographic = true;
-            camera.orthographicSize = 1;
-            camera.depth = 1;
-            camera.farClipPlane = 1;
-            camera.nearClipPlane = -1;
+            //Camera camera = uiCamera.AddComponent<Camera>();
+            //camera.clearFlags = CameraClearFlags.Depth;
+            //camera.cullingMask = 1 << uiCamera.layer;
+            //camera.orthographic = true;
+            //camera.orthographicSize = 1;
+            //camera.depth = 1;
+            //camera.farClipPlane = 1;
+            //camera.nearClipPlane = -1;
 
-            uiCamera.AddComponent<UICamera>();
+            //uiCamera.AddComponent<UICamera>();
+
+            root = transform;
+            root.localPosition = Vector3.zero;
         }
 
         private Dictionary<SceneType, Dictionary<WindowType, UnityEngine.Object>> openWindows = new Dictionary<SceneType, Dictionary<WindowType, UnityEngine.Object>>(new EnumComparer<SceneType>());
@@ -80,8 +91,6 @@ namespace Core.Manager
                 {
                     GameObject instance = Instantiate(go);
                     instance.transform.parent = Root;
-                    instance.transform.localPosition = Vector3.zero;
-                    instance.transform.localScale = Vector3.one;
 
                     if(openWindows.ContainsKey(scene) == false)
                     {

@@ -1,0 +1,34 @@
+ManifestFileVersion: 0
+CRC: 2460997212
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ee73b30754e90eb58ca7fcd021b43efe
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0502908ccacc9473345a67176f2b50ea
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 01b410777f910b44fb63b4bffee66d91, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Leap/LeapEventSystem.prefab
+Dependencies: []

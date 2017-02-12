@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 80018551
+CRC: 4270687931
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -10,4 +10,10 @@ AssetBundleManifest:
       Dependencies: {}
     Info_2:
       Name: leap/interaction/interactioncube.assetbundle
+      Dependencies: {}
+    Info_3:
+      Name: leap/eventsystem.assetbundle
+      Dependencies: {}
+    Info_4:
+      Name: ui/window/uguitest.assetbundle
       Dependencies: {}

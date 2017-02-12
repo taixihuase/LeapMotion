@@ -10,12 +10,14 @@ namespace Test
     {
         private void Start()
         {
-            UIManager.Instance.OpenWindow(SceneManager.Instance.CurrentScene, WindowType.WinTest, (go) =>
-            {
-                Debug.Log(go.name);
-            }, true, true);
+            //UIManager.Instance.OpenWindow(SceneManager.Instance.CurrentScene, WindowType.WinTest, (go) =>
+            //{
+            //    Debug.Log(go.name);
+            //}, true, true);
 
-            CoroutineManager.Instance.StartCoroutine(LoadScene());
+            //CoroutineManager.Instance.StartCoroutine(LoadScene());
+
+            UIManager.Instance.OpenWindow(SceneManager.Instance.CurrentScene, WindowType.UGUITest, null, true, true);
         }
 
         IEnumerator LoadScene()
