@@ -8,6 +8,9 @@ namespace Define
         WinTest = 0,
 
         [Description("UGUITest")]
-        UGUITest = 0,
+        UGUITest = 1,
+
+        [Description("LivingRoom")]
+        LivingRoom = 2,
     }
 }

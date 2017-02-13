@@ -1,0 +1,40 @@
+ManifestFileVersion: 0
+CRC: 2027671085
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1e7838bb52e48cd0d1877c3175d2a498
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 46590330f9f5ac22c92e4cd8deaa47e8
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: a3d3ef1a5bbfb4e0a910fbbe5830b1f9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e56b7bba4ce00ee43ac1111184ce4ebf, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Scene/Bathroom.prefab
+Dependencies: []

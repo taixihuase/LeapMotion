@@ -17,7 +17,7 @@ namespace Test
 
             //CoroutineManager.Instance.StartCoroutine(LoadScene());
 
-            UIManager.Instance.OpenWindow(SceneManager.Instance.CurrentScene, WindowType.UGUITest, null, true, true);
+            UIManager.Instance.OpenWindow(SceneManager.Instance.CurrentScene, WindowType.LivingRoom, null, true, true);
         }
 
         IEnumerator LoadScene()
