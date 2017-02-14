@@ -3,6 +3,5 @@
     public class BathroomModel : Core.MVC.Model
     {
 
-
     }
 }

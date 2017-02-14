@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Core.MVC;
+using Define;
 
 namespace View.LivingRoom
 {
@@ -8,6 +9,7 @@ namespace View.LivingRoom
         void Start()
         {
             Init(LivingRoomCtrl.Instance.Model);
+            Bind(EventType.MoveCameraPos, MoveCamera);
         }
     }
 }

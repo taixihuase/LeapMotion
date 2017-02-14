@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 991114050
+CRC: 1667502061
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -37,4 +37,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_11:
       Name: ui/window/hallway.assetbundle
+      Dependencies: {}
+    Info_12:
+      Name: ui/window/kitchen.assetbundle
       Dependencies: {}

@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Core.MVC;
+using Define;
 
 namespace View.Kitchen
 {
@@ -8,6 +9,7 @@ namespace View.Kitchen
         void Start()
         {
             Init(KitchenCtrl.Instance.Model);
+            Bind(EventType.MoveCameraPos, MoveCamera);
         }
     }
 }

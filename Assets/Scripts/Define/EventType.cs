@@ -2,6 +2,8 @@
 {
     public enum EventType
     {
+        MoveCameraPos,
+
         L_ToPos1,
         L_ToPos2,
         L_ToPos3,

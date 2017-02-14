@@ -22,7 +22,7 @@ namespace Core.Manager
 
         private Quaternion toRot;
 
-        private float smoothTime = 0.5f;
+        private float smoothTime = 0.3f;
 
         private Vector3 velocity = Vector3.zero;
 
@@ -46,13 +46,16 @@ namespace Core.Manager
 
         private bool IsArriveTargetRot(Quaternion current, Quaternion target)
         {
-            return Vector3.SqrMagnitude(Quaternion.Inverse(current) * target.eulerAngles) < Vector3.kEpsilon;
+            return IsArriveTargetPos(current.eulerAngles, target.eulerAngles);
         }
 
         public void MoveAndRotate(Transform target)
         {
+            isStart = false;
             toPos = target.position;
             toRot = target.rotation;
+            Debug.Log(toPos);
+            Debug.Log(toRot.eulerAngles);
             isStart = true;
         }
     }

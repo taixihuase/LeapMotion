@@ -1,4 +1,5 @@
 ﻿using Core;
+using Define;
 using Model;
 
 namespace Controller
@@ -7,5 +8,9 @@ namespace Controller
     {
         public LivingRoomModel Model = new LivingRoomModel();
 
+        public void MovePos(int index)
+        {
+            Model.Refresh(EventType.MoveCameraPos, index);
+        }
     }
 }

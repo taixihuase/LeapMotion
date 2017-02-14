@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Core.MVC;
+using Define;
 
 namespace View.Bathroom
 {
@@ -8,6 +9,7 @@ namespace View.Bathroom
         void Start()
         {
             Init(BathroomCtrl.Instance.Model);
+            Bind(EventType.MoveCameraPos, MoveCamera);
         }
     }
 }
