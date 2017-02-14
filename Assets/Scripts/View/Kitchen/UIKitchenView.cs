@@ -1,5 +1,7 @@
 ﻿using Controller;
+using Core.Manager;
 using UnityEngine;
+using View.Hallway;
 
 namespace View.Kitchen
 {
@@ -41,7 +43,20 @@ namespace View.Kitchen
 
         public void OnClickToHallway()
         {
-
+            GameObject kitchen = FindObjectOfType<KitchenView>().gameObject;
+            Object hallway = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
+            if (hallway != null)
+            {
+                CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
+                {
+                    Destroy(kitchen);
+                    GameObject obj = Instantiate(hallway) as GameObject;
+                    Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
+                    CameraManager.Instance.MoveAndRotate(startPos);
+                    UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.Kitchen);
+                    UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway);
+                });
+            }
         }
     }
 }

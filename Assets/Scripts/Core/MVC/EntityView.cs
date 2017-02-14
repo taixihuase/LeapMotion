@@ -13,5 +13,10 @@ namespace Core.MVC
             int index = (int)arg1[0];
             CameraManager.Instance.MoveAndRotate(pos[index]);
         }
+
+        public Transform GetStartPos()
+        {
+            return pos[0];
+        }
     }
 }

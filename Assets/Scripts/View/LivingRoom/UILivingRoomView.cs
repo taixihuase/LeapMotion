@@ -1,5 +1,8 @@
 ﻿using Controller;
+using Core.Manager;
 using UnityEngine;
+using View.Hallway;
+using View.LivingRoom;
 
 namespace View.Living
 {
@@ -41,7 +44,20 @@ namespace View.Living
 
         public void OnClickToHallway()
         {
-
+            GameObject livingroom = FindObjectOfType<LivingRoomView>().gameObject;
+            Object hallway = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
+            if (hallway != null)
+            {
+                CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
+                {
+                    Destroy(livingroom);
+                    GameObject obj = Instantiate(hallway) as GameObject;
+                    Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
+                    CameraManager.Instance.MoveAndRotate(startPos);
+                    UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.LivingRoom);
+                    UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway);
+                });
+            }
         }
     }
 }

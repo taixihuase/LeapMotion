@@ -12,5 +12,14 @@ namespace Define
 
         [Description("LivingRoom")]
         LivingRoom = 2,
+
+        [Description("Bathroom")]
+        Bathroom = 3,
+
+        [Description("Kitchen")]
+        Kitchen = 4,
+
+        [Description("Hallway")]
+        Hallway = 5,
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Controller;
+using Core.Manager;
 using UnityEngine;
+using View.Hallway;
 
 namespace View.Bathroom
 {
@@ -33,7 +35,20 @@ namespace View.Bathroom
 
         public void OnClickToHallway()
         {
-
+            GameObject bathroom = FindObjectOfType<BathroomView>().gameObject;
+            Object hallway = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
+            if (hallway != null)
+            {
+                CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
+                {
+                    Destroy(bathroom);
+                    GameObject obj = Instantiate(hallway) as GameObject;
+                    Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
+                    CameraManager.Instance.MoveAndRotate(startPos);
+                    UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.Bathroom);
+                    UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway);
+                });
+            }
         }
     }
 

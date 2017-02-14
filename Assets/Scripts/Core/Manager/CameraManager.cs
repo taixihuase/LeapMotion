@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
+using System;
 
 namespace Core.Manager
 {
     public class CameraManager : MonoSingleton<CameraManager>
     {
-        private Camera camera;
+        public Camera Camera;
 
         private void Awake()
         {
@@ -13,7 +16,8 @@ namespace Core.Manager
 
         private void Init()
         {
-            camera = Camera.main;
+            Camera = Camera.main;
+            blackBG = GameObject.Find("BlackBG").GetComponent<Image>();
         }
 
         private bool isStart = false;
@@ -30,9 +34,9 @@ namespace Core.Manager
         {
             if (isStart)
             {
-                camera.transform.position = Vector3.SmoothDamp(camera.transform.position, toPos, ref velocity, smoothTime);
-                camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, toRot, 1 / smoothTime * Time.deltaTime);
-                if (IsArriveTargetPos(camera.transform.position, toPos) && IsArriveTargetRot(camera.transform.rotation, toRot))
+                Camera.transform.position = Vector3.SmoothDamp(Camera.transform.position, toPos, ref velocity, smoothTime);
+                Camera.transform.rotation = Quaternion.Slerp(Camera.transform.rotation, toRot, 1 / smoothTime * Time.deltaTime);
+                if (IsArriveTargetPos(Camera.transform.position, toPos) && IsArriveTargetRot(Camera.transform.rotation, toRot))
                 {
                     isStart = false;
                 }
@@ -57,6 +61,31 @@ namespace Core.Manager
             Debug.Log(toPos);
             Debug.Log(toRot.eulerAngles);
             isStart = true;
+        }
+
+        [SerializeField]
+        Image blackBG;
+
+        public void ChangeScene(float darkDuration, float pauseDuration, float showDuration, Action onComplete)
+        {
+            ViewToDark(darkDuration)
+                .OnComplete(() => ViewToDark(pauseDuration)
+                .OnComplete(() =>
+                {
+                    ViewToDark(pauseDuration)
+                    .OnPlay(() => onComplete())
+                    .OnComplete(() => ShowView(showDuration));
+                }));
+        }
+    
+        public Tweener ViewToDark(float duration)
+        {
+            return blackBG.DOFade(1, duration);
+        }
+
+        public Tweener ShowView(float duration)
+        {
+            return blackBG.DOFade(0, duration);
         }
     }
 }
