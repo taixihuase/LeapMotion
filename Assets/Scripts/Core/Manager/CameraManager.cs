@@ -58,8 +58,6 @@ namespace Core.Manager
             isStart = false;
             toPos = target.position;
             toRot = target.rotation;
-            Debug.Log(toPos);
-            Debug.Log(toRot.eulerAngles);
             isStart = true;
         }
 
