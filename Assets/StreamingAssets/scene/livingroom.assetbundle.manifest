@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3988827304
+CRC: 2337860022
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8319fdc50a3a94baf143cb5af36055ff
+    Hash: b54cf803625c233b985f0b5ce127390c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9f5e4fbaf0d3adb25a0fe5bca4e3d996
+    Hash: 36e71b90fd6c07f818acd923e392b3e0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -27,8 +27,6 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 54
   Script: {instanceID: 0}
-- Class: 59
-  Script: {instanceID: 0}
 - Class: 64
   Script: {instanceID: 0}
 - Class: 65
@@ -36,14 +34,22 @@ ClassTypes:
 - Class: 108
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: d0d90d203addfcd4e9401006f44d79b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 183146e09617b2e41a21d0ecf5e56fcb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c64ed932563afd24dab8dfc1939a9516, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f5f7ab934b62d25438bd10ceb74720d6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ffce1885e536aaf4696254f3d6911922, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d79f36bc3cfbe724b84442128f47ef8f, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 8ec7c5cd9da4d744781215751ca3a483, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c4f0b8429cbc5c948a2ae968491b6c35, type: 3}
 - Class: 115
-  Script: {instanceID: 0}
-- Class: 134
-  Script: {instanceID: 0}
-- Class: 136
-  Script: {instanceID: 0}
-- Class: 144
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/Scene/LivingRoom.prefab

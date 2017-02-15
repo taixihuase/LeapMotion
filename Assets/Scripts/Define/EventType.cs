@@ -5,5 +5,7 @@
         MoveCameraPos,
         WaterInToggleChanged,
         WaterOutToggleChanged,
+        InsertPlug,
+        PutPlugOut,
     }
 }
