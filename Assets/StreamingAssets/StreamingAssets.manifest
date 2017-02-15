@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 4225324201
+CRC: 2041218018
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -12,32 +12,29 @@ AssetBundleManifest:
       Name: leap/interaction/interactioncube.assetbundle
       Dependencies: {}
     Info_3:
-      Name: leap/eventsystem.assetbundle
-      Dependencies: {}
-    Info_4:
       Name: ui/window/uguitest.assetbundle
       Dependencies: {}
-    Info_5:
+    Info_4:
       Name: ui/window/livingroom.assetbundle
       Dependencies: {}
-    Info_6:
-      Name: scene/bathroom.assetbundle
-      Dependencies: {}
-    Info_7:
-      Name: ui/window/hallway.assetbundle
-      Dependencies: {}
-    Info_8:
-      Name: ui/window/kitchen.assetbundle
-      Dependencies: {}
-    Info_9:
-      Name: scene/kitchen.assetbundle
-      Dependencies: {}
-    Info_10:
+    Info_5:
       Name: ui/window/bathroom.assetbundle
       Dependencies: {}
-    Info_11:
+    Info_6:
       Name: scene/livingroom.assetbundle
       Dependencies: {}
-    Info_12:
+    Info_7:
+      Name: scene/kitchen.assetbundle
+      Dependencies: {}
+    Info_8:
+      Name: scene/bathroom.assetbundle
+      Dependencies: {}
+    Info_9:
       Name: scene/hallway.assetbundle
+      Dependencies: {}
+    Info_10:
+      Name: ui/window/hallway.assetbundle
+      Dependencies: {}
+    Info_11:
+      Name: ui/window/kitchen.assetbundle
       Dependencies: {}

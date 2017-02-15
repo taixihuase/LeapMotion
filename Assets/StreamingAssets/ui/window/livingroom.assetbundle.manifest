@@ -1,19 +1,25 @@
 ManifestFileVersion: 0
-CRC: 4075075986
+CRC: 3507378610
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 25036bf6bb96a3dd9a346b9d12e7aee9
+    Hash: 6a106553ff8770595f289064bee29e53
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 90834e162f9fef93a16471a3de4692f2
+    Hash: f0c51152a783451c9e9b091eb500e68f
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
   Script: {instanceID: 0}
+- Class: 12
+  Script: {instanceID: 0}
+- Class: 15
+  Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 26
   Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
@@ -80,6 +86,7 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/Resources/UI/Window/FX_Rain.prefab
 - Assets/Resources/UI/Window/MinimalPanel.prefab
 - Assets/Resources/UI/Window/LivingRoom.prefab
 Dependencies: []

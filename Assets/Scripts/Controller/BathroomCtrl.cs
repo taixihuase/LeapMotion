@@ -12,5 +12,15 @@ namespace Controller
         {
             Model.Refresh(EventType.MoveCameraPos, index);
         }
+
+        public void ChangeWaterInToggle()
+        {
+            Model.Refresh(EventType.WaterInToggleChanged);
+        }
+
+        public void ChangeWaterOutToggle()
+        {
+            Model.Refresh(EventType.WaterOutToggleChanged);
+        }
     }
 }
