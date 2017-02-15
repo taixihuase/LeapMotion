@@ -13,5 +13,15 @@ namespace Controller
         {
             Model.Refresh(EventType.MoveCameraPos, index, callback);
         }
+
+        public void InsertPlug()
+        {
+            Model.Refresh(EventType.InsertPlug);
+        }
+
+        public void PutPlugOut()
+        {
+            Model.Refresh(EventType.PutPlugOut);
+        }
     }
 }

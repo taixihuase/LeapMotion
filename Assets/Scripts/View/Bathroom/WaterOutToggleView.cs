@@ -12,6 +12,5 @@ namespace View.Bathroom
                 BathroomCtrl.Instance.ChangeWaterOutToggle();
             }
         }
-
     }
 }
