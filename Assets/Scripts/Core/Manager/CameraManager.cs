@@ -26,9 +26,11 @@ namespace Core.Manager
 
         private Quaternion toRot;
 
-        private float smoothTime = 0.3f;
+        private float smoothTime = 0.2f;
 
         private Vector3 velocity = Vector3.zero;
+
+        Action func = null;
 
         private void Update()
         {
@@ -39,6 +41,10 @@ namespace Core.Manager
                 if (IsArriveTargetPos(Camera.transform.position, toPos) && IsArriveTargetRot(Camera.transform.rotation, toRot))
                 {
                     isStart = false;
+                    if(func != null)
+                    {
+                        func();
+                    }
                 }
             }
         }
@@ -53,12 +59,13 @@ namespace Core.Manager
             return IsArriveTargetPos(current.eulerAngles, target.eulerAngles);
         }
 
-        public void MoveAndRotate(Transform target)
+        public void MoveAndRotate(Transform target, Action callback = null)
         {
             isStart = false;
             toPos = target.position;
             toRot = target.rotation;
             isStart = true;
+            func = callback;
         }
 
         [SerializeField]

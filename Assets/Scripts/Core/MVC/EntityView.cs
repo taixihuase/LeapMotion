@@ -1,4 +1,5 @@
 ﻿using Core.Manager;
+using System;
 using UnityEngine;
 
 namespace Core.MVC
@@ -11,7 +12,12 @@ namespace Core.MVC
         protected void MoveCamera(params object[] arg1)
         {
             int index = (int)arg1[0];
-            CameraManager.Instance.MoveAndRotate(pos[index]);
+            Action callback = null;
+            if (arg1.Length >= 2)
+            {
+                callback = (Action)arg1[1];
+            }
+            CameraManager.Instance.MoveAndRotate(pos[index], callback);
         }
 
         public Transform GetStartPos()

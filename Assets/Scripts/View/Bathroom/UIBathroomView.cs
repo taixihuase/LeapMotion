@@ -21,16 +21,14 @@ namespace View.Bathroom
 
         public void OnClickToPos1()
         {
-            BathroomCtrl.Instance.MovePos(0);
             pos[1].SetActive(false);
-            pos[0].SetActive(true);
+            BathroomCtrl.Instance.MovePos(0, () => pos[0].SetActive(true));
         }
 
         public void OnClickToPos2()
         {
-            BathroomCtrl.Instance.MovePos(1);
             pos[0].SetActive(false);
-            pos[1].SetActive(true);
+            BathroomCtrl.Instance.MovePos(1, () => pos[1].SetActive(true));
         }
 
         public void OnClickToHallway()
@@ -39,13 +37,13 @@ namespace View.Bathroom
             Object hallway = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
             if (hallway != null)
             {
+                UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.Bathroom);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
                     Destroy(bathroom);
                     GameObject obj = Instantiate(hallway) as GameObject;
                     Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
                     CameraManager.Instance.MoveAndRotate(startPos);
-                    UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.Bathroom);
                     UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway);
                 });
             }

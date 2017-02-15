@@ -1,6 +1,7 @@
 ﻿using Core;
 using Define;
 using Model;
+using System;
 
 namespace Controller
 {
@@ -8,9 +9,9 @@ namespace Controller
     {
         public BathroomModel Model = new BathroomModel();
 
-        public void MovePos(int index)
+        public void MovePos(int index, Action callback)
         {
-            Model.Refresh(EventType.MoveCameraPos, index);
+            Model.Refresh(EventType.MoveCameraPos, index, callback);
         }
 
         public void ChangeWaterInToggle()
