@@ -270,6 +270,16 @@ namespace Leap.Unity {
       }
     }
 
+        public ModelGroup GetGroup(string groupName)
+        {
+            ModelGroup modelGroup = null;
+            if (ModelPool.Find(i => i.GroupName == groupName) != null)
+            {
+                modelGroup = ModelPool.Find(i => i.GroupName == groupName);
+            }
+            return modelGroup;
+        }
+
 #if UNITY_EDITOR
     /**In the Unity Editor, Validate that the IHandModel is an instance of a prefab from the scene vs. a prefab from the project. */
     void OnValidate() {

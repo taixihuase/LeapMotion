@@ -15,6 +15,7 @@ namespace View.LivingRoom
             Bind(Define.EventType.MoveCameraPos, MoveCamera);
             Bind(Define.EventType.InsertPlug, InsertPlug);
             Bind(Define.EventType.PutPlugOut, PutPlugOut);
+            lightStartColor = DirLight.color;
         }
 
         [SerializeField]
@@ -25,6 +26,11 @@ namespace View.LivingRoom
 
         [SerializeField]
         InteractionBehaviour PlugInteraction;
+
+        [SerializeField]
+        Light DirLight;
+
+        Color lightStartColor;
 
         Action<Hand> insertFunc = null;
 
@@ -43,6 +49,7 @@ namespace View.LivingRoom
                 PlugInteraction.useGravity = false;
                 Plug.transform.localPosition = InsertPos.transform.localPosition;
                 Plug.transform.localRotation = InsertPos.transform.localRotation;
+                DirLight.color = Color.red;
             };
             PlugInteraction.OnHandReleasedEvent += insertFunc;
         }
@@ -55,6 +62,7 @@ namespace View.LivingRoom
                 timer = 0;
                 PlugInteraction.useGravity = true;
                 PlugInteraction.OnHandReleasedEvent -= insertFunc;
+                DirLight.color = lightStartColor;
             }
         }
 
