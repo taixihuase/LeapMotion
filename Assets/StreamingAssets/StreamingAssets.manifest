@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2458506349
+CRC: 139881297
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -18,23 +18,23 @@ AssetBundleManifest:
       Name: ui/window/livingroom.assetbundle
       Dependencies: {}
     Info_5:
-      Name: ui/window/bathroom.assetbundle
-      Dependencies: {}
-    Info_6:
-      Name: scene/livingroom.assetbundle
-      Dependencies: {}
-    Info_7:
-      Name: scene/kitchen.assetbundle
-      Dependencies: {}
-    Info_8:
       Name: scene/bathroom.assetbundle
       Dependencies: {}
-    Info_9:
-      Name: scene/hallway.assetbundle
-      Dependencies: {}
-    Info_10:
+    Info_6:
       Name: ui/window/hallway.assetbundle
       Dependencies: {}
-    Info_11:
+    Info_7:
       Name: ui/window/kitchen.assetbundle
+      Dependencies: {}
+    Info_8:
+      Name: scene/kitchen.assetbundle
+      Dependencies: {}
+    Info_9:
+      Name: ui/window/bathroom.assetbundle
+      Dependencies: {}
+    Info_10:
+      Name: scene/livingroom.assetbundle
+      Dependencies: {}
+    Info_11:
+      Name: scene/hallway.assetbundle
       Dependencies: {}
