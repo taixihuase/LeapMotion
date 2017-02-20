@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace View.Hallway
 {
-    public class UIHallwayView : Core.MVC.View
+    public class UIHallwayView : UIView
     {
         public void OnClickToOtherScene(string sceneName)
         {

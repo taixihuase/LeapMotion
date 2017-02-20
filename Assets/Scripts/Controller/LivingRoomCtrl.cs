@@ -19,6 +19,11 @@ namespace Controller
             Model.Refresh(EventType.InsertPlug);
         }
 
+        public void OnInsertPlugComplete()
+        {
+            Model.Refresh(EventType.InsertPlugComplete);
+        }
+
         public void PutPlugOut()
         {
             Model.Refresh(EventType.PutPlugOut);

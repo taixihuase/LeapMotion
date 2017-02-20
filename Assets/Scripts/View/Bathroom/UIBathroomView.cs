@@ -1,15 +1,13 @@
 ﻿using Controller;
 using Core.Manager;
+using Core.MVC;
 using UnityEngine;
 using View.Hallway;
 
 namespace View.Bathroom
 {
-    public class UIBathroomView : Core.MVC.View
+    public class UIBathroomView : UIView
     {
-        [SerializeField]
-        GameObject[] pos;
-
         void Start()
         {
             for (int i = 0; i < pos.Length; i++)

@@ -16,6 +16,7 @@ namespace View.LivingRoom
             Bind(Define.EventType.InsertPlug, InsertPlug);
             Bind(Define.EventType.PutPlugOut, PutPlugOut);
             lightStartColor = DirLight.color;
+            lightStartIntensity = DirLight.intensity;
         }
 
         [SerializeField]
@@ -30,7 +31,19 @@ namespace View.LivingRoom
         [SerializeField]
         Light DirLight;
 
+        [SerializeField]
+        Light GreenLight;
+
         Color lightStartColor;
+
+        [SerializeField]
+        Color lightChangeColor;
+
+        float lightStartIntensity;
+
+        [SerializeField]
+        float lightChangeIntensity;
+
 
         Action<Hand> insertFunc = null;
 
@@ -49,7 +62,10 @@ namespace View.LivingRoom
                 PlugInteraction.useGravity = false;
                 Plug.transform.localPosition = InsertPos.transform.localPosition;
                 Plug.transform.localRotation = InsertPos.transform.localRotation;
-                DirLight.color = Color.red;
+                DirLight.color = lightChangeColor;
+                DirLight.intensity = lightChangeIntensity;
+                GreenLight.gameObject.SetActive(true);
+                LivingRoomCtrl.Instance.OnInsertPlugComplete();
             };
             PlugInteraction.OnHandReleasedEvent += insertFunc;
         }
@@ -63,6 +79,8 @@ namespace View.LivingRoom
                 PlugInteraction.useGravity = true;
                 PlugInteraction.OnHandReleasedEvent -= insertFunc;
                 DirLight.color = lightStartColor;
+                DirLight.intensity = lightStartIntensity;
+                GreenLight.gameObject.SetActive(false);
             }
         }
 

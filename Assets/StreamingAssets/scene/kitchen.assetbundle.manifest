@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3446673051
+CRC: 1970888381
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b2ed4325e792b0b888fe7bfc5ae6bcb6
+    Hash: 49743a0909dc5bf2b87d3bf231d0140d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8d6a5d6481eab00e289236db46db10f5
+    Hash: d5ece9111480d0172453d95aa7be80d7
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,9 +31,15 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 712416de404525a46846b8b395049330, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0949468010e648744b650652cf9e1574, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 136
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/Scene/Kitchen.prefab

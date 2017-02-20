@@ -6,6 +6,8 @@
         WaterInToggleChanged,
         WaterOutToggleChanged,
         InsertPlug,
+        InsertPlugComplete,
         PutPlugOut,
+        FireSwitchChanged,
     }
 }

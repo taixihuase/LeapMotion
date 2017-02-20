@@ -13,5 +13,10 @@ namespace Controller
         {
             Model.Refresh(EventType.MoveCameraPos, index, callback);
         }
+
+        public void ChangeFire(int index)
+        {
+            Model.Refresh(EventType.FireSwitchChanged, index);
+        }
     }
 }

@@ -3,21 +3,34 @@ using Core.Manager;
 using UnityEngine;
 using View.Hallway;
 using View.LivingRoom;
+using UnityEngine.UI;
+using Core.MVC;
 
 namespace View.Living
 {
-    public class UILivingRoomView : Core.MVC.View
+    public class UILivingRoomView : UIView
     {
-        [SerializeField]
-        GameObject[] pos;
-
         void Start()
         {
+            Init(LivingRoomCtrl.Instance.Model);
+            Bind(Define.EventType.InsertPlugComplete, OnInsertPlug);
+            Bind(Define.EventType.PutPlugOut, OnPutPlugOut);
+            ChangeNormalUIColor();
             for (int i = 0; i < pos.Length; i++)
             {
                 if (i != 0)
                     pos[i].SetActive(false);
             }
+        }
+
+        private void OnInsertPlug(params object[] arg1)
+        {
+            ChangeGreenUIColor();
+        }
+
+        private void OnPutPlugOut(params object[] arg1)
+        {
+            ChangeNormalUIColor();
         }
 
         public void OnClickToPos1()
