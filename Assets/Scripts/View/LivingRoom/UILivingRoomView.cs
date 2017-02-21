@@ -3,7 +3,6 @@ using Core.Manager;
 using UnityEngine;
 using View.Hallway;
 using View.LivingRoom;
-using UnityEngine.UI;
 using Core.MVC;
 
 namespace View.Living
@@ -75,7 +74,7 @@ namespace View.Living
                     GameObject obj = Instantiate(hallway) as GameObject;
                     Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
                     CameraManager.Instance.MoveAndRotate(startPos);
-                    UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway);
+                    UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
                 });
             }
         }

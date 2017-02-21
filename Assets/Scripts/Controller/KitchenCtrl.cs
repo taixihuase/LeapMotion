@@ -18,5 +18,10 @@ namespace Controller
         {
             Model.Refresh(EventType.FireSwitchChanged, index);
         }
+
+        public void OpenFridgeDoor(int index)
+        {
+            Model.Refresh(EventType.FridgeDoorOpened, index);
+        }
     }
 }

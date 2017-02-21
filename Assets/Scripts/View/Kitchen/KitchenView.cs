@@ -12,6 +12,7 @@ namespace View.Kitchen
             Init(KitchenCtrl.Instance.Model);
             Bind(Define.EventType.MoveCameraPos, MoveCamera);
             Bind(Define.EventType.FireSwitchChanged, OnFireUsingStateChanged);
+            Bind(Define.EventType.FridgeDoorOpened, OnOpenFridgeDoor);
         }
 
         [SerializeField]
@@ -33,6 +34,15 @@ namespace View.Kitchen
 
         [SerializeField]
         float fireSwitchMoveDistance;
+
+        [SerializeField]
+        Transform[] fridgeDoor;
+
+        [SerializeField]
+        Transform bottomFridgeBox;
+
+        [SerializeField]
+        Transform boxFinalPos;
                     
         void Update()
         {
@@ -79,6 +89,24 @@ namespace View.Kitchen
             isUsingFire[index] = false;
             fire[index].SetActive(false);
             fireSwitch[index].DOLocalMoveZ(fireSwitch[index].localPosition.z + fireSwitchMoveDistance, 0.2f);
+        }
+
+        private void OnOpenFridgeDoor(params object[] arg1)
+        {
+            int index = (int)arg1[0];
+            Transform door = fridgeDoor[index];
+            Vector3 v = door.localEulerAngles;
+            Quaternion q = Quaternion.Euler(v.x, 270f, v.z);
+
+            TweenCallback callback = () => 
+            {
+                if (index == 1)
+                {
+                    bottomFridgeBox.DOLocalMove(boxFinalPos.transform.localPosition, 0.35f);
+                }
+            };
+
+            door.DOLocalRotateQuaternion(q, 0.2f).OnComplete(callback);
         }
     }
 }
