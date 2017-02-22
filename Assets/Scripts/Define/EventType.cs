@@ -9,6 +9,6 @@
         InsertPlugComplete,
         PutPlugOut,
         FireSwitchChanged,
-        FridgeDoorOpened,
+        FridgeDoorChanged,
     }
 }

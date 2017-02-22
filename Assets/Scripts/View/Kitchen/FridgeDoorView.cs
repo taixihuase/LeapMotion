@@ -31,11 +31,15 @@ namespace View.Kitchen
 
         float startDelay = 0.15f;
 
-        float endDelay = 0.3f;
+        float endDelay = 0.5f;
 
         float timer = 0;
 
         IEnumerator coroutine;
+
+        Vector3 lastEuler;
+
+        bool[] isDoorOpened = new bool[] { false, false };
 
         void OnTriggerEnter(Collider other)
         {
@@ -45,6 +49,7 @@ namespace View.Kitchen
                 {
                     hand = other.transform;
                     lastPos = currPos = hand.position;
+                    lastEuler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
                     timer = 0;
                 }
             }
@@ -110,8 +115,10 @@ namespace View.Kitchen
 
              
                 Vector3 euler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
+                lastEuler = euler;
                 if (euler.y - rotateAngle < maxAngle || euler.y - rotateAngle > 0)
                     return;
+
                 Quaternion q = Quaternion.Euler(euler.x, euler.y - rotateAngle, euler.z);
                 gameObject.transform.localRotation = q;
                 CheckOpenState();
@@ -128,9 +135,11 @@ namespace View.Kitchen
 
         private void CheckOpenState()
         {
-            if (ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles).y < -60f)
+            float angle = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles).y;
+            if ((angle < -85f && !isDoorOpened[index]) || (angle > -85f && lastEuler.y < -85f && isDoorOpened[index]))
             {
-                //KitchenCtrl.Instance.OpenFridgeDoor(index);
+                KitchenCtrl.Instance.ChangeFridgeDoor(index);
+                isDoorOpened[index] = !isDoorOpened[index];
             }
         }
 

@@ -12,7 +12,8 @@ namespace View.Kitchen
             Init(KitchenCtrl.Instance.Model);
             Bind(Define.EventType.MoveCameraPos, MoveCamera);
             Bind(Define.EventType.FireSwitchChanged, OnFireUsingStateChanged);
-            Bind(Define.EventType.FridgeDoorOpened, OnOpenFridgeDoor);
+            Bind(Define.EventType.FridgeDoorChanged, OnFridgeDoorStateChange);
+            boxStartPos = bottomFridgeBox.localPosition;
         }
 
         [SerializeField]
@@ -41,8 +42,15 @@ namespace View.Kitchen
         [SerializeField]
         Transform bottomFridgeBox;
 
+        Vector3 boxStartPos;
+
         [SerializeField]
         Transform boxFinalPos;
+
+        [SerializeField]
+        GameObject headFire;
+
+        bool isFridgeDoorOpened = false;
                     
         void Update()
         {
@@ -91,22 +99,25 @@ namespace View.Kitchen
             fireSwitch[index].DOLocalMoveZ(fireSwitch[index].localPosition.z + fireSwitchMoveDistance, 0.2f);
         }
 
-        private void OnOpenFridgeDoor(params object[] arg1)
+        private void OnFridgeDoorStateChange(params object[] arg1)
         {
             int index = (int)arg1[0];
-            Transform door = fridgeDoor[index];
-            Vector3 v = door.localEulerAngles;
-            Quaternion q = Quaternion.Euler(v.x, 270f, v.z);
-
-            TweenCallback callback = () => 
+            if (index == 1)
             {
-                if (index == 1)
+                if (isFridgeDoorOpened == false)
                 {
-                    bottomFridgeBox.DOLocalMove(boxFinalPos.transform.localPosition, 0.35f);
+                    bottomFridgeBox.DOKill();
+                    bottomFridgeBox.DOLocalMove(boxFinalPos.transform.localPosition, 0.35f)
+                        .OnPlay(() => headFire.SetActive(true));
                 }
-            };
-
-            door.DOLocalRotateQuaternion(q, 0.2f).OnComplete(callback);
+                else
+                {
+                    bottomFridgeBox.DOKill();
+                    bottomFridgeBox.DOLocalMove(boxStartPos, 0.35f)
+                        .OnPlay(() => headFire.SetActive(false));
+                }
+                isFridgeDoorOpened = !isFridgeDoorOpened;
+            }
         }
     }
 }
