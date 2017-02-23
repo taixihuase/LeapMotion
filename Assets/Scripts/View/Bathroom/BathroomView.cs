@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace View.Bathroom
 {
-    public class BathroomView : EntityView
+    public class BathroomView : SceneEntityView
     {
         void Start()
         {

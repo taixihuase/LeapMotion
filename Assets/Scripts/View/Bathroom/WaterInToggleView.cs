@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace View.Bathroom
 {
-    public class WaterInToggleView : Core.MVC.View
+    public class WaterInToggleView : Core.MVC.EntityView
     {
         void OnTriggerEnter(Collider other)
         {

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace View.LivingRoom
 {
-    public class LivingRoomView : EntityView
+    public class LivingRoomView : SceneEntityView
     {
         void Start()
         {

@@ -10,5 +10,8 @@
         PutPlugOut,
         FireSwitchChanged,
         FridgeDoorChanged,
+        KitchenLightChanged,
+        UnextendFingers,
+        ExtendFingers,
     }
 }

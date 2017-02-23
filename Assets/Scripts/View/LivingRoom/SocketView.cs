@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace View.LivingRoom
 {
-    public class SocketView : Core.MVC.View
+    public class SocketView : Core.MVC.EntityView
     {
         void OnTriggerEnter(Collider other)
         {

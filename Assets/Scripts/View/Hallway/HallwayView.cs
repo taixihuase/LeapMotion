@@ -2,7 +2,7 @@
 
 namespace View.Hallway
 {
-    public class HallwayView : EntityView
+    public class HallwayView : SceneEntityView
     {
 
     }

@@ -1,15 +1,43 @@
 ﻿using Leap.Unity;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Core.Manager
 {
-    public class HandManager : Singleton<HandManager>
+    public class HandManager : MonoSingleton<HandManager>
     {
         private IHandModel leftHand; 
 
         public IHandModel LeftHand
         {
             get { return leftHand; }
+            private set
+            {
+                if (value != null)
+                {
+                    if (!value.isActiveAndEnabled)
+                    {
+                        GameObject clone = GameObject.Find("PepperBaseCutLeftHand(Clone)");
+                        if (clone != null && leftHand != clone)
+                        {
+                            leftHand = clone.GetComponent<IHandModel>();
+                            if (OnHandChanged != null)
+                            {
+                                OnHandChanged.Invoke(leftHand, 0);
+                            }
+                        }
+                    }
+                    else if(value != leftHand)
+                    {
+                        leftHand = value;
+                        if (OnHandChanged != null)
+                        {
+                            OnHandChanged.Invoke(leftHand, 0);
+                        }
+                    }
+                }
+            }
         }
 
         private IHandModel rightHand;
@@ -17,7 +45,35 @@ namespace Core.Manager
         public IHandModel RightHand
         {
             get { return rightHand; }
+            private set
+            {
+                if (value != null)
+                {
+                    if (!value.isActiveAndEnabled)
+                    {
+                        GameObject clone = GameObject.Find("PepperBaseCutRightHand(Clone)");
+                        if (clone != null && rightHand != clone)
+                        {
+                            rightHand = clone.GetComponent<IHandModel>();
+                            if(OnHandChanged != null)
+                            {
+                                OnHandChanged.Invoke(rightHand, 1);
+                            }
+                        }
+                    }
+                    else if (value != rightHand)
+                    {
+                        rightHand = value;
+                        if (OnHandChanged != null)
+                        {
+                            OnHandChanged.Invoke(rightHand, 1);
+                        }
+                    }
+                }
+            }
         }
+
+        public Action<IHandModel, int> OnHandChanged;
 
         private IHandModel leftAttachment;
 
@@ -54,9 +110,14 @@ namespace Core.Manager
             get { return pool; }
         }
 
-        public HandManager()
+        private void Awake()
         {
-            pool = Object.FindObjectOfType<HandPool>();
+            Init();
+        }
+
+        private void Init()
+        {
+            pool = FindObjectOfType<HandPool>();
             HandPool.ModelGroup graphics = pool.GetGroup("Graphics_Hands");
             leftHand = graphics.LeftModel;
             rightHand = graphics.RightModel;
@@ -66,6 +127,16 @@ namespace Core.Manager
             HandPool.ModelGroup attachments = pool.GetGroup("Attachment_Hands");
             leftAttachment = attachments.LeftModel;
             rightAttachment = attachments.RightModel;
+        }
+
+        private void Update()
+        {
+            if(!LeftHand.isActiveAndEnabled || !RightHand.isActiveAndEnabled)
+            {
+                HandPool.ModelGroup graphics = pool.GetGroup("Graphics_Hands");
+                LeftHand = graphics.LeftModel;
+                RightHand = graphics.RightModel;
+            }
         }
     }
 }

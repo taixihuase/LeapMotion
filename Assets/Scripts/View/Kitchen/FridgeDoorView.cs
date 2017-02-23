@@ -2,11 +2,10 @@
 using System.Collections;
 using UnityEngine;
 using Controller;
-using DG.Tweening;
 
 namespace View.Kitchen
 {
-    public class FridgeDoorView : Core.MVC.View
+    public class FridgeDoorView : Core.MVC.EntityView
     {
         [SerializeField]
         int index;
@@ -41,55 +40,97 @@ namespace View.Kitchen
 
         bool[] isDoorOpened = new bool[] { false, false };
 
+        bool[] isFingerExtended = new bool[] { true, true };
+
+        int handType = -1;
+
+        bool isWaitForClear = false;
+
+        public void ExtendFingers(params object[] arg1)
+        {
+            int direction = (int)arg1[0];
+            isFingerExtended[direction] = true;
+        }
+
+        public void UnextendFingers(params object[] arg1)
+        {
+            int direction = (int)arg1[0];
+            isFingerExtended[direction] = false;
+        }
+
         void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Finger")
+            if (other.tag.Contains("Finger"))
             {
+                if(other.tag.Contains("Left"))
+                {
+                    if (isFingerExtended[0] == true)
+                        return;
+                }
+                else if(other.tag.Contains("Right"))
+                {
+                    if (isFingerExtended[1] == true)
+                        return;
+                }
+
                 if (hand == null)
                 {
                     hand = other.transform;
                     lastPos = currPos = hand.position;
                     lastEuler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
                     timer = 0;
+
+                    if (other.tag.Contains("Left"))
+                    {
+                        handType = 0;
+                    }
+                    else if (other.tag.Contains("Right"))
+                    {
+                        handType = 1;
+                    }
                 }
-            }
-        }
-
-
-        void OnTriggerExit(Collider other)
-        {
-            if (other.tag == "Finger" && other.transform == hand)
-            {
-                coroutine = ReleaseHand();
-                CoroutineManager.Instance.StartCoroutine(coroutine);
             }
         }
 
         IEnumerator ReleaseHand()
         {
-            float time = 0;
-            while (time < endDelay)
+            while (true)
             {
-                time += 0.05f;
-                yield return new WaitForSeconds(0.05f);
+                while (!isWaitForClear)
+                    yield return new WaitForSeconds(0.05f);
+
+                float time = 0;
+                while (time < endDelay && isWaitForClear)
+                {
+                    time += 0.05f;
+                    yield return new WaitForSeconds(0.05f);
+                }
+                hand = null;
+                handType = -1;
+                isWaitForClear = false;
             }
-            hand = null;
         }
 
         void Start()
         {
-            nVec = (fridgePosY.position - fridgePos.position).normalized;
-        }
+            coroutine = ReleaseHand();
+            CoroutineManager.Instance.StartCoroutine(coroutine);
 
+            nVec = (fridgePosY.position - fridgePos.position).normalized;
+            Init(KitchenCtrl.Instance.Model);
+            Bind(Define.EventType.ExtendFingers, ExtendFingers);
+            Bind(Define.EventType.UnextendFingers, UnextendFingers);
+        }
 
         void Update()
         {
             if (hand != null)
             {
-                if(hand.gameObject.activeInHierarchy == false)
+                if(hand.gameObject.activeInHierarchy == false || isFingerExtended[handType] == true)
                 {
                     hand = null;
-                    CoroutineManager.Instance.StopCoroutine(coroutine);
+                    handType = -1;
+                    isWaitForClear = false;
                     return;
                 }
 
@@ -112,7 +153,6 @@ namespace View.Kitchen
                 Vector2 from = new Vector2((fridgePos.position - lastProjVec).x, (fridgePos.position - lastProjVec).z);
                 Vector2 to = new Vector2((fridgePos.position - currProjVec).x, (fridgePos.position - currProjVec).z);
                 float rotateAngle = VectorAngle(from, to);
-
              
                 Vector3 euler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
                 lastEuler = euler;
@@ -149,6 +189,12 @@ namespace View.Kitchen
             float y = euler.y < 180 ? euler.y : euler.y - 360;
             float z = euler.z < 180 ? euler.z : euler.z - 360;
             return new Vector3(x, y, z);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            CoroutineManager.Instance.StartCoroutine(coroutine);
         }
     }
 }

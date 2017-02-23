@@ -10,6 +10,7 @@ namespace View.Bathroom
     {
         void Start()
         {
+            ChangeNormalUIColor();
             for (int i = 0; i < pos.Length; i++)
             {
                 if (i != 0)

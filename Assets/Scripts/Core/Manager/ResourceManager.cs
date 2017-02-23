@@ -9,9 +9,9 @@ namespace Core.Manager
 {
     public sealed class ResourceManager : Singleton<ResourceManager>
     {
-        public bool IsDefaultAsync = false;
+        public bool IsDefaultAsync = true;
 
-        public bool IsDefaultFromServer = false;
+        public bool IsDefaultFromServer = true;
 
         private Dictionary<string, UnityEngine.Object> loadedAssets = new Dictionary<string, UnityEngine.Object>();
 

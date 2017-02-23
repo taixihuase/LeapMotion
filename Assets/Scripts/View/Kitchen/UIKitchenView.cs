@@ -10,11 +10,29 @@ namespace View.Kitchen
     {
         void Start()
         {
-            for(int i = 0; i < pos.Length; i++)
+            Init(KitchenCtrl.Instance.Model);
+            Bind(Define.EventType.KitchenLightChanged, ChangeUIColor);
+            ChangeNormalUIColor();
+            for (int i = 0; i < pos.Length; i++)
             {
                 if (i != 0)
                     pos[i].SetActive(false);
             }
+        }
+
+        bool isNormalColor = true;
+
+        private void ChangeUIColor(params object[] arg1)
+        {
+            if(isNormalColor)
+            {
+                ChangeGreenUIColor();
+            }
+            else
+            {
+                ChangeNormalUIColor();
+            }
+            isNormalColor = !isNormalColor;
         }
 
         public void OnClickToPos1()

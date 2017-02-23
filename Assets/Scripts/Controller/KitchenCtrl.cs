@@ -23,5 +23,20 @@ namespace Controller
         {
             Model.Refresh(EventType.FridgeDoorChanged, index);
         }
+
+        public void ChangeLight()
+        {
+            Model.Refresh(EventType.KitchenLightChanged);
+        }
+
+        public void UnextendFingers(int direction)
+        {
+            Model.Refresh(EventType.UnextendFingers, direction);
+        }
+
+        public void ExtendFingers(int direction)
+        {
+            Model.Refresh(EventType.ExtendFingers, direction);
+        }
     }
 }

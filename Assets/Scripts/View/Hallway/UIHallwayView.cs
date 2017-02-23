@@ -19,7 +19,7 @@ namespace View.Hallway
                 {
                     Destroy(hallway);
                     GameObject obj = Instantiate(scene) as GameObject;
-                    Transform startPos = obj.GetComponent<EntityView>().GetStartPos();
+                    Transform startPos = obj.GetComponent<SceneEntityView>().GetStartPos();
                     CameraManager.Instance.MoveAndRotate(startPos);
                     UIManager.Instance.OpenWindow(SceneType.MainScene, EnumDescriptionTool.GetEnum<WindowType>(sceneName), null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
                 });

@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace View.Kitchen
 {
-    public class KitchenView : EntityView
+    public class KitchenView : SceneEntityView
     {
         void Start()
         {
@@ -13,6 +13,7 @@ namespace View.Kitchen
             Bind(Define.EventType.MoveCameraPos, MoveCamera);
             Bind(Define.EventType.FireSwitchChanged, OnFireUsingStateChanged);
             Bind(Define.EventType.FridgeDoorChanged, OnFridgeDoorStateChange);
+            Bind(Define.EventType.KitchenLightChanged, OnLightStateChange);
             boxStartPos = bottomFridgeBox.localPosition;
         }
 
@@ -51,6 +52,11 @@ namespace View.Kitchen
         GameObject headFire;
 
         bool isFridgeDoorOpened = false;
+
+        [SerializeField]
+        GameObject lights;
+
+        bool isLightOn = false;
                     
         void Update()
         {
@@ -118,6 +124,12 @@ namespace View.Kitchen
                 }
                 isFridgeDoorOpened = !isFridgeDoorOpened;
             }
+        }
+
+        private void OnLightStateChange(params object[] arg1)
+        {
+            isLightOn = !isLightOn;
+            lights.SetActive(isLightOn);
         }
     }
 }

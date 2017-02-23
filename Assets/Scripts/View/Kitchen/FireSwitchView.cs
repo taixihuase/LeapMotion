@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace View.Kitchen
 {
-    public class FireSwitchView : Core.MVC.View
+    public class FireSwitchView : Core.MVC.EntityView
     {
         [SerializeField]
         int index;
