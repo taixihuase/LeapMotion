@@ -13,47 +13,54 @@ namespace View.Bathroom
             Bind(Define.EventType.MoveCameraPos, MoveCamera);
             Bind(Define.EventType.WaterInToggleChanged, OnInToggleStateChanged);
             Bind(Define.EventType.WaterOutToggleChanged, OnOutToggleStateChanged);
+            smokeSystem.Play();
         }
 
         [SerializeField]
-        Transform WaterInToggle;
+        Transform waterInToggle;
 
         [SerializeField]
-        float InToggleUpDownDistance;
+        float inToggleUpDownDistance;
 
         bool isInDown = false;
 
         [SerializeField]
-        Transform WaterOutToggle;
+        Transform waterOutToggle;
 
         [SerializeField]
-        float OutToggleUpDownDistance;
+        float outToggleUpDownDistance;
 
         bool isOutDown = false;
 
         [SerializeField]
-        float WaterInSpeed;
+        float waterInSpeed;
 
         [SerializeField]
-        float WaterOutSpeed;
+        float waterOutSpeed;
 
         [SerializeField]
-        float WaterMaxHeight;
+        float waterMaxHeight;
 
         [SerializeField]
-        float WaterMinHeight;
+        float waterMinHeight;
 
         [SerializeField]
-        Transform Water;
+        Transform water;
 
         [SerializeField]
-        GameObject WaterParticle;
+        GameObject waterParticle;
+
+        [SerializeField]
+        ParticleSystem smokeSystem;
 
         float interval = 0.5f;
 
         float cdTimer = 0;
 
         bool isAnyStateChanged = false;
+
+        [SerializeField]
+        GameObject normalLight;
 
         [SerializeField]
         GameObject greenLight;
@@ -73,28 +80,45 @@ namespace View.Bathroom
                 }
             }
 
-            if(isInDown && Water.localPosition.y < WaterMaxHeight)
+            if(isInDown && water.localPosition.y < waterMaxHeight)
             {
-                Water.Translate(Vector3.up * WaterInSpeed);
+                water.Translate(Vector3.up * waterInSpeed);
             }
-            if(isOutDown && Water.localPosition.y > WaterMinHeight)
+            if(isOutDown && water.localPosition.y > waterMinHeight)
             {
-                Water.Translate(Vector3.down * WaterOutSpeed);
+                water.Translate(Vector3.down * waterOutSpeed);
             }
-            if(Water.localPosition.y < WaterMinHeight * 0.95f)
+            if(water.localPosition.y < waterMinHeight * 0.95f)
             {
-                if (greenLight.activeSelf == true)
+                if (greenLight.activeSelf)
                 {
+                    normalLight.SetActive(true);
                     greenLight.SetActive(false);
                     BathroomCtrl.Instance.PourWater();
                 }
             }
             else
             {
-                if (greenLight.activeSelf == false)
+                if (!greenLight.activeSelf)
                 {
+                    normalLight.SetActive(false);
                     greenLight.SetActive(true);
+                    smokeSystem.Play();
                     BathroomCtrl.Instance.FillWater();
+                }
+            }
+            if (water.localPosition.y < (waterMaxHeight - waterMinHeight) * 0.35f + waterMinHeight)
+            {
+                if(smokeSystem.isPlaying)
+                {
+                    smokeSystem.Stop();
+                }
+            }
+            else
+            {
+                if (smokeSystem.isStopped)
+                {
+                    smokeSystem.Play();
                 }
             }
         }
@@ -126,27 +150,27 @@ namespace View.Bathroom
         private void OnInToggleDown()
         {
             isInDown = true;
-            WaterParticle.SetActive(true);
-            WaterInToggle.DOLocalMoveZ(WaterInToggle.localPosition.z - InToggleUpDownDistance, 0.2f);
+            waterParticle.SetActive(true);
+            waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z - inToggleUpDownDistance, 0.2f);
         }
 
         private void OnInToggleUp()
         {
             isInDown = false;
-            WaterParticle.SetActive(false);
-            WaterInToggle.DOLocalMoveZ(WaterInToggle.localPosition.z + InToggleUpDownDistance, 0.2f);
+            waterParticle.SetActive(false);
+            waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z + inToggleUpDownDistance, 0.2f);
         }
 
         private void OnOutToggleDown()
         {
             isOutDown = true;
-            WaterOutToggle.DOLocalMoveY(WaterOutToggle.localPosition.y - OutToggleUpDownDistance, 0.2f);
+            waterOutToggle.DOLocalMoveY(waterOutToggle.localPosition.y - outToggleUpDownDistance, 0.2f);
         }
 
         private void OnOutToggleUp()
         {
             isOutDown = false;
-            WaterOutToggle.DOLocalMoveY(WaterOutToggle.localPosition.y + OutToggleUpDownDistance, 0.2f);
+            waterOutToggle.DOLocalMoveY(waterOutToggle.localPosition.y + outToggleUpDownDistance, 0.2f);
         }
     }
 }
