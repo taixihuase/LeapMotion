@@ -10,12 +10,25 @@ namespace View.Bathroom
     {
         void Start()
         {
+            Init(BathroomCtrl.Instance.Model);
+            Bind(Define.EventType.PourWater, PourWater);
+            Bind(Define.EventType.FillWater, FillWater);
             ChangeNormalUIColor();
             for (int i = 0; i < pos.Length; i++)
             {
                 if (i != 0)
                     pos[i].SetActive(false);
             }
+        }
+
+        private void PourWater(params object[] arg1)
+        {
+            ChangeNormalUIColor();
+        }
+
+        private void FillWater(params object[] arg1)
+        {
+            ChangeGreenUIColor();
         }
 
         public void OnClickToPos1()

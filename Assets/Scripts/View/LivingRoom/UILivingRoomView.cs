@@ -25,6 +25,8 @@ namespace View.Living
         private void OnInsertPlug(params object[] arg1)
         {
             ChangeGreenUIColor();
+            pos[3].SetActive(false);
+            LivingRoomCtrl.Instance.MovePos(2, () => pos[2].SetActive(true));
         }
 
         private void OnPutPlugOut(params object[] arg1)
@@ -59,6 +61,7 @@ namespace View.Living
         {
             pos[2].SetActive(false);
             LivingRoomCtrl.Instance.MovePos(3, () => pos[3].SetActive(true));
+            LivingRoomCtrl.Instance.FixPlugPosition();
         }
 
         public void OnClickToHallway()

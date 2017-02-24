@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2925074279
+CRC: 1053042499
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 494231b0a85ea34fd1d8fe60a1ba7fbe
+    Hash: 0106a8eb283729f613b01568d0251f0d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f215ec3c36a404b1824ff5f66a95e323
+    Hash: 3dcc3d5a981858ef8a34bda7d3601baa
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -50,6 +50,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 8ec7c5cd9da4d744781215751ca3a483, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 134
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/Scene/LivingRoom.prefab

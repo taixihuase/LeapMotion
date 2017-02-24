@@ -15,24 +15,28 @@ namespace View.LivingRoom
             Bind(Define.EventType.MoveCameraPos, MoveCamera);
             Bind(Define.EventType.InsertPlug, InsertPlug);
             Bind(Define.EventType.PutPlugOut, PutPlugOut);
-            lightStartColor = DirLight.color;
-            lightStartIntensity = DirLight.intensity;
+            Bind(Define.EventType.FixPlugPos, FixPlugPos);
+            lightStartColor = dirLight.color;
+            lightStartIntensity = dirLight.intensity;
         }
 
         [SerializeField]
-        Transform InsertPos;
+        Transform insertPos;
 
         [SerializeField]
-        Transform Plug;
+        Transform plugStartPos;
 
         [SerializeField]
-        InteractionBehaviour PlugInteraction;
+        Transform plug;
 
         [SerializeField]
-        Light DirLight;
+        InteractionBehaviour plugInteraction;
 
         [SerializeField]
-        Light GreenLight;
+        Light dirLight;
+
+        [SerializeField]
+        Light greenLight;
 
         Color lightStartColor;
 
@@ -44,30 +48,34 @@ namespace View.LivingRoom
         [SerializeField]
         float lightChangeIntensity;
 
-
         Action<Hand> insertFunc = null;
 
         bool isInsert = false;
 
-        float cd = 1f;
+        float duration = 1f;
 
         float timer = 0;
+
+        float fixDuration = 1f;
+
+        float fixTimer = 1f;
 
         private void InsertPlug(params object[] arg1)
         {
             insertFunc = (h) =>
             {
                 isInsert = true;
-                PlugInteraction.isKinematic = true;
-                PlugInteraction.useGravity = false;
-                Plug.transform.localPosition = InsertPos.transform.localPosition;
-                Plug.transform.localRotation = InsertPos.transform.localRotation;
-                DirLight.color = lightChangeColor;
-                DirLight.intensity = lightChangeIntensity;
-                GreenLight.gameObject.SetActive(true);
+                timer = 0;
+                plugInteraction.isKinematic = true;
+                plugInteraction.useGravity = false;
+                plug.transform.localPosition = insertPos.transform.localPosition;
+                plug.transform.localRotation = insertPos.transform.localRotation;
+                dirLight.color = lightChangeColor;
+                dirLight.intensity = lightChangeIntensity;
+                greenLight.gameObject.SetActive(true);
                 LivingRoomCtrl.Instance.OnInsertPlugComplete();
             };
-            PlugInteraction.OnHandReleasedEvent += insertFunc;
+            plugInteraction.OnHandReleasedEvent += insertFunc;
         }
 
         private void PutPlugOut(params object[] arg1)
@@ -75,26 +83,43 @@ namespace View.LivingRoom
             if (insertFunc != null)
             {
                 isInsert = false;
-                timer = 0;
-                PlugInteraction.useGravity = true;
-                PlugInteraction.OnHandReleasedEvent -= insertFunc;
-                DirLight.color = lightStartColor;
-                DirLight.intensity = lightStartIntensity;
-                GreenLight.gameObject.SetActive(false);
+                plugInteraction.isKinematic = false;
+                plugInteraction.useGravity = true;
+                plugInteraction.OnHandReleasedEvent -= insertFunc;
+                dirLight.color = lightStartColor;
+                dirLight.intensity = lightStartIntensity;
+                greenLight.gameObject.SetActive(false);
+            }
+        }
+
+        private void FixPlugPos(params object[] arg1)
+        {
+            plugInteraction.isKinematic = true;
+            fixTimer = 0;
+            if(isInsert == false)
+            {
+                plug.transform.localPosition = plugStartPos.transform.localPosition;
+                plug.transform.localRotation = plugStartPos.transform.localRotation;
             }
         }
 
         void Update()
         {
-            if(isInsert)
+            if (isInsert && timer < duration)
             {
-                if(timer < cd)
+                timer += Time.deltaTime;
+                plug.transform.localPosition = insertPos.transform.localPosition;
+                plug.transform.localRotation = insertPos.transform.localRotation;
+            }
+            else if (fixTimer < fixDuration)
+            {
+                fixTimer += Time.deltaTime;
+            }
+            else
+            {
+                if (plugInteraction.isKinematic)
                 {
-                    timer += Time.deltaTime;
-                }
-                else
-                {
-                    PlugInteraction.isKinematic = false;
+                    plugInteraction.isKinematic = false;
                 }
             }
         }

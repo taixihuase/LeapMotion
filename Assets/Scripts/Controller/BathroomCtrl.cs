@@ -23,5 +23,15 @@ namespace Controller
         {
             Model.Refresh(EventType.WaterOutToggleChanged);
         }
+
+        public void PourWater()
+        {
+            Model.Refresh(EventType.PourWater);
+        }
+
+        public void FillWater()
+        {
+            Model.Refresh(EventType.FillWater);
+        }
     }
 }

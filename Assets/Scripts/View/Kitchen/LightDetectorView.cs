@@ -28,6 +28,8 @@ namespace View.Kitchen
 
         PalmDirectionDetector[] palmDetectors;
 
+        ExtendedFingerDetector[] extendedDetectors;
+
         protected override void Awake()
         {
             proximityDetector = GetComponent<ObjectProximityDetector>();
@@ -51,12 +53,17 @@ namespace View.Kitchen
             palmDetectors[0].HandModel = HandManager.Instance.LeftHand;
             palmDetectors[1].HandModel = HandManager.Instance.RightHand;
 
+            extendedDetectors = GetComponents<ExtendedFingerDetector>();
+            extendedDetectors[0].HandModel = HandManager.Instance.LeftHand;
+            extendedDetectors[1].HandModel = HandManager.Instance.RightHand;
+
             HandManager.Instance.OnHandChanged += OnHandChanged;
         }
 
         private void OnHandChanged(IHandModel hand, int direction)
         {
             palmDetectors[direction].HandModel = hand;
+            extendedDetectors[direction].HandModel = hand;
             RiggedHand hm = hand as RiggedHand;
             if(direction == 0)
             {

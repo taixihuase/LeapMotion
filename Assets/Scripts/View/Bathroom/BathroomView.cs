@@ -55,6 +55,9 @@ namespace View.Bathroom
 
         bool isAnyStateChanged = false;
 
+        [SerializeField]
+        GameObject greenLight;
+
         void Update()
         {
             if(isAnyStateChanged)
@@ -77,6 +80,22 @@ namespace View.Bathroom
             if(isOutDown && Water.localPosition.y > WaterMinHeight)
             {
                 Water.Translate(Vector3.down * WaterOutSpeed);
+            }
+            if(Water.localPosition.y < WaterMinHeight * 0.95f)
+            {
+                if (greenLight.activeSelf == true)
+                {
+                    greenLight.SetActive(false);
+                    BathroomCtrl.Instance.PourWater();
+                }
+            }
+            else
+            {
+                if (greenLight.activeSelf == false)
+                {
+                    greenLight.SetActive(true);
+                    BathroomCtrl.Instance.FillWater();
+                }
             }
         }
 

@@ -28,5 +28,10 @@ namespace Controller
         {
             Model.Refresh(EventType.PutPlugOut);
         }
+
+        public void FixPlugPosition()
+        {
+            Model.Refresh(EventType.FixPlugPos);
+        }
     }
 }

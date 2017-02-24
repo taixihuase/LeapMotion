@@ -130,6 +130,22 @@ namespace View.Kitchen
         {
             isLightOn = !isLightOn;
             lights.SetActive(isLightOn);
+            if(isLightOn)
+            {
+                for(int i = 0; i < fire.Length; i++)
+                {
+                    ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
+                    ps.startColor = new Color(0, 150f / 255, 1f, 1f);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < fire.Length; i++)
+                {
+                    ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
+                    ps.startColor = new Color(225f / 255, 1f, 150f / 255, 1f);
+                }
+            }
         }
     }
 }

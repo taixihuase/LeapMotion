@@ -7,7 +7,7 @@ namespace View.Bathroom
     {
         void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Hand")
+            if (other.tag == "Hand" || other.tag.Contains("Finger"))
             {
                 BathroomCtrl.Instance.ChangeWaterOutToggle();
             }

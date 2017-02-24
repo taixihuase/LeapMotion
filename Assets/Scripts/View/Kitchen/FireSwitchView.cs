@@ -10,7 +10,7 @@ namespace View.Kitchen
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Hand")
+            if (other.tag == "Hand" || other.tag.Contains("Finger"))
             {
                 KitchenCtrl.Instance.ChangeFire(index);
             }
