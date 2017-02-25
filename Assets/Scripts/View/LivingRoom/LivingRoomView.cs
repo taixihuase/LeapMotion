@@ -3,6 +3,7 @@ using Core.MVC;
 using Leap;
 using Leap.Unity.Interaction;
 using System;
+using Core.Manager;
 using UnityEngine;
 
 namespace View.LivingRoom
@@ -18,6 +19,10 @@ namespace View.LivingRoom
             Bind(Define.EventType.FixPlugPos, FixPlugPos);
             lightStartColor = dirLight.color;
             lightStartIntensity = dirLight.intensity;
+            if (plugInteraction.Manager == null)
+            {
+                plugInteraction.Manager = LeapMotionManager.Instance.Interaction;
+            }
         }
 
         [SerializeField]

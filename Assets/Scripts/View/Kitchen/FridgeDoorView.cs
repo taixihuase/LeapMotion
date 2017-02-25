@@ -176,7 +176,7 @@ namespace View.Kitchen
         private void CheckOpenState()
         {
             float angle = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles).y;
-            if ((angle < -85f && !isDoorOpened[index]) || (angle > -85f && lastEuler.y < -85f && isDoorOpened[index]))
+            if ((angle < -85f && !isDoorOpened[index]) || (angle > -75f && isDoorOpened[index]))
             {
                 KitchenCtrl.Instance.ChangeFridgeDoor(index);
                 isDoorOpened[index] = !isDoorOpened[index];

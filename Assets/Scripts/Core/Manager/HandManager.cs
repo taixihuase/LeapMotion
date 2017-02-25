@@ -1,7 +1,6 @@
 ﻿using Leap.Unity;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Core.Manager
 {
@@ -117,7 +116,7 @@ namespace Core.Manager
 
         private void Init()
         {
-            pool = FindObjectOfType<HandPool>();
+            pool = LeapMotionManager.Instance.HandPool;
             HandPool.ModelGroup graphics = pool.GetGroup("Graphics_Hands");
             leftHand = graphics.LeftModel;
             rightHand = graphics.RightModel;
