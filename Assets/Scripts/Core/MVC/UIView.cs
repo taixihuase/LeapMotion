@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Boo.Lang;
+using Core.Manager;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Core.MVC
@@ -12,6 +14,12 @@ namespace Core.MVC
         protected Image[] btnImage;
 
         protected Text[] btnText;
+
+        [SerializeField]
+        protected RectTransform[] btnRect;
+
+        [SerializeField]
+        protected Vector4[] btnPos;  
 
         protected Color normalUIColor = new Color(1f, 200f / 255, 100f / 255, 225f / 255);
 
@@ -32,6 +40,40 @@ namespace Core.MVC
                     btnText[i] = btnImage[i].transform.GetChild(0).GetComponent<Text>();
                 }
             }
+            if (pos.Length > 0)
+            {
+                for (int i = 0; i < pos.Length; i++)
+                {
+                    Canvas canvas = pos[i].GetComponent<Canvas>();
+                    canvas.worldCamera = CameraManager.Instance.Camera;
+                }
+            }
+
+            pos[0].SetActive(true);
+            for (int i = 1; i < pos.Length; i++)
+            {
+                pos[i].SetActive(false);
+            }
+
+            if (btnRect.Length > 0)
+            {
+                if (Screen.width == 1440)
+                {
+                    for (int i = 0; i < btnRect.Length; i++)
+                    {
+                        btnRect[i].anchoredPosition = new Vector2(btnPos[i].x, btnPos[i].y);
+                    }
+                }
+                else if (Screen.width == 1366)
+                {
+                    for (int i = 0; i < btnRect.Length; i++)
+                    {
+                        btnRect[i].anchoredPosition = new Vector2(btnPos[i].z, btnPos[i].w);
+                    }
+                }
+            }
+
+            ChangeNormalUIColor();
         }
 
         protected void ChangeNormalUIColor()

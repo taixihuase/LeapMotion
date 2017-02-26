@@ -1,4 +1,5 @@
 ﻿using Core.Manager;
+using Define;
 using UnityEngine;
 using View.LivingRoom;
 
@@ -10,6 +11,7 @@ public class StartApp : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 #endif
+        DontDestroyOnLoad(gameObject);
 
         ResourceManager.Instance.LoadAsset(Define.ResourceType.Scene, "LivingRoom", (o) =>
         {
@@ -29,5 +31,10 @@ public class StartApp : MonoBehaviour
             ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
         ResourceManager.Instance.LoadAsset(Define.ResourceType.Scene, "Hallway", null,
             ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
+    }
+
+    private void OnApplicationQuit()
+    {
+        Destroy(gameObject);
     }
 }

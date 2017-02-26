@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using System;
+using Controller;
 using Core.Manager;
 using Core.MVC;
 using Leap.Unity;
@@ -24,7 +25,6 @@ namespace View.Kitchen
             detectors = GetComponents<ExtendedFingerDetector>();
             detectors[0].HandModel = HandManager.Instance.LeftHand;
             detectors[1].HandModel = HandManager.Instance.RightHand;
-
             HandManager.Instance.OnHandChanged += OnHandChanged;
         }
 
@@ -32,7 +32,7 @@ namespace View.Kitchen
         {
             detectors[direction].HandModel = hand;
         }
-
+            
         protected override void OnDestroy()
         {
             base.OnDestroy();

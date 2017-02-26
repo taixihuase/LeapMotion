@@ -12,12 +12,6 @@ namespace View.Kitchen
         {
             Init(KitchenCtrl.Instance.Model);
             Bind(Define.EventType.KitchenLightChanged, ChangeUIColor);
-            ChangeNormalUIColor();
-            for (int i = 0; i < pos.Length; i++)
-            {
-                if (i != 0)
-                    pos[i].SetActive(false);
-            }
         }
 
         bool isNormalColor = true;

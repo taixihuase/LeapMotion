@@ -14,12 +14,6 @@ namespace View.Living
             Init(LivingRoomCtrl.Instance.Model);
             Bind(Define.EventType.InsertPlugComplete, OnInsertPlug);
             Bind(Define.EventType.PutPlugOut, OnPutPlugOut);
-            ChangeNormalUIColor();
-            for (int i = 0; i < pos.Length; i++)
-            {
-                if (i != 0)
-                    pos[i].SetActive(false);
-            }
         }
 
         private void OnInsertPlug(params object[] arg1)

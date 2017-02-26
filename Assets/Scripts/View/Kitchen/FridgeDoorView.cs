@@ -194,7 +194,7 @@ namespace View.Kitchen
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            CoroutineManager.Instance.StartCoroutine(coroutine);
+            CoroutineManager.Instance.StopCoroutine(coroutine);
         }
     }
 }
