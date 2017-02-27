@@ -78,7 +78,7 @@ namespace Core.Manager
                 .OnComplete(() =>
                 {
                     ViewToDark(pauseDuration)
-                    .OnPlay(() => onComplete())
+                    .OnPlay(() => { if (onComplete != null) onComplete(); })
                     .OnComplete(() => ShowView(showDuration));
                 }));
         }

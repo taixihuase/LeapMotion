@@ -4,6 +4,9 @@ namespace Define
 {
     public enum WindowType
     {
+        [Description("Menu")]
+        Menu = 0,
+
         [Description("LivingRoom")]
         LivingRoom = 1,
 

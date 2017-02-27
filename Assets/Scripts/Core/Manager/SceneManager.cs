@@ -11,11 +11,11 @@ namespace Core.Manager
 {
     public class SceneAction
     {
-        public UnityAction<Scene, Scene> ActiveSceneChanged;
+        public UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene> ActiveSceneChanged;
 
-        public UnityAction<Scene, LoadSceneMode> SceneLoaded;
+        public UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode> SceneLoaded;
 
-        public UnityAction<Scene> SceneUnloaded;
+        public UnityAction<UnityEngine.SceneManagement.Scene> SceneUnloaded;
     }
 
 
@@ -77,7 +77,7 @@ namespace Core.Manager
             }
         }
 
-        private UnityAction<Scene, LoadSceneMode> singleLoaded;
+        private UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode> singleLoaded;
 
         private List<SceneType> openScenes = new List<SceneType>();
         
@@ -87,7 +87,7 @@ namespace Core.Manager
             openScenes.Add(currentScene);
             NextScene = SceneType.None;
 
-            UnityAction <Scene, LoadSceneMode> sceneLoaded = (scene, mode) =>
+            UnityAction <UnityEngine.SceneManagement.Scene, LoadSceneMode> sceneLoaded = (scene, mode) =>
             {
                 if (mode == LoadSceneMode.Single)
                 {
@@ -111,20 +111,20 @@ namespace Core.Manager
                     Delegate[] loaded = sceneActions[scene.name].SceneLoaded.GetInvocationList();
                     for(int i = 0; i < loaded.Length; i++)
                     {
-                        UnityAction<Scene, LoadSceneMode> func = loaded[i] as UnityAction<Scene, LoadSceneMode>;
+                        UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode> func = loaded[i] as UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode>;
                         func(scene, mode);
                     }
                 }
             };
 
-            UnityAction<Scene> sceneUnloaded = (scene) =>
+            UnityAction<UnityEngine.SceneManagement.Scene> sceneUnloaded = (scene) =>
             {
                 if (sceneActions.ContainsKey(scene.name) && sceneActions[scene.name].SceneUnloaded != null)
                 {
                     Delegate[] unloaded = sceneActions[scene.name].SceneUnloaded.GetInvocationList();
                     for (int i = 0; i < unloaded.Length; i++)
                     {
-                        UnityAction<Scene> func = unloaded[i] as UnityAction<Scene>;
+                        UnityAction<UnityEngine.SceneManagement.Scene> func = unloaded[i] as UnityAction<UnityEngine.SceneManagement.Scene>;
                         func(scene);
                     }
                 }
@@ -133,14 +133,14 @@ namespace Core.Manager
                 ClearChangedEventHandler(CurrentScene);
             };
 
-            UnityAction<Scene, Scene> activeSceneChanged = (scene, toScene) =>
+            UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene> activeSceneChanged = (scene, toScene) =>
             {
                 if (sceneActions.ContainsKey(toScene.name) && sceneActions[toScene.name].ActiveSceneChanged != null)
                 {
                     Delegate[] changed = sceneActions[toScene.name].ActiveSceneChanged.GetInvocationList();
                     for (int i = 0; i < changed.Length; i++)
                     {
-                        UnityAction<Scene, Scene> func = changed[i] as UnityAction<Scene, Scene>;
+                        UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene> func = changed[i] as UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene>;
                         func(scene, toScene);
                     }
                 }
@@ -164,7 +164,7 @@ namespace Core.Manager
             return sceneActions.ContainsKey(scene.GetDescription());
         }
 
-        public void AddLoadedEventHandler(SceneType scene, UnityAction<Scene, LoadSceneMode> sceneLoaded)
+        public void AddLoadedEventHandler(SceneType scene, UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode> sceneLoaded)
         {
             string name = scene.GetDescription();
             if(sceneActions.ContainsKey(name) == false)
@@ -175,7 +175,7 @@ namespace Core.Manager
             Debug.Log(string.Format("Scene \"{0}\" Add Loaded", name));
         }
 
-        public void RemoveLoadedEventHandler(SceneType scene, UnityAction<Scene, LoadSceneMode> sceneLoaded)
+        public void RemoveLoadedEventHandler(SceneType scene, UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode> sceneLoaded)
         {
             string name = scene.GetDescription();
             if(sceneActions.ContainsKey(name))
@@ -185,7 +185,7 @@ namespace Core.Manager
             }
         }
 
-        public void AddUnloadedEventHandler(SceneType scene, UnityAction<Scene> sceneUnloaded)
+        public void AddUnloadedEventHandler(SceneType scene, UnityAction<UnityEngine.SceneManagement.Scene> sceneUnloaded)
         {
             string name = scene.GetDescription();
             if (sceneActions.ContainsKey(name) == false)
@@ -196,7 +196,7 @@ namespace Core.Manager
             Debug.Log(string.Format("Scene \"{0}\" Add Unloaded", name));
         }
 
-        public void RemoveUnloadedEventHandler(SceneType scene, UnityAction<Scene> sceneUnloaded)
+        public void RemoveUnloadedEventHandler(SceneType scene, UnityAction<UnityEngine.SceneManagement.Scene> sceneUnloaded)
         {
             string name = scene.GetDescription();
             if (sceneActions.ContainsKey(name))
@@ -206,7 +206,7 @@ namespace Core.Manager
             }
         }
         
-        public void AddChangedEventHandler(SceneType scene, UnityAction<Scene, Scene> changed)
+        public void AddChangedEventHandler(SceneType scene, UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene> changed)
         {
             string name = scene.GetDescription();
             if (sceneActions.ContainsKey(name) == false)
@@ -217,7 +217,7 @@ namespace Core.Manager
             Debug.Log(string.Format("Scene \"{0}\" Add Changed", name));
         }
 
-        public void RemoveChangedEventHandler(SceneType scene, UnityAction<Scene, Scene> changed)
+        public void RemoveChangedEventHandler(SceneType scene, UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene> changed)
         {
             string name = scene.GetDescription();
             if (sceneActions.ContainsKey(name))
@@ -264,7 +264,7 @@ namespace Core.Manager
 
         #endregion
 
-        public void LoadScene(SceneType scene, LoadSceneMode loadMode = LoadSceneMode.Single, UnityAction<Scene, LoadSceneMode> sceneLoaded = null)
+        public void LoadScene(SceneType scene, LoadSceneMode loadMode = LoadSceneMode.Single, UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode> sceneLoaded = null)
         {
             if (sceneLoaded != null)
             {
@@ -275,7 +275,7 @@ namespace Core.Manager
             UnityEngine.SceneManagement.SceneManager.LoadScene(scene.GetDescription(), loadMode);
         }
 
-        public void LoadSceneAsync(SceneType scene, LoadSceneMode loadMode = LoadSceneMode.Single, UnityAction<Scene, LoadSceneMode> sceneLoaded = null)
+        public void LoadSceneAsync(SceneType scene, LoadSceneMode loadMode = LoadSceneMode.Single, UnityAction<UnityEngine.SceneManagement.Scene, LoadSceneMode> sceneLoaded = null)
         {
             if (sceneLoaded != null)
             {

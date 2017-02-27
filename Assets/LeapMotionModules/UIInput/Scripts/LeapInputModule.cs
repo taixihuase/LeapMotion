@@ -237,6 +237,7 @@ namespace Leap.Unity.InputModule {
       for (int index = 0; index < Pointers.Length; index++) {
         //Create the Canvas to render the Pointer on
         GameObject pointer = new GameObject("Pointer " + index);
+        DontDestroyOnLoad(pointer);
         SpriteRenderer renderer = pointer.AddComponent<SpriteRenderer>();
         renderer.sortingOrder = 1000;
 

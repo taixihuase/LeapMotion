@@ -13,7 +13,13 @@ namespace Define
         [Description("TestLoad")]
         TestLoad = 1,
 
+        [Description("StartScene")]
+        StartScene = 2,
+
+        [Description("MenuScene")]
+        MenuScene = 3,
+
         [Description("MainScene")]
-        MainScene = 2,
+        MainScene = 4,
     }
 }

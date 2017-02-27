@@ -16,13 +16,13 @@ namespace Test
         {
             yield return null;
 
-            UnityAction<Scene> unloaded = (sc) =>
+            UnityAction<UnityEngine.SceneManagement.Scene> unloaded = (sc) =>
             {
                 Debug.Log(sc.name + " unloaded");
             };
             Core.Manager.SceneManager.Instance.AddUnloadedEventHandler(Define.SceneType.TestLoad, unloaded);
 
-            UnityAction<Scene, Scene> changed = (sc1, sc2) =>
+            UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene> changed = (sc1, sc2) =>
             {
                 Debug.Log("Change to " + sc2.name);
             };

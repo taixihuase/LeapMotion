@@ -93,6 +93,7 @@ namespace Leap.Unity.Interaction {
 
       _handParent = new GameObject(gameObject.name);
       _handParent.transform.parent = null; // Prevent hand from moving when you turn your head.
+      DontDestroyOnLoad(_handParent);
 
       _brushBones = new InteractionBrushBone[N_FINGERS * N_ACTIVE_BONES];
 
