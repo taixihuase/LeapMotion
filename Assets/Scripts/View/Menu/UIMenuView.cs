@@ -39,9 +39,10 @@ namespace View.Menu
 
         public void OnSelectMode2()
         {
-            SceneManager.Instance.LoadSceneAsync(Define.SceneType.MainScene, UnityEngine.SceneManagement.LoadSceneMode.Single, (sc, mode) =>
+            CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
             {
                 UIManager.Instance.CloseSceneWindows(Define.SceneType.MenuScene);
+                SceneManager.Instance.LoadSceneAsync(Define.SceneType.MainScene, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
             });
         }
 
@@ -59,8 +60,8 @@ namespace View.Menu
         {
             if(currentPanel != 0)
             {
-                currentPanel = 0;
                 pos[currentPanel].SetActive(false);
+                currentPanel = 0;
                 pos[0].SetActive(true);
             }
         }

@@ -33,61 +33,63 @@ Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Man
 Loading C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\DOTween50.dll into Unity Child Domain
 Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\LeapCSharp.NET3.5.dll (this message is harmless)
 Loading C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\LeapCSharp.NET3.5.dll into Unity Child Domain
-- Completed reload, in  0.628 seconds
+- Completed reload, in  0.587 seconds
 Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\System.dll (this message is harmless)
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.799717 ms
+UnloadTime: 1.024138 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
 A group matching that name does not exisit in the modelPool
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-UnloadTime: 16.367477 ms
+UnloadTime: 1.011643 ms
 
-Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1037.
-Total: 0.931765 ms (FindLiveObjects: 0.204827 ms CreateObjectMapping: 0.102637 ms MarkObjects: 0.596633 ms  DeleteObjects: 0.026774 ms)
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1038.
+Total: 0.693915 ms (FindLiveObjects: 0.115578 ms CreateObjectMapping: 0.028113 ms MarkObjects: 0.523002 ms  DeleteObjects: 0.026328 ms)
 
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.345395 ms
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/livingroom.assetbundle
+Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/ui/window/menu.assetbundle
  
 (Filename:  Line: 483)
 
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/ui/window/livingroom.assetbundle
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
  
-(Filename:  Line: 483)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/bathroom.assetbundle
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
  
-(Filename:  Line: 483)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/kitchen.assetbundle
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
  
-(Filename:  Line: 483)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/hallway.assetbundle
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
  
-(Filename:  Line: 483)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 5871.
-Total: 4.784669 ms (FindLiveObjects: 0.629209 ms CreateObjectMapping: 0.284706 ms MarkObjects: 3.830145 ms  DeleteObjects: 0.040162 ms)
-
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/ui/window/hallway.assetbundle
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
  
-(Filename:  Line: 483)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/ui/window/bathroom.assetbundle
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
  
-(Filename:  Line: 483)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/ui/window/kitchen.assetbundle
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
  
-(Filename:  Line: 483)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 2b44 -> priority: 1 
+  Thread -> id: 1cac -> priority: 1 

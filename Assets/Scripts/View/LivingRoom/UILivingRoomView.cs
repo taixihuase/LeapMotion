@@ -78,9 +78,12 @@ namespace View.Living
 
         public void OnClickExit()
         {
-            SceneManager.Instance.LoadScene(Define.SceneType.MenuScene, UnityEngine.SceneManagement.LoadSceneMode.Single, (sc, mode)=>
+            CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
             {
+                GameObject livingroom = FindObjectOfType<LivingRoomView>().gameObject;
+                Destroy(livingroom);
                 UIManager.Instance.CloseSceneWindows(Define.SceneType.MainScene);
+                SceneManager.Instance.LoadSceneAsync(Define.SceneType.MenuScene, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
             });
         }
     }

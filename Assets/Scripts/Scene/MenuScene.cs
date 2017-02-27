@@ -7,10 +7,17 @@ namespace Scene
     {
         void Start()
         {
-            CameraManager.Instance.ChangeScene(0, 1.0f, 0.5f, () =>
+            if (CameraManager.Instance.IsChanging == false)
+            {
+                CameraManager.Instance.ChangeScene(0, 0.5f, 0.5f, () =>
+                {
+                    UIManager.Instance.OpenWindow(Define.SceneType.MenuScene, Define.WindowType.Menu, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
+                });
+            }
+            else
             {
                 UIManager.Instance.OpenWindow(Define.SceneType.MenuScene, Define.WindowType.Menu, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
-            });
+            }
         }
     }
 }

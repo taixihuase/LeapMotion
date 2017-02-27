@@ -9,6 +9,8 @@ namespace Core.Manager
     {
         public Camera Camera;
 
+        public bool IsChanging = false;
+
         private void Awake()
         {
             Init();
@@ -74,13 +76,21 @@ namespace Core.Manager
         public void ChangeScene(float darkDuration, float pauseDuration, float showDuration, Action onComplete)
         {
             ViewToDark(darkDuration)
-                .OnComplete(() => ViewToDark(pauseDuration)
+                .OnPlay(() => IsChanging = true)
                 .OnComplete(() =>
                 {
                     ViewToDark(pauseDuration)
-                    .OnPlay(() => { if (onComplete != null) onComplete(); })
-                    .OnComplete(() => ShowView(showDuration));
-                }));
+                    .OnComplete(() =>
+                    {
+                        ViewToDark(pauseDuration)
+                        .OnPlay(() => { if (onComplete != null) onComplete(); })
+                        .OnComplete(() =>
+                        {
+                            ShowView(showDuration)
+                            .OnComplete(() => IsChanging = false);
+                        });
+                    });
+                });
         }
     
         public Tweener ViewToDark(float duration)
