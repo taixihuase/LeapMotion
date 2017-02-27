@@ -19,7 +19,7 @@ namespace Core.Manager
     }
 
 
-    public class SceneManager : Singleton<SceneManager>
+    public sealed class SceneManager : Singleton<SceneManager>
     {
         private Dictionary<string, SceneAction> sceneActions = new Dictionary<string, SceneAction>();
 

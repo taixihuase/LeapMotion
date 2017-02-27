@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core.Manager
 {
-    public class HandManager : MonoSingleton<HandManager>
+    public sealed class HandManager : MonoSingleton<HandManager>
     {
         private IHandModel leftHand; 
 

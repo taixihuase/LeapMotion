@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 
 namespace Core.Manager
 {
-    public class UIManager : MonoSingleton<UIManager>
+    public sealed class UIManager : MonoSingleton<UIManager>
     {
         private GameObject uiCamera;
 

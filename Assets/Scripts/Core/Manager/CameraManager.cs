@@ -5,7 +5,7 @@ using System;
 
 namespace Core.Manager
 {
-    public class CameraManager : MonoSingleton<CameraManager>
+    public sealed class CameraManager : MonoSingleton<CameraManager>
     {
         public Camera Camera;
 

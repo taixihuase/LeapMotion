@@ -34,11 +34,12 @@ namespace View.Menu
 
         public void OnSelectMode1()
         {
-
+            GlobalManager.Instance.SceneMode = GlobalManager.Mode.PracticeMode;
         }
 
         public void OnSelectMode2()
         {
+            GlobalManager.Instance.SceneMode = GlobalManager.Mode.ThrillingMode;
             CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
             {
                 UIManager.Instance.CloseSceneWindows(Define.SceneType.MenuScene);
