@@ -12,6 +12,11 @@ namespace Core.Manager
             notifier.AddEventHandler(eventName, func);
         }
 
+        public void AddEventHandler(EventType eventType, VariadicDelegate func)
+        {
+            notifier.AddEventHandler(eventType, func);
+        }
+
         public void ClearEventHandler()
         {
             notifier.ClearEventHandler();
@@ -22,14 +27,29 @@ namespace Core.Manager
             notifier.RaiseEvent(eventName, e);
         }
 
+        public void RaiseEvent(EventType eventType, params object[] e)
+        {
+            notifier.RaiseEvent(eventType, e);
+        }
+
         public void RemoveAllEventHandler(string eventName)
         {
             notifier.RemoveAllEventHandler(eventName);
         }
 
+        public void RemoveAllEventHandler(EventType eventType)
+        {
+            notifier.RemoveAllEventHandler(eventType);
+        }
+
         public void RemoveEventHandler(string eventName, VariadicDelegate func)
         {
             notifier.RemoveEventHandler(eventName, func);
+        }
+
+        public void RemoveEventHandler(EventType eventType, VariadicDelegate func)
+        {
+            notifier.RemoveEventHandler(eventType, func);
         }
     }
 }

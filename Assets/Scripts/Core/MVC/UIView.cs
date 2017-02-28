@@ -1,5 +1,4 @@
-﻿using Boo.Lang;
-using Core.Manager;
+﻿using Core.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,12 +13,6 @@ namespace Core.MVC
         protected Image[] btnImage;
 
         protected Text[] btnText;
-
-        [SerializeField]
-        protected RectTransform[] btnRect;
-
-        [SerializeField]
-        protected Vector4[] btnPos;  
 
         protected Color normalUIColor = new Color(1f, 200f / 255, 100f / 255, 225f / 255);
 
@@ -55,24 +48,6 @@ namespace Core.MVC
                 pos[i].SetActive(false);
             }
 
-            if (btnRect.Length > 0)
-            {
-                if (Screen.width == 1440)
-                {
-                    for (int i = 0; i < btnRect.Length; i++)
-                    {
-                        btnRect[i].anchoredPosition = new Vector2(btnPos[i].x, btnPos[i].y);
-                    }
-                }
-                else if (Screen.width == 1366)
-                {
-                    for (int i = 0; i < btnRect.Length; i++)
-                    {
-                        btnRect[i].anchoredPosition = new Vector2(btnPos[i].z, btnPos[i].w);
-                    }
-                }
-            }
-
             ChangeNormalUIColor();
         }
 
@@ -95,6 +70,11 @@ namespace Core.MVC
                     btnText[i].color = redTextColor;
                 }
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
         }
     }
 }
