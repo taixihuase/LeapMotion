@@ -33,63 +33,109 @@ Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Man
 Loading C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\DOTween50.dll into Unity Child Domain
 Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\LeapCSharp.NET3.5.dll (this message is harmless)
 Loading C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\LeapCSharp.NET3.5.dll into Unity Child Domain
-- Completed reload, in  0.587 seconds
+- Completed reload, in  0.711 seconds
 Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Unity\Unity5.5.0p3\Projects\LeapMotion\LeapMotion_Data\Managed\System.dll (this message is harmless)
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.024138 ms
+UnloadTime: 1.411035 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
 A group matching that name does not exisit in the modelPool
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-UnloadTime: 1.011643 ms
+UnloadTime: 1.352131 ms
 
-Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1038.
-Total: 0.693915 ms (FindLiveObjects: 0.115578 ms CreateObjectMapping: 0.028113 ms MarkObjects: 0.523002 ms  DeleteObjects: 0.026328 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 1042.
+Total: 0.508276 ms (FindLiveObjects: 0.083894 ms CreateObjectMapping: 0.035699 ms MarkObjects: 0.380203 ms  DeleteObjects: 0.007586 ms)
 
 Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/ui/window/menu.assetbundle
  
 (Filename:  Line: 483)
 
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.143691 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 3807.
+Total: 1.300366 ms (FindLiveObjects: 0.134766 ms CreateObjectMapping: 0.067829 ms MarkObjects: 1.076796 ms  DeleteObjects: 0.020081 ms)
+
+Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/livingroom.assetbundle
+ 
+(Filename:  Line: 483)
+
+Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/ui/window/livingroom.assetbundle
+ 
+(Filename:  Line: 483)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/bathroom.assetbundle
+ 
+(Filename:  Line: 483)
+
+Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/kitchen.assetbundle
+ 
+(Filename:  Line: 483)
+
+Unable to open archive file: c:/unity/unity5.5.0p3/projects/leapmotion/leapmotion_data/streamingassets/scene/hallway.assetbundle
+ 
+(Filename:  Line: 483)
+
+UnloadTime: 3.420490 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 6260.
+Total: 3.837285 ms (FindLiveObjects: 0.609128 ms CreateObjectMapping: 0.386896 ms MarkObjects: 2.810915 ms  DeleteObjects: 0.029452 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.306167 ms
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 3860.
+Total: 4.156799 ms (FindLiveObjects: 0.394483 ms CreateObjectMapping: 0.369046 ms MarkObjects: 3.324100 ms  DeleteObjects: 0.067383 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.523002 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 6337.
+Total: 4.512458 ms (FindLiveObjects: 0.654199 ms CreateObjectMapping: 0.270872 ms MarkObjects: 3.554364 ms  DeleteObjects: 0.032129 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.871075 ms
+DOTWEEN :: An error inside a tween callback was silently taken care of > Object reference not set to an instance of an object
+
+  at View.Living.UILivingRoomView.<OnClickExit>m__5 () [0x00000] in <filename unknown>:0 
+  at Core.Manager.CameraManager+<ChangeScene>c__AnonStorey0.<>m__3 () [0x00000] in <filename unknown>:0 
+  at DG.Tweening.Tween.OnTweenCallback (DG.Tweening.TweenCallback callback) [0x00000] in <filename unknown>:0 
+
+
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
+
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 3860.
+Total: 2.796189 ms (FindLiveObjects: 0.214198 ms CreateObjectMapping: 0.099067 ms MarkObjects: 2.414647 ms  DeleteObjects: 0.067383 ms)
+
+DOTWEEN :: An error inside a tween callback was silently taken care of > Object reference not set to an instance of an object
+
+  at View.Living.UILivingRoomView.<OnClickExit>m__5 () [0x00000] in <filename unknown>:0 
+  at Core.Manager.CameraManager+<ChangeScene>c__AnonStorey0.<>m__3 () [0x00000] in <filename unknown>:0 
+  at DG.Tweening.Tween.OnTweenCallback (DG.Tweening.TweenCallback callback) [0x00000] in <filename unknown>:0 
+
+
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.295416 ms
 
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 5732.
+Total: 3.076879 ms (FindLiveObjects: 0.213306 ms CreateObjectMapping: 0.202596 ms MarkObjects: 2.643126 ms  DeleteObjects: 0.016064 ms)
 
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.184788 ms
 
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Ensure that the layers that you have allotted are children of CompressibleUI object and have UI Elements in them!
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 3964.
+Total: 1.725640 ms (FindLiveObjects: 0.243651 ms CreateObjectMapping: 0.098620 ms MarkObjects: 1.351238 ms  DeleteObjects: 0.031237 ms)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1cac -> priority: 1 
+  Thread -> id: 39f8 -> priority: 1 

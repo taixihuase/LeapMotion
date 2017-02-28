@@ -2,6 +2,7 @@
 using Core.MVC;
 using UnityEngine;
 using DG.Tweening;
+using Core.Manager;
 
 namespace View.Kitchen
 {
@@ -15,10 +16,17 @@ namespace View.Kitchen
             Bind(Define.EventType.FridgeDoorChanged, OnFridgeDoorStateChange);
             Bind(Define.EventType.KitchenLightChanged, OnLightStateChange);
             boxStartPos = bottomFridgeBox.localPosition;
+            if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+            {
+                fridgeBoxContent[0].SetActive(false);
+                fridgeBoxContent[1].SetActive(true);
+            }
+            else
+            {
+                fridgeBoxContent[0].SetActive(true);
+                fridgeBoxContent[1].SetActive(false);
+            }
         }
-
-        [SerializeField]
-        GameObject light;
 
         [SerializeField]
         Transform[] fireSwitch;
@@ -54,7 +62,10 @@ namespace View.Kitchen
         bool isFridgeDoorOpened = false;
 
         [SerializeField]
-        GameObject lights;
+        GameObject[] lights;
+
+        [SerializeField]
+        GameObject[] fridgeBoxContent;
 
         bool isLightOn = false;
                     
@@ -129,8 +140,8 @@ namespace View.Kitchen
         private void OnLightStateChange(params object[] arg1)
         {
             isLightOn = !isLightOn;
-            lights.SetActive(isLightOn);
-            if(isLightOn)
+            lights[(int)GlobalManager.Instance.SceneMode].SetActive(isLightOn);
+            if(isLightOn && GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
             {
                 for(int i = 0; i < fire.Length; i++)
                 {

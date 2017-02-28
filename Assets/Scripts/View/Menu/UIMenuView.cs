@@ -35,6 +35,11 @@ namespace View.Menu
         public void OnSelectMode1()
         {
             GlobalManager.Instance.SceneMode = GlobalManager.Mode.PracticeMode;
+            CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
+            {
+                UIManager.Instance.CloseSceneWindows(Define.SceneType.MenuScene);
+                SceneManager.Instance.LoadSceneAsync(Define.SceneType.MainScene, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
+            });
         }
 
         public void OnSelectMode2()

@@ -87,10 +87,13 @@ namespace Core.MVC
 
         protected void ChangeGreenUIColor()
         {
-            for (int i = 0; i < btnImage.Length; i++)
+            if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
             {
-                btnImage[i].color = greenUIColor;
-                btnText[i].color = redTextColor;
+                for (int i = 0; i < btnImage.Length; i++)
+                {
+                    btnImage[i].color = greenUIColor;
+                    btnText[i].color = redTextColor;
+                }
             }
         }
     }

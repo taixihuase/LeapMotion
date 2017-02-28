@@ -15,8 +15,8 @@ namespace Core.Manager
 
         public enum Mode
         {
-            PracticeMode = 1,
-            ThrillingMode = 2
+            PracticeMode = 0,
+            ThrillingMode = 1,
         }
 
         public Mode SceneMode { get; set; }

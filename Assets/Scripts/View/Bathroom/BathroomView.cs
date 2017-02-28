@@ -2,6 +2,7 @@
 using Core.MVC;
 using UnityEngine;
 using DG.Tweening;
+using Core.Manager;
 
 namespace View.Bathroom
 {
@@ -13,7 +14,10 @@ namespace View.Bathroom
             Bind(Define.EventType.MoveCameraPos, MoveCamera);
             Bind(Define.EventType.WaterInToggleChanged, OnInToggleStateChanged);
             Bind(Define.EventType.WaterOutToggleChanged, OnOutToggleStateChanged);
-            smokeSystem.Play();
+            smoke = smokeSystem[(int)GlobalManager.Instance.SceneMode];
+            smoke.gameObject.SetActive(true);
+            wt = water[(int)GlobalManager.Instance.SceneMode];
+            wt.gameObject.SetActive(true);
         }
 
         [SerializeField]
@@ -45,13 +49,13 @@ namespace View.Bathroom
         float waterMinHeight;
 
         [SerializeField]
-        Transform water;
+        Transform[] water;
 
         [SerializeField]
-        GameObject waterParticle;
+        GameObject[] waterParticle;
 
         [SerializeField]
-        ParticleSystem smokeSystem;
+        ParticleSystem[] smokeSystem;
 
         float interval = 0.5f;
 
@@ -64,6 +68,10 @@ namespace View.Bathroom
 
         [SerializeField]
         GameObject greenLight;
+
+        ParticleSystem smoke;
+
+        Transform wt;
 
         void Update()
         {
@@ -80,45 +88,49 @@ namespace View.Bathroom
                 }
             }
 
-            if(isInDown && water.localPosition.y < waterMaxHeight)
+            if(isInDown && wt.localPosition.y < waterMaxHeight)
             {
-                water.Translate(Vector3.up * waterInSpeed);
+                wt.Translate(Vector3.up * waterInSpeed);
             }
-            if(isOutDown && water.localPosition.y > waterMinHeight)
+            if(isOutDown && wt.localPosition.y > waterMinHeight)
             {
-                water.Translate(Vector3.down * waterOutSpeed);
+                wt.Translate(Vector3.down * waterOutSpeed);
             }
-            if(water.localPosition.y < waterMinHeight * 0.95f)
+
+            if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
             {
-                if (greenLight.activeSelf)
+                if (wt.localPosition.y < waterMinHeight * 0.95f)
                 {
-                    normalLight.SetActive(true);
-                    greenLight.SetActive(false);
-                    BathroomCtrl.Instance.PourWater();
+                    if (greenLight.activeSelf)
+                    {
+                        normalLight.SetActive(true);
+                        greenLight.SetActive(false);
+                        BathroomCtrl.Instance.PourWater();
+                    }
+                }
+                else
+                {
+                    if (!greenLight.activeSelf)
+                    {
+                        normalLight.SetActive(false);
+                        greenLight.SetActive(true);
+                        BathroomCtrl.Instance.FillWater();
+                    }
+                }
+            }
+
+            if (wt.localPosition.y < (waterMaxHeight - waterMinHeight) * 0.35f + waterMinHeight)
+            {
+                if(smoke.isPlaying)
+                {
+                    smoke.Stop();
                 }
             }
             else
             {
-                if (!greenLight.activeSelf)
+                if (smoke.isStopped)
                 {
-                    normalLight.SetActive(false);
-                    greenLight.SetActive(true);
-                    smokeSystem.Play();
-                    BathroomCtrl.Instance.FillWater();
-                }
-            }
-            if (water.localPosition.y < (waterMaxHeight - waterMinHeight) * 0.35f + waterMinHeight)
-            {
-                if(smokeSystem.isPlaying)
-                {
-                    smokeSystem.Stop();
-                }
-            }
-            else
-            {
-                if (smokeSystem.isStopped)
-                {
-                    smokeSystem.Play();
+                    smoke.Play();
                 }
             }
         }
@@ -150,14 +162,14 @@ namespace View.Bathroom
         private void OnInToggleDown()
         {
             isInDown = true;
-            waterParticle.SetActive(true);
+            waterParticle[(int)GlobalManager.Instance.SceneMode].SetActive(true);
             waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z - inToggleUpDownDistance, 0.2f);
         }
 
         private void OnInToggleUp()
         {
             isInDown = false;
-            waterParticle.SetActive(false);
+            waterParticle[(int)GlobalManager.Instance.SceneMode].SetActive(false);
             waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z + inToggleUpDownDistance, 0.2f);
         }
 

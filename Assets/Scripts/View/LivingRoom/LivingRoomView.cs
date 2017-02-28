@@ -75,9 +75,12 @@ namespace View.LivingRoom
                 plugInteraction.useGravity = false;
                 plug.transform.localPosition = insertPos.transform.localPosition;
                 plug.transform.localRotation = insertPos.transform.localRotation;
-                dirLight.color = lightChangeColor;
-                dirLight.intensity = lightChangeIntensity;
-                greenLight.gameObject.SetActive(true);
+                if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+                {
+                    dirLight.color = lightChangeColor;
+                    dirLight.intensity = lightChangeIntensity;
+                    greenLight.gameObject.SetActive(true);
+                }
                 LivingRoomCtrl.Instance.OnInsertPlugComplete();
             };
             plugInteraction.OnHandReleasedEvent += insertFunc;

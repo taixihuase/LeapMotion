@@ -11,10 +11,6 @@ namespace View.Hallway
         void Start()
         {
             RectTransform rt = btnImage[1].transform.parent.GetComponent<RectTransform>();
-            if (Screen.width == 1366)
-            {
-                rt.anchoredPosition = new Vector2(425f, rt.anchoredPosition.y);
-            } 
         }
 
         public void OnClickToOtherScene(string sceneName)
