@@ -33,5 +33,15 @@ namespace Controller
         {
             Model.Refresh(EventType.FixPlugPos);
         }
+
+        public void ElectricWarning()
+        {
+            Model.Refresh(EventType.ElectricWarning);
+        }
+
+        public void CancelWarning()
+        {
+            Model.Refresh(EventType.CancelElectricWarning);
+        }
     }
 }

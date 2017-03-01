@@ -22,5 +22,10 @@ namespace Core.MVC
         {
             RaiseEvent(string.Format("{0}{1}", Name, attribute), e);
         } 
+
+        public virtual void Reset()
+        {
+
+        }
     }
 }

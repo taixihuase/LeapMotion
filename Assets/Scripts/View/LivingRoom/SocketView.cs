@@ -11,6 +11,10 @@ namespace View.LivingRoom
             {
                 LivingRoomCtrl.Instance.InsertPlug();
             }
+            else if (other.tag == "Hand" || other.tag.Contains("Finger"))
+            {
+                LivingRoomCtrl.Instance.ElectricWarning();
+            }
         }
 
         void OnTriggerExit(Collider other)
@@ -18,6 +22,10 @@ namespace View.LivingRoom
             if (other.tag == "Plug")
             {
                 LivingRoomCtrl.Instance.PutPlugOut();
+            }
+            else if (other.tag == "Hand" || other.tag.Contains("Finger"))
+            {
+                LivingRoomCtrl.Instance.CancelWarning();
             }
         }
     }

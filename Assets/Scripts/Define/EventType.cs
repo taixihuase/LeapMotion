@@ -16,5 +16,9 @@
         KitchenLightChanged,
         UnextendFingers,
         ExtendFingers,
+        ElectricWarning,
+        CancelElectricWarning,
+        FillWaterBegin,
+        PourWaterBegin,
     }
 }

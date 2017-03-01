@@ -1,4 +1,5 @@
-﻿using Core.Manager;
+﻿using Controller;
+using Core.Manager;
 using UnityEngine;
 using View.LivingRoom;
 
@@ -17,6 +18,8 @@ namespace Scene
                 Camera camera = CameraManager.Instance.Camera;
                 camera.transform.position = startPos.position;
                 camera.transform.rotation = startPos.rotation;
+                LivingRoomCtrl.Instance.Model.Reset();
+                BathroomCtrl.Instance.Model.Reset();
                 UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.LivingRoom, null,
                     ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
             }, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);

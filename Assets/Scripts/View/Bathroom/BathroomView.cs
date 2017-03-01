@@ -163,7 +163,8 @@ namespace View.Bathroom
         {
             isInDown = true;
             waterParticle[(int)GlobalManager.Instance.SceneMode].SetActive(true);
-            waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z - inToggleUpDownDistance, 0.2f);
+            waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z - inToggleUpDownDistance, 0.2f)
+                .OnPlay(() => BathroomCtrl.Instance.FillWaterBegin());
         }
 
         private void OnInToggleUp()
@@ -176,13 +177,14 @@ namespace View.Bathroom
         private void OnOutToggleDown()
         {
             isOutDown = true;
-            waterOutToggle.DOLocalMoveY(waterOutToggle.localPosition.y - outToggleUpDownDistance, 0.2f);
+            waterOutToggle.DOLocalMoveY(waterOutToggle.localPosition.y - outToggleUpDownDistance, 0.2f)
+                .OnPlay(() => BathroomCtrl.Instance.PourWaterBegin());
         }
 
         private void OnOutToggleUp()
         {
             isOutDown = false;
-            waterOutToggle.DOLocalMoveY(waterOutToggle.localPosition.y + outToggleUpDownDistance, 0.2f);
+            waterOutToggle.DOLocalMoveY(waterOutToggle.localPosition.y + outToggleUpDownDistance, 0.2f);           
         }
     }
 }

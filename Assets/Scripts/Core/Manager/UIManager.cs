@@ -4,35 +4,17 @@ using UnityEngine;
 using Tool;
 using System.Collections.Generic;
 using System.Linq;
-using Leap.Unity;
-using Leap.Unity.InputModule;
-using UnityEngine.EventSystems;
 
 namespace Core.Manager
 {
     public sealed class UIManager : MonoSingleton<UIManager>
     {
-        private GameObject uiCamera;
-
-        public GameObject UICamera
-        {
-            get { return uiCamera; }
-        }
-
         private Transform root;
 
         public Transform Root
         {
             get { return root; }
         }
-
-        private GameObject eventSystem;
-
-        public GameObject EventSystem
-        {
-            get { return eventSystem; }
-        }
-
 
         private void Awake()
         {

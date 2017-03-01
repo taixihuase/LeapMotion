@@ -33,5 +33,15 @@ namespace Controller
         {
             Model.Refresh(EventType.FillWater);
         }
+
+        public void PourWaterBegin()
+        {
+            Model.Refresh(EventType.PourWaterBegin);
+        }
+
+        public void FillWaterBegin()
+        {
+            Model.Refresh(EventType.FillWaterBegin);
+        }
     }
 }

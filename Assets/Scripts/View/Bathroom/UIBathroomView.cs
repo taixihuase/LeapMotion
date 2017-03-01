@@ -1,6 +1,7 @@
 ﻿using Controller;
 using Core.Manager;
 using Core.MVC;
+using Model;
 using UnityEngine;
 using View.Hallway;
 
@@ -13,6 +14,21 @@ namespace View.Bathroom
             Init(BathroomCtrl.Instance.Model);
             Bind(Define.EventType.PourWater, PourWater);
             Bind(Define.EventType.FillWater, FillWater);
+
+            if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.PracticeMode)
+            {
+                BathroomModel m = model as BathroomModel;
+                pourTips.SetActive(false);
+                fillTips.SetActive(m.CanShowFillTips);
+
+                Bind(Define.EventType.FillWaterBegin, FillWaterBegin);
+                Bind(Define.EventType.PourWaterBegin, PourWaterBegin);
+            }
+            else
+            {
+                pourTips.SetActive(false);
+                fillTips.SetActive(false);
+            }
         }
 
         private void PourWater(params object[] arg1)
@@ -54,6 +70,29 @@ namespace View.Bathroom
                 });
             }
         }
-    }
 
+        [SerializeField]
+        GameObject pourTips;
+
+        [SerializeField]
+        GameObject fillTips;
+
+        private void PourWaterBegin(params object[] arg1)
+        {
+            BathroomModel bm = model as BathroomModel;
+            if (bm.CanShowFillTips == false)
+            {
+                bm.SetPourTips(false);
+                pourTips.SetActive(false);
+            }
+        }
+
+        private void FillWaterBegin(params object[] arg1)
+        {
+            BathroomModel bm = model as BathroomModel;
+            bm.SetFillTips(false);
+            fillTips.SetActive(false);
+            pourTips.SetActive(bm.CanShowPourTips);
+        }
+    }
 }

@@ -17,8 +17,6 @@ namespace Core.Manager
 
         private Dictionary<string, object> loadingAssets = new Dictionary<string, object>();
 
-        private Dictionary<ResourceType, List<string>> allAssets = new Dictionary<ResourceType, List<string>>();
-
         public UnityEngine.Object GetResource(ResourceType type, string name)
         {
             UnityEngine.Object obj = null;

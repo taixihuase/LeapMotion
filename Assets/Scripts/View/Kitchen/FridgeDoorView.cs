@@ -36,8 +36,6 @@ namespace View.Kitchen
 
         IEnumerator coroutine;
 
-        Vector3 lastEuler;
-
         bool[] isDoorOpened = new bool[] { false, false };
 
         bool[] isFingerExtended = new bool[] { true, true };
@@ -77,7 +75,6 @@ namespace View.Kitchen
                 {
                     hand = other.transform;
                     lastPos = currPos = hand.position;
-                    lastEuler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
                     timer = 0;
 
                     if (other.tag.Contains("Left"))
@@ -155,7 +152,6 @@ namespace View.Kitchen
                 float rotateAngle = VectorAngle(from, to);
              
                 Vector3 euler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
-                lastEuler = euler;
                 if (euler.y - rotateAngle < maxAngle || euler.y - rotateAngle > 0)
                     return;
 

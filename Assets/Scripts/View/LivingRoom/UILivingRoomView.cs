@@ -4,6 +4,7 @@ using UnityEngine;
 using View.Hallway;
 using View.LivingRoom;
 using Core.MVC;
+using Model;
 
 namespace View.Living
 {
@@ -14,10 +15,29 @@ namespace View.Living
             Init(LivingRoomCtrl.Instance.Model);
             Bind(Define.EventType.InsertPlugComplete, OnInsertPlug);
             Bind(Define.EventType.PutPlugOut, OnPutPlugOut);
+            if(GlobalManager.Instance.SceneMode == GlobalManager.Mode.PracticeMode)
+            {
+                LivingRoomModel m = model as LivingRoomModel;
+                clickTips.SetActive(m.CanShowClickTips);
+                socketTips.SetActive(m.CanShowSocketTips);
+                warningTips.SetActive(false);
+
+                Bind(Define.EventType.ElectricWarning, ShowWarning);
+                Bind(Define.EventType.CancelElectricWarning, CancelWarning);
+            }
+            else
+            {
+                clickTips.SetActive(false);
+                socketTips.SetActive(false);
+                warningTips.SetActive(false);
+            }
         }
 
         private void OnInsertPlug(params object[] arg1)
         {
+            (model as LivingRoomModel).SetSocketTips(false);
+            socketTips.SetActive(false);
+
             ChangeGreenUIColor();
             pos[3].SetActive(false);
             LivingRoomCtrl.Instance.MovePos(2, () => pos[2].SetActive(true));
@@ -42,6 +62,8 @@ namespace View.Living
             pos[0].SetActive(false);
             pos[2].SetActive(false);
             LivingRoomCtrl.Instance.MovePos(1, () => pos[1].SetActive(true));
+            (model as LivingRoomModel).SetClickTips(false);
+            clickTips.SetActive(false);
         }
 
         public void OnClickToPos3()
@@ -85,6 +107,47 @@ namespace View.Living
                 UIManager.Instance.CloseSceneWindows(Define.SceneType.MainScene);
                 SceneManager.Instance.LoadSceneAsync(Define.SceneType.MenuScene, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
             });
+        }
+
+        [SerializeField]
+        GameObject clickTips;
+
+        [SerializeField]
+        GameObject socketTips;
+
+        [SerializeField]
+        GameObject warningTips;
+
+        bool isDelayCancelWarning = false;
+
+        float delayCancelWarningTime = 0;
+
+        private void ShowWarning(params object[] arg1)
+        {
+            isDelayCancelWarning = false;
+            warningTips.SetActive(true);
+        }
+
+        private void CancelWarning(params object[] arg1)
+        {
+            isDelayCancelWarning = true;
+            delayCancelWarningTime = 0.5f;
+        }
+
+        void Update()
+        {
+            if(isDelayCancelWarning == true)
+            {
+                if(delayCancelWarningTime <= 0)
+                {
+                    warningTips.SetActive(false);
+                    isDelayCancelWarning = false;
+                }
+                else
+                {
+                    delayCancelWarningTime -= Time.deltaTime;
+                }
+            }
         }
     }
 }
