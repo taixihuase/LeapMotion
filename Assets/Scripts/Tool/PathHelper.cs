@@ -107,6 +107,8 @@ namespace Tool
 
         public const string ScenePath = "Scene";
 
+        public const string SoundPath = "Sound";
+
         public const string LeapPath = "Leap";
 
         public const string InteractionPath = "Leap/Interaction";
@@ -117,6 +119,7 @@ namespace Tool
         {
             resPath.Add(ResourceType.UI, WindowPath);
             resPath.Add(ResourceType.Scene, ScenePath);
+            resPath.Add(ResourceType.Sound, SoundPath);
             resPath.Add(ResourceType.Icon, IconPath);
             resPath.Add(ResourceType.Leap, LeapPath);
             resPath.Add(ResourceType.Interaction, InteractionPath);

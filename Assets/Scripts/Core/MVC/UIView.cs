@@ -1,5 +1,7 @@
 ﻿using Core.Manager;
+using Define;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Core.MVC
@@ -8,6 +10,9 @@ namespace Core.MVC
     {
         [SerializeField]
         protected GameObject[] pos;
+
+        [SerializeField]
+        protected Button[] btn;
 
         [SerializeField]
         protected Image[] btnImage;
@@ -25,6 +30,14 @@ namespace Core.MVC
         protected override void Awake()
         {
             base.Awake();
+            if(btn.Length > 0)
+            {
+                for(int i = 0; i < btn.Length; i++)
+                {
+                    BindSound(btn[i], EventTriggerType.PointerDown, SoundType.Effect, "ButtonDown");
+                    BindSound(btn[i], EventTriggerType.PointerUp, SoundType.Effect, "ButtonUp");
+                }
+            }
             if (btnImage.Length > 0)
             {
                 btnText = new Text[btnImage.Length];
@@ -75,6 +88,33 @@ namespace Core.MVC
         protected override void OnDestroy()
         {
             base.OnDestroy();
+        }
+
+        protected void BindSound(Button btn, EventTriggerType triggerType, SoundType soundType, string soundName, bool isLoop = false, float volumn = 1f)
+        {
+            EventTrigger trigger = btn.GetComponent<EventTrigger>();
+            if (trigger == null)
+                return;
+
+            EventTrigger.Entry entry = trigger.triggers.Find(t => t.eventID == triggerType);
+            if (entry == null)
+            {
+                entry = new EventTrigger.Entry();
+                entry.eventID = triggerType;
+                trigger.triggers.Add(entry);
+            }
+            entry.callback.AddListener((data) =>
+            {
+                OnPointerDelegate((PointerEventData)data, soundType, soundName, isLoop, volumn);
+            });
+        }
+
+        private void OnPointerDelegate(PointerEventData data, SoundType soundType, string soundName, bool isLoop, float volumn)
+        {
+            if(soundType == SoundType.Effect)
+                SoundManager.Instance.PlayEffectSound(soundName, isLoop, volumn);
+            else
+                SoundManager.Instance.PlayEnvironmentSound(soundName, isLoop, volumn);
         }
     }
 }

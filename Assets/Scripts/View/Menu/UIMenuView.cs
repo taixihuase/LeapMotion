@@ -1,8 +1,6 @@
 ﻿using Core.Manager;
 using Core.MVC;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
 
 namespace View.Menu
 {

@@ -4,8 +4,9 @@
     {
         UI = 1,
         Scene = 2,
-        Icon = 3,
-        Leap = 4,
-        Interaction = 5,
+        Sound = 3,
+        Icon = 4,
+        Leap = 5,
+        Interaction = 6,
     }
 }

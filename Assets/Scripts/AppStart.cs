@@ -6,5 +6,7 @@ public class AppStart : MonoBehaviour
     private void Start()
     {
         GlobalManager.Instance.EnableSettings();
+
+        var s = SoundManager.Instance.EnvironmentSound;
     }
 }
