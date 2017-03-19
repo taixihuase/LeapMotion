@@ -94,5 +94,10 @@ namespace View.Bathroom
             fillTips.SetActive(false);
             pourTips.SetActive(bm.CanShowPourTips);
         }
+
+        public void ChangeWaterIn()
+        {
+            BathroomCtrl.Instance.ChangeWaterInToggle();
+        }
     }
 }

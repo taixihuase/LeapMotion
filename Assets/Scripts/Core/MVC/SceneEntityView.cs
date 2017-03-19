@@ -72,6 +72,15 @@ namespace Core.MVC
             }
         }
 
+        protected void StopEffectSounds(string soundGroupName)
+        {
+            if (soundDict.ContainsKey(soundGroupName))
+            {
+                var s = soundDict[soundGroupName];
+                SoundManager.Instance.StopEffectSound(s.AudioSourceIndex, true);
+            }
+        }
+
         protected void PlayEnvironmentSounds(string soundGroupName)
         {
             if (soundDict.ContainsKey(soundGroupName))
@@ -79,6 +88,11 @@ namespace Core.MVC
                 var s = soundDict[soundGroupName];
                 SoundManager.Instance.PlayScheduledEnvironmentSounds(s.Sounds, s.IsLoopFromStart);
             }
+        }
+
+        protected void StopEnvironmentSounds()
+        {
+            SoundManager.Instance.StopEnvironmentSound(true);
         }
 
         protected override void Awake()

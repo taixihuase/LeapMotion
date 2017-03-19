@@ -165,6 +165,7 @@ namespace View.Bathroom
             waterParticle[(int)GlobalManager.Instance.SceneMode].SetActive(true);
             waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z - inToggleUpDownDistance, 0.2f)
                 .OnPlay(() => BathroomCtrl.Instance.FillWaterBegin());
+            PlayEffectSounds("WaterIn");
         }
 
         private void OnInToggleUp()
@@ -172,6 +173,7 @@ namespace View.Bathroom
             isInDown = false;
             waterParticle[(int)GlobalManager.Instance.SceneMode].SetActive(false);
             waterInToggle.DOLocalMoveZ(waterInToggle.localPosition.z + inToggleUpDownDistance, 0.2f);
+            StopEffectSounds("WaterIn");
         }
 
         private void OnOutToggleDown()
