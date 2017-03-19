@@ -1,6 +1,5 @@
 ﻿using System.Collections;
-using Boo.Lang;
-using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core.Manager
@@ -9,17 +8,11 @@ namespace Core.Manager
     {
         private AudioSource environmentSound;
 
-        public AudioSource EnvironmentSound
-        {
-            get { return environmentSound; }
-        }
+        private List<AudioSource> effectSound;
 
-        private AudioSource effectSound;
+        private Dictionary<int, IEnumerator> coroutines;
 
-        public AudioSource EffectSound
-        {
-            get { return effectSound; }
-        }
+        private int effectAmount = 5;
 
         private void Awake()
         {
@@ -29,15 +22,20 @@ namespace Core.Manager
         private void Init()
         {
             environmentSound = gameObject.AddComponent<AudioSource>();
-            effectSound = gameObject.AddComponent<AudioSource>();
+            effectSound = new List<AudioSource>();
+            for (int i = 0; i < effectAmount; i++)
+            {
+                effectSound.Add(gameObject.AddComponent<AudioSource>());
+            }
+            coroutines = new Dictionary<int, IEnumerator>();
         }
 
-        private void PlayEnvironmentSound(AudioClip clip, bool isLoop = false, float volumn = 1f)
+        private void PlayEnvironmentSound(AudioClip clip, bool isLoop = false, float volumn = 1f, bool breakCoroutine = false)
         {
             if (clip == null)
                 return;
 
-            StopEnvironmentSound();
+            StopEnvironmentSound(breakCoroutine);
             environmentSound.volume = volumn;
             environmentSound.clip = clip;
             environmentSound.loop = isLoop;
@@ -60,7 +58,7 @@ namespace Core.Manager
                 }
             }
 
-            PlayEnvironmentSound(clip, isLoop, volumn);
+            PlayEnvironmentSound(clip, isLoop, volumn, true);
         }
 
         public void RestartEnvironmentSound()
@@ -71,27 +69,35 @@ namespace Core.Manager
             }
         }
 
-        public void StopEnvironmentSound()
+        public void StopEnvironmentSound(bool breakCoroutine = false)
         {
             if(environmentSound.clip != null)
             {
                 environmentSound.Stop();
             }
+            if (breakCoroutine)
+            {
+                if (coroutines.ContainsKey(-1))
+                {
+                    CoroutineManager.Instance.StopCoroutine(coroutines[-1]);
+                    coroutines.Remove(-1);
+                }
+            }
         }
 
-        private void PlayEffectSound(AudioClip clip, bool isLoop = false, float volumn = 1f)
+        private void PlayEffectSound(AudioClip clip, bool isLoop = false, float volumn = 1f, int soundIndex = 0, bool breakCoroutine = false)
         {
             if (clip == null)
                 return;
 
-            StopEffectSound();
-            effectSound.volume = volumn;
-            effectSound.clip = clip;
-            effectSound.loop = isLoop;
-            effectSound.Play();
+            StopEffectSound(soundIndex, breakCoroutine);
+            effectSound[soundIndex].volume = volumn;
+            effectSound[soundIndex].clip = clip;
+            effectSound[soundIndex].loop = isLoop;
+            effectSound[soundIndex].Play();
         }
 
-        public void PlayEffectSound(string name, bool isLoop = false, float volumn = 1f)
+        public void PlayEffectSound(string name, bool isLoop = false, float volumn = 1f, int soundIndex = 0)
         {
             AudioClip clip = ResourceManager.Instance.GetResource(Define.ResourceType.Sound, name) as AudioClip;
             if (clip == null)
@@ -107,22 +113,30 @@ namespace Core.Manager
                 }
             }
 
-            PlayEffectSound(clip, isLoop, volumn);
+            PlayEffectSound(clip, isLoop, volumn, soundIndex, true);
         }
 
-        public void RestartEffectSound()
+        public void RestartEffectSound(int soundIndex = 0)
         {
-            if (effectSound.clip != null && effectSound.isPlaying == false)
+            if (effectSound[soundIndex].clip != null && effectSound[soundIndex].isPlaying == false)
             {
-                effectSound.Play();
+                effectSound[soundIndex].Play();
             }
         }
 
-        public void StopEffectSound()
+        public void StopEffectSound(int soundIndex = 0, bool breakCoroutine = false)
         {
-            if (effectSound.clip != null)
+            if (effectSound[soundIndex].clip != null)
             {
-                effectSound.Stop();
+                effectSound[soundIndex].Stop();
+            }
+            if (breakCoroutine)
+            {
+                if (coroutines.ContainsKey(soundIndex))
+                {
+                    CoroutineManager.Instance.StopCoroutine(coroutines[soundIndex]);
+                    coroutines.Remove(soundIndex);
+                }
             }
         }
 
@@ -131,21 +145,27 @@ namespace Core.Manager
             if(soundClips.Count == 0)
                 return;
 
-            CoroutineManager.Instance.StartCoroutine(PlayScheduledSounds(true, soundClips, isLoopFromStart));
+            StopEnvironmentSound(true);
+            var coroutine = PlayScheduledSounds(true, soundClips, isLoopFromStart, -1);
+            coroutines.Add(-1, coroutine);
+            CoroutineManager.Instance.StartCoroutine(coroutine);
         }
 
-        public void PlayScheduledEffectSounds(List<ScheduledSound> soundClips, bool isLoopFromStart = false)
+        public void PlayScheduledEffectSounds(List<ScheduledSound> soundClips, bool isLoopFromStart = false, int soundIndex = 0)
         {
             if (soundClips.Count == 0)
                 return;
 
-            CoroutineManager.Instance.StartCoroutine(PlayScheduledSounds(false, soundClips, isLoopFromStart));
+            StopEffectSound(soundIndex, true);
+            var coroutine = PlayScheduledSounds(false, soundClips, isLoopFromStart, soundIndex);
+            coroutines.Add(soundIndex, coroutine);
+            CoroutineManager.Instance.StartCoroutine(coroutine);
         }
 
-        IEnumerator PlayScheduledSounds(bool isEnvironment, List<ScheduledSound> soundClips, bool isLoopFromStart = false)
+        IEnumerator PlayScheduledSounds(bool isEnvironment, List<ScheduledSound> soundClips, bool isLoopFromStart = false, int soundIndex = -1)
         {
             AudioClip[] clips = new AudioClip[soundClips.Count];
-            float endTime = 0;
+            float totalEndTime = 0;
             int lastAvaliableClip = -1;
             for (int i = 0; i < clips.Length; i++)
             {
@@ -161,62 +181,100 @@ namespace Core.Manager
                     {
                         continue;
                     }
-                    lastAvaliableClip = i;
                 }
+                lastAvaliableClip = i;
                 yield return null;
             }
-            if (lastAvaliableClip == -1)
-                yield break;
 
-            endTime = soundClips[lastAvaliableClip].DelayTime + clips[lastAvaliableClip].length;
+            if (lastAvaliableClip == -1)
+            {
+                coroutines.Remove(soundIndex);
+                yield break;
+            }
+
+            totalEndTime = soundClips[lastAvaliableClip].DelayTime + clips[lastAvaliableClip].length;
             while (true)
             {
                 float timer = 0;
                 int current = 0;
-                while (timer < endTime)
+                float availableLength = 0;
+                float lengthCounter = 0;
+                while (timer < totalEndTime)
                 {
                     if (current <= lastAvaliableClip && timer > soundClips[current].DelayTime)
                     {
+                        availableLength = soundClips[current].AvailableLength;
+                        lengthCounter = 0;
                         if (isEnvironment)
                         {
-                            PlayEnvironmentSound(clips[current], false, soundClips[current].Volumn);
+                            PlayEnvironmentSound(clips[current], soundClips[current].IsLoop, soundClips[current].Volumn);
                         }
                         else
                         {
-                            PlayEffectSound(clips[current], false, soundClips[current].Volumn);
+                            PlayEffectSound(clips[current], soundClips[current].IsLoop, soundClips[current].Volumn, soundIndex);
                         }
                         current++;
                     }
+                    if (availableLength > 0 && lengthCounter > availableLength)
+                    {
+                        if (isEnvironment)
+                        {
+                            StopEnvironmentSound();
+                        }
+                        else
+                        {
+                            StopEffectSound(soundIndex);
+                        }
+                        availableLength = 0;
+                    }
                     timer += Time.deltaTime;
+                    lengthCounter += Time.deltaTime;
                     yield return new WaitForEndOfFrame();
                 }
                 if (isLoopFromStart == false)
                 {
+                    coroutines.Remove(soundIndex);
                     yield break;
                 }
             }
         }
 
+        public void ResetSceneSound()
+        {
+            StopEnvironmentSound(true);
+            for (int i = 0; i < effectSound.Count; i++)
+            {
+                StopEffectSound(i, true);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            ResetSceneSound();
+        }
+
+        [System.Serializable]
         public class ScheduledSound
         {
-            private string clipName;
+            [SerializeField] private string clipName;
 
             public string ClipName { get { return clipName; } }
 
-            private float delayTime;
+            [SerializeField] private float delayTime;
 
-            public  float DelayTime { get { return delayTime; } }
+            public float DelayTime { get { return delayTime; } }
 
-            private float volumn;
+            [SerializeField] private float availableLength;
+
+            public float AvailableLength { get { return availableLength; } }
+
+            [SerializeField] private float volumn = 1f;
 
             public float Volumn { get { return volumn; } }
 
-            public ScheduledSound(string clipName, float delay, float volumn = 1f)
-            {
-                this.clipName = clipName;
-                delayTime = delay;
-                this.volumn = volumn;
-            }
+            [SerializeField] private bool isLoop = false;
+
+            public bool IsLoop { get { return isLoop; } }
         }
     }
 }

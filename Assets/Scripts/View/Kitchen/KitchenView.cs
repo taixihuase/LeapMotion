@@ -107,6 +107,14 @@ namespace View.Kitchen
             isUsingFire[index] = true;
             fire[index].SetActive(true);
             fireSwitch[index].DOLocalMoveZ(fireSwitch[index].localPosition.z - fireSwitchMoveDistance, 0.2f);
+            if (index == 0)
+            {
+                PlayEffectSounds("OpenFireLeft");
+            }
+            else
+            {
+                PlayEffectSounds("OpenFireRight");
+            }
         }
 
         private void OnCloseFire(int index)
@@ -114,6 +122,14 @@ namespace View.Kitchen
             isUsingFire[index] = false;
             fire[index].SetActive(false);
             fireSwitch[index].DOLocalMoveZ(fireSwitch[index].localPosition.z + fireSwitchMoveDistance, 0.2f);
+            if (index == 0)
+            {
+                PlayEffectSounds("CloseFireLeft");
+            }
+            else
+            {
+                PlayEffectSounds("CloseFireRight");
+            }
         }
 
         private void OnFridgeDoorStateChange(params object[] arg1)

@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using System.Collections.Generic;
+using Controller;
 using Core.Manager;
 using Core.MVC;
 using Model;
@@ -107,7 +108,14 @@ namespace View.Kitchen
         [SerializeField]
         GameObject fridgeTips;
 
+        public void FireLeftSound()
+        {
+            KitchenCtrl.Instance.ChangeFire(0);
+        }
 
-
+        public void FireRightSound()
+        {
+            KitchenCtrl.Instance.ChangeFire(1);
+        }
     }
 }
