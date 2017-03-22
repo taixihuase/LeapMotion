@@ -75,6 +75,7 @@ namespace Core.Manager
 
         public void ChangeScene(float darkDuration, float pauseDuration, float showDuration, Action onComplete)
         {
+            blackBG.DOKill();
             ViewToDark(darkDuration)
                 .OnPlay(() => IsChanging = true)
                 .OnComplete(() =>

@@ -123,7 +123,6 @@ namespace View.Living
                         (res as AssetBundle).Unload(true);
                     }
                 }
-
                 UIManager.Instance.CloseSceneWindows(Define.SceneType.MainScene);
                 SceneManager.Instance.LoadSceneAsync(Define.SceneType.MenuScene, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
             });

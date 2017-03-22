@@ -94,7 +94,7 @@ namespace Tool
         {
             if(string.IsNullOrEmpty(name) || resPath.ContainsKey(type) == false)
             {
-                return null;
+                return string.Empty;
             }
             else
             {
@@ -106,7 +106,7 @@ namespace Tool
         {
             if (abPath.ContainsKey(type) == false)
             {
-                return null;
+                return string.Empty;
             }
             else
             {
