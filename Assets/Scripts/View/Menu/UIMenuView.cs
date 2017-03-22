@@ -1,5 +1,6 @@
 ﻿using Core.Manager;
 using Core.MVC;
+using Tool;
 using UnityEngine;
 
 namespace View.Menu

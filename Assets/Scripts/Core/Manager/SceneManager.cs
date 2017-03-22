@@ -18,7 +18,6 @@ namespace Core.Manager
         public UnityAction<UnityEngine.SceneManagement.Scene> SceneUnloaded;
     }
 
-
     public sealed class SceneManager : Singleton<SceneManager>
     {
         private Dictionary<string, SceneAction> sceneActions = new Dictionary<string, SceneAction>();

@@ -44,21 +44,38 @@ namespace Core.Manager
 
         public void PlayEnvironmentSound(string name, bool isLoop = false, float volumn = 1f)
         {
-            AudioClip clip = ResourceManager.Instance.GetResource(Define.ResourceType.Sound, name) as AudioClip;
-            if(clip == null)
+            Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Sound, name);
+            AudioClip clip;
+            if (res == null)
             {
                 ResourceManager.Instance.LoadAsset(Define.ResourceType.Sound, name, (o) =>
                 {
-                    clip = o as AudioClip;
-                }, false, false);
-
-                if(clip == null)
-                {
-                    return;
-                }
+                    if (o is AssetBundle)
+                    {
+                        clip = (o as AssetBundle).LoadAsset(name) as AudioClip;
+                    }
+                    else
+                    {
+                        clip = o as AudioClip;
+                    }
+                    if (clip != null)
+                    {
+                        PlayEnvironmentSound(clip, isLoop, volumn, true);
+                    }
+                }, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
             }
-
-            PlayEnvironmentSound(clip, isLoop, volumn, true);
+            else
+            {
+                if (res is AssetBundle)
+                {
+                    clip = (res as AssetBundle).LoadAsset(name) as AudioClip;
+                }
+                else
+                {
+                    clip = res as AudioClip;
+                }
+                PlayEnvironmentSound(clip, isLoop, volumn, true);
+            }
         }
 
         public void RestartEnvironmentSound()
@@ -99,21 +116,38 @@ namespace Core.Manager
 
         public void PlayEffectSound(string name, bool isLoop = false, float volumn = 1f, int soundIndex = 0)
         {
-            AudioClip clip = ResourceManager.Instance.GetResource(Define.ResourceType.Sound, name) as AudioClip;
-            if (clip == null)
+            Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Sound, name) as AudioClip;
+            AudioClip clip;
+            if (res == null)
             {
                 ResourceManager.Instance.LoadAsset(Define.ResourceType.Sound, name, (o) =>
                 {
-                    clip = o as AudioClip;
-                }, false, false);
-
-                if (clip == null)
-                {
-                    return;
-                }
+                    if (o is AssetBundle)
+                    {
+                        clip = (o as AssetBundle).LoadAsset(name) as AudioClip;
+                    }
+                    else
+                    {
+                        clip = o as AudioClip;
+                    }
+                    if (clip != null)
+                    {
+                        PlayEffectSound(clip, isLoop, volumn, soundIndex, true);
+                    }
+                }, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
             }
-
-            PlayEffectSound(clip, isLoop, volumn, soundIndex, true);
+            else
+            {
+                if (res is AssetBundle)
+                {
+                    clip = (res as AssetBundle).LoadAsset(name) as AudioClip;
+                }
+                else
+                {
+                    clip = res as AudioClip;
+                }
+                PlayEffectSound(clip, isLoop, volumn, soundIndex, true);
+            }
         }
 
         public void RestartEffectSound(int soundIndex = 0)
@@ -246,11 +280,6 @@ namespace Core.Manager
             {
                 StopEffectSound(i, true);
             }
-        }
-
-        private void OnDestroy()
-        {
-            ResetSceneSound();
         }
 
         [System.Serializable]

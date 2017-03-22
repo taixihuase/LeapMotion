@@ -11,7 +11,7 @@ namespace Scene
             {
                 CameraManager.Instance.ChangeScene(0, 0.5f, 0.5f, () =>
                 {
-                    UIManager.Instance.OpenWindow(Define.SceneType.MenuScene, Define.WindowType.Menu, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
+                    UIManager.Instance.OpenWindow(Define.SceneType.MenuScene, Define.WindowType.Menu, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);                 
                 });
             }
             else

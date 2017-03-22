@@ -9,9 +9,15 @@ namespace Core.Manager
 {
     public sealed class ResourceManager : Singleton<ResourceManager>
     {
+#if UNITY_EDITOR
         public bool IsDefaultAsync = false;
 
         public bool IsDefaultFromServer = false;
+#else
+        public bool IsDefaultAsync = true;
+
+        public bool IsDefaultFromServer = true;
+#endif
 
         private Dictionary<string, UnityEngine.Object> loadedAssets = new Dictionary<string, UnityEngine.Object>();
 
@@ -20,7 +26,20 @@ namespace Core.Manager
         public UnityEngine.Object GetResource(ResourceType type, string name)
         {
             UnityEngine.Object obj = null;
-            string path = PathHelper.Instance.GetResourcePath(type, name);
+            string path;
+            if (IsDefaultAsync)
+            {
+                path = PathHelper.Instance.GetAssetBundlePath(type);
+            }
+            else
+            {
+                path = PathHelper.Instance.GetResourcePath(type, name);
+            }
+            if(string.IsNullOrEmpty(path))
+            {
+                return null;
+            }
+
             if (loadedAssets.TryGetValue(path, out obj) == false)
             {
                 Debug.LogWarning(string.Format("资源 \"{0}\" 尚未加载", name));
@@ -62,7 +81,15 @@ namespace Core.Manager
 
         public void LoadAsset(ResourceType type, string name, Action<UnityEngine.Object> callback = null, bool isAsync = false, bool fromServer = false)
         {
-            string path = PathHelper.Instance.GetResourcePath(type, name);
+            string path;
+            if (isAsync)
+            {
+                path = PathHelper.Instance.GetAssetBundlePath(type);
+            }
+            else
+            {
+                path = PathHelper.Instance.GetResourcePath(type, name);
+            }
             if (string.IsNullOrEmpty(path) == false)
             {
                 if (loadedAssets.ContainsKey(path))
@@ -80,9 +107,9 @@ namespace Core.Manager
                 if (isAsync)
                 {
                     if (fromServer)
-                        CoroutineManager.Instance.StartCoroutine(LoadAssetAsync(path, callback));
+                        CoroutineManager.Instance.StartCoroutine(LoadAssetAsync(name, path, callback));
                     else
-                        CoroutineManager.Instance.StartCoroutine(LoadAssetFromFileAsync(path, callback));
+                        CoroutineManager.Instance.StartCoroutine(LoadAssetFromFileAsync(name, path, callback));
                 }
                 else
                 {
@@ -129,7 +156,7 @@ namespace Core.Manager
             }
         }
 
-        private IEnumerator LoadAssetAsync(string path, Action<UnityEngine.Object> callback)
+        private IEnumerator LoadAssetAsync(string name, string path, Action<UnityEngine.Object> callback)
         {
             string fullPath = PathHelper.Instance.CombineStreamingFile(path).ToLower();
             string url = PathHelper.Instance.AddAssetbundlePostfix(PathHelper.Instance.AddFileProtocol(fullPath));
@@ -145,15 +172,14 @@ namespace Core.Manager
                     string[] str = ab.GetAllAssetNames();
                     if (str.Length > 0)
                     {
-                        obj = ab.LoadAsset(str[0]);
-                        loadedAssets.Add(path, obj);
+                        obj = ab.LoadAsset(name);
+                        loadedAssets.Add(path, ab);
                     }
                     Debug.Log(string.Format("加载资源包 \"{0}\" 成功", path));
                     if (callback != null)
                     {
                         callback(obj);
                     }
-                    ab.Unload(false);
                 }
                 else
                 {
@@ -163,7 +189,7 @@ namespace Core.Manager
             }
         }
 
-        private IEnumerator LoadAssetFromFileAsync(string path, Action<UnityEngine.Object> callback)
+        private IEnumerator LoadAssetFromFileAsync(string name, string path, Action<UnityEngine.Object> callback)
         {
             string fullPath = PathHelper.Instance.AddAssetbundlePostfix(PathHelper.Instance.CombineStreamingFile(path).ToLower());
             AssetBundleCreateRequest req = AssetBundle.LoadFromFileAsync(fullPath);
@@ -181,8 +207,8 @@ namespace Core.Manager
             string[] str = ab.GetAllAssetNames();
             if (str.Length > 0)
             {
-                obj = ab.LoadAsset(str[0]);
-                loadedAssets.Add(path, obj);
+                obj = ab.LoadAsset(name);
+                loadedAssets.Add(path, ab);
             }
             loadingAssets.Remove(path);
             Debug.Log(string.Format("加载资源包 \"{0}\" 成功", path));
@@ -190,19 +216,39 @@ namespace Core.Manager
             {
                 callback(obj);
             }
-            ab.Unload(false);
         }    
 
         public bool IsResLoading(ResourceType type, string name)
         {
-            string path = PathHelper.Instance.GetResourcePath(type, name);
+            string path;
+            if (IsDefaultAsync)
+            {
+                path = PathHelper.Instance.GetAssetBundlePath(type);
+            }
+            else
+            {
+                path = PathHelper.Instance.GetResourcePath(type, name);
+            }
             return loadingAssets.ContainsKey(path);
         }
 
         public bool IsResLoaded(ResourceType type, string name)
         {
-            string path = PathHelper.Instance.GetResourcePath(type, name);
+            string path;
+            if (IsDefaultAsync)
+            {
+                path = PathHelper.Instance.GetAssetBundlePath(type);
+            }
+            else
+            {
+                path = PathHelper.Instance.GetResourcePath(type, name);
+            }
             return loadedAssets.ContainsKey(path);
+        }
+
+        public bool RemoveLoadedAsset(string key)
+        {
+            return loadedAssets.Remove(key);
         }
     }
 }

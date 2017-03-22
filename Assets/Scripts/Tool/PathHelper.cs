@@ -8,7 +8,9 @@ namespace Tool
 {
     public sealed class PathHelper : Singleton<PathHelper>
     {
-        private Dictionary<ResourceType, string> resPath = new Dictionary<ResourceType, string>();
+        private Dictionary<ResourceType, string> resPath = new Dictionary<ResourceType, string>(new EnumComparer<ResourceType>());
+
+        private Dictionary<ResourceType, string> abPath = new Dictionary<ResourceType, string>(new EnumComparer<ResourceType>());
 
         public const string FilePrefix = "file:///";
 
@@ -17,6 +19,7 @@ namespace Tool
         public PathHelper()
         {
             InitResourcePath();
+            InitAssetBundlePath();
         }
 
         public string AddFileProtocol(string path)
@@ -99,30 +102,50 @@ namespace Tool
             }
         }
 
+        public string GetAssetBundlePath(ResourceType type)
+        {
+            if (abPath.ContainsKey(type) == false)
+            {
+                return null;
+            }
+            else
+            {
+                return abPath[type];
+            }
+        }
+
         #region Resource Path
 
         public const string WindowPath = "UI/Window";
-
-        public const string IconPath = "UI/Icon";
 
         public const string ScenePath = "Scene";
 
         public const string SoundPath = "Sound";
 
-        public const string LeapPath = "Leap";
+        #endregion
 
-        public const string InteractionPath = "Leap/Interaction";
+        #region
+
+        public const string WindowABPath = "UI/Windows";
+
+        public const string SceneABPath = "Scene/MainScene";
+
+        public const string SoundABPath = "Sound/Sounds";
 
         #endregion
 
         private void InitResourcePath()
         {
-            resPath.Add(ResourceType.UI, WindowPath);
+            resPath.Add(ResourceType.Window, WindowPath);
             resPath.Add(ResourceType.Scene, ScenePath);
             resPath.Add(ResourceType.Sound, SoundPath);
-            resPath.Add(ResourceType.Icon, IconPath);
-            resPath.Add(ResourceType.Leap, LeapPath);
-            resPath.Add(ResourceType.Interaction, InteractionPath);
+        }
+
+        private void InitAssetBundlePath()
+        {
+            abPath.Add(ResourceType.Window, WindowABPath);
+            abPath.Add(ResourceType.Scene, SceneABPath);
+            abPath.Add(ResourceType.Sound, SoundABPath);
         }
     }
 }

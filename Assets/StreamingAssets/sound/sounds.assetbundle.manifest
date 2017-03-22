@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 1500014266
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 239f5e95cf316e3ec26d0e3f111fdf61
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Sound/Fire.wav
+- Assets/Resources/Sound/ButtonUp.wav
+- Assets/Resources/Sound/FireToggle.mp3
+- Assets/Resources/Sound/WaterIn.wav
+- Assets/Resources/Sound/ButtonDown.wav
+Dependencies: []

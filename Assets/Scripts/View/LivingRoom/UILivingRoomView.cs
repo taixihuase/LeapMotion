@@ -5,6 +5,7 @@ using View.Hallway;
 using View.LivingRoom;
 using Core.MVC;
 using Model;
+using Tool;
 
 namespace View.Living
 {
@@ -83,14 +84,22 @@ namespace View.Living
         public void OnClickToHallway()
         {
             GameObject livingroom = FindObjectOfType<LivingRoomView>().gameObject;
-            Object hallway = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
-            if (hallway != null)
+            Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
+            if (res != null)
             {
                 UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.LivingRoom);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
                     Destroy(livingroom);
-                    GameObject obj = Instantiate(hallway) as GameObject;
+                    GameObject obj;
+                    if (res is AssetBundle)
+                    {
+                        obj = Instantiate((res as AssetBundle).LoadAsset("Hallway")) as GameObject;
+                    }
+                    else
+                    {
+                        obj = Instantiate(res) as GameObject;
+                    }
                     Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
                     CameraManager.Instance.MoveAndRotate(startPos);
                     UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
@@ -104,6 +113,17 @@ namespace View.Living
             {
                 GameObject livingroom = FindObjectOfType<LivingRoomView>().gameObject;
                 Destroy(livingroom);
+                if (ResourceManager.Instance.IsResLoaded(Define.ResourceType.Scene, null))
+                {
+                    Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, null);
+                    if (res is AssetBundle)
+                    {
+                        string path = PathHelper.Instance.GetAssetBundlePath(Define.ResourceType.Scene);
+                        ResourceManager.Instance.RemoveLoadedAsset(path);
+                        (res as AssetBundle).Unload(true);
+                    }
+                }
+
                 UIManager.Instance.CloseSceneWindows(Define.SceneType.MainScene);
                 SceneManager.Instance.LoadSceneAsync(Define.SceneType.MenuScene, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
             });

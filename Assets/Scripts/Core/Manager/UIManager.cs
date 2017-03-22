@@ -33,12 +33,19 @@ namespace Core.Manager
         {
             Action<UnityEngine.Object> act = (obj) =>
             {
-                GameObject go = obj as GameObject;
+                GameObject go;
+                if (obj is AssetBundle)
+                {
+                    go = (obj as AssetBundle).LoadAsset(win.GetDescription()) as GameObject;
+                }
+                else
+                {
+                    go = obj as GameObject;
+                }
                 if (go != null)
                 {
                     GameObject instance = Instantiate(go);
                     instance.transform.parent = Root;
-
                     if(openWindows.ContainsKey(scene) == false)
                     {
                         openWindows.Add(scene, new Dictionary<WindowType, UnityEngine.Object>(new EnumComparer<WindowType>()));
@@ -55,7 +62,7 @@ namespace Core.Manager
                 }
             };
 
-            ResourceManager.Instance.LoadAsset(ResourceType.UI, win.GetDescription(), act, isAsync, fromServer);
+            ResourceManager.Instance.LoadAsset(ResourceType.Window, win.GetDescription(), act, isAsync, fromServer);
         }
 
         public void CloseWindow(SceneType scene, WindowType win, Action<UnityEngine.Object> callback = null)

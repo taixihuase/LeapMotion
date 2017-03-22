@@ -56,14 +56,22 @@ namespace View.Bathroom
         public void OnClickToHallway()
         {
             GameObject bathroom = FindObjectOfType<BathroomView>().gameObject;
-            Object hallway = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
-            if (hallway != null)
+            Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
+            if (res != null)
             {
                 UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.Bathroom);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
                     Destroy(bathroom);
-                    GameObject obj = Instantiate(hallway) as GameObject;
+                    GameObject obj;
+                    if (res is AssetBundle)
+                    {
+                        obj = Instantiate((res as AssetBundle).LoadAsset("Hallway")) as GameObject;
+                    }
+                    else
+                    {
+                        obj = Instantiate(res) as GameObject;
+                    }
                     Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
                     CameraManager.Instance.MoveAndRotate(startPos);
                     UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);

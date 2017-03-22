@@ -11,7 +11,15 @@ namespace Scene
         {
             ResourceManager.Instance.LoadAsset(Define.ResourceType.Scene, "LivingRoom", (o) =>
             {
-                GameObject livingroom = Instantiate(o) as GameObject;
+                GameObject livingroom;
+                if (o is AssetBundle)
+                {
+                    livingroom = Instantiate((o as AssetBundle).LoadAsset("LivingRoom")) as GameObject;
+                }
+                else
+                {
+                    livingroom = Instantiate(o) as GameObject;
+                }
                 livingroom.SetActive(true);
                 LivingRoomView view = livingroom.GetComponent<LivingRoomView>();
                 Transform startPos = view.GetStartPos();

@@ -11,14 +11,22 @@ namespace View.Hallway
         public void OnClickToOtherScene(string sceneName)
         {
             GameObject hallway = FindObjectOfType<HallwayView>().gameObject;
-            Object scene = ResourceManager.Instance.GetResource(ResourceType.Scene, sceneName);
-            if (scene != null)
+            Object res = ResourceManager.Instance.GetResource(ResourceType.Scene, sceneName);
+            if (res != null)
             {
                 UIManager.Instance.CloseWindow(SceneType.MainScene, WindowType.Hallway);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
                     Destroy(hallway);
-                    GameObject obj = Instantiate(scene) as GameObject;
+                    GameObject obj;
+                    if (res is AssetBundle)
+                    {
+                        obj = Instantiate((res as AssetBundle).LoadAsset(sceneName)) as GameObject;
+                    }
+                    else
+                    {
+                        obj = Instantiate(res) as GameObject;
+                    }
                     Transform startPos = obj.GetComponent<SceneEntityView>().GetStartPos();
                     CameraManager.Instance.MoveAndRotate(startPos);
                     UIManager.Instance.OpenWindow(SceneType.MainScene, EnumDescriptionTool.GetEnum<WindowType>(sceneName), null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
