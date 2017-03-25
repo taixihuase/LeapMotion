@@ -7523,7 +7523,16 @@ MonoBehaviour:
   - {fileID: 4720033478775734}
   - {fileID: 4508254608200256}
   - {fileID: 4358563011521230}
-  sounds: []
+  sounds:
+  - groupName: ElectricWarning
+    isLoopFromStart: 1
+    audioSourceIndex: 1
+    sounds:
+    - clipName: Warning
+      delayTime: 0
+      availableLength: 0
+      volumn: 1
+      isLoop: 1
   insertPos: {fileID: 4571511350319008}
   plugStartPos: {fileID: 4373764890839106}
   plug: {fileID: 4516249192866286}

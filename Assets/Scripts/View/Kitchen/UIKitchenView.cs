@@ -125,5 +125,15 @@ namespace View.Kitchen
         {
             KitchenCtrl.Instance.ChangeFire(1);
         }
+
+        public void FridgeDoorSound()
+        {
+            KitchenCtrl.Instance.ChangeFridgeDoor(1);
+        }
+
+        public void LightSound()
+        {
+            KitchenCtrl.Instance.ChangeLight();
+        }
     }
 }

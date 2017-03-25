@@ -4,6 +4,7 @@ using Leap;
 using Leap.Unity.Interaction;
 using System;
 using Core.Manager;
+using Leap.Unity;
 using UnityEngine;
 
 namespace View.LivingRoom
@@ -17,12 +18,34 @@ namespace View.LivingRoom
             Bind(Define.EventType.InsertPlug, InsertPlug);
             Bind(Define.EventType.PutPlugOut, PutPlugOut);
             Bind(Define.EventType.FixPlugPos, FixPlugPos);
+            if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.PracticeMode)
+            {
+                Bind(Define.EventType.ElectricWarning, ShowWarning);
+                Bind(Define.EventType.CancelElectricWarning, CancelWarning);
+            }
             lightStartColor = dirLight.color;
             lightStartIntensity = dirLight.intensity;
             if (plugInteraction.Manager == null)
             {
                 plugInteraction.Manager = LeapMotionManager.Instance.Interaction;
             }
+
+            insertFunc = (h) =>
+            {
+                isInsert = true;
+                timer = 0;
+                plugInteraction.isKinematic = true;
+                plugInteraction.useGravity = false;
+                plug.transform.localPosition = insertPos.transform.localPosition;
+                plug.transform.localRotation = insertPos.transform.localRotation;
+                if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+                {
+                    dirLight.color = lightChangeColor;
+                    dirLight.intensity = lightChangeIntensity;
+                    greenLight.gameObject.SetActive(true);
+                }
+                LivingRoomCtrl.Instance.OnInsertPlugComplete();
+            };
         }
 
         [SerializeField]
@@ -67,23 +90,11 @@ namespace View.LivingRoom
 
         private void InsertPlug(params object[] arg1)
         {
-            insertFunc = (h) =>
-            {
-                isInsert = true;
-                timer = 0;
-                plugInteraction.isKinematic = true;
-                plugInteraction.useGravity = false;
-                plug.transform.localPosition = insertPos.transform.localPosition;
-                plug.transform.localRotation = insertPos.transform.localRotation;
-                if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
-                {
-                    dirLight.color = lightChangeColor;
-                    dirLight.intensity = lightChangeIntensity;
-                    greenLight.gameObject.SetActive(true);
-                }
-                LivingRoomCtrl.Instance.OnInsertPlugComplete();
-            };
             plugInteraction.OnHandReleasedEvent += insertFunc;
+            if ((LeapMotionManager.Instance.Provider as LeapServiceProvider).IsConnected() == false)
+            {
+                insertFunc.Invoke(null);
+            }
         }
 
         private void PutPlugOut(params object[] arg1)
@@ -109,6 +120,16 @@ namespace View.LivingRoom
                 plug.transform.localPosition = plugStartPos.transform.localPosition;
                 plug.transform.localRotation = plugStartPos.transform.localRotation;
             }
+        }
+
+        private void CancelWarning(object[] args)
+        {
+            StopEffectSounds("ElectricWarning");
+        }
+
+        private void ShowWarning(object[] args)
+        {
+            PlayEffectSounds("ElectricWarning");
         }
 
         void Update()

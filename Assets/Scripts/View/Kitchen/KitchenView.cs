@@ -142,12 +142,20 @@ namespace View.Kitchen
                     bottomFridgeBox.DOKill();
                     bottomFridgeBox.DOLocalMove(boxFinalPos.transform.localPosition, 0.35f)
                         .OnPlay(() => headFire.SetActive(true));
+                    if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+                    {
+                        PlayEffectSounds("HeadOut");
+                    }
                 }
                 else
                 {
                     bottomFridgeBox.DOKill();
                     bottomFridgeBox.DOLocalMove(boxStartPos, 0.35f)
                         .OnPlay(() => headFire.SetActive(false));
+                    if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+                    {
+                        PlayEffectSounds("HeadIn");
+                    }
                 }
                 isFridgeDoorOpened = !isFridgeDoorOpened;
             }
@@ -164,6 +172,7 @@ namespace View.Kitchen
                     ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
                     ps.startColor = new Color(0, 150f / 255, 1f, 1f);
                 }
+                PlayEnvironmentSounds("ElfFireOn");
             }
             else
             {
@@ -172,6 +181,7 @@ namespace View.Kitchen
                     ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
                     ps.startColor = new Color(225f / 255, 1f, 150f / 255, 1f);
                 }
+                StopEnvironmentSounds();
             }
         }
     }

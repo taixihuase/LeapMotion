@@ -16606,6 +16606,33 @@ MonoBehaviour:
       availableLength: 1
       volumn: 1
       isLoop: 0
+  - groupName: HeadOut
+    isLoopFromStart: 0
+    audioSourceIndex: 3
+    sounds:
+    - clipName: HeadOut
+      delayTime: 0
+      availableLength: 0
+      volumn: 1
+      isLoop: 0
+  - groupName: HeadIn
+    isLoopFromStart: 0
+    audioSourceIndex: 3
+    sounds:
+    - clipName: HeadIn
+      delayTime: 0
+      availableLength: 0.75
+      volumn: 1
+      isLoop: 0
+  - groupName: ElfFireOn
+    isLoopFromStart: 1
+    audioSourceIndex: -1
+    sounds:
+    - clipName: ElfFire
+      delayTime: 0
+      availableLength: 20
+      volumn: 1
+      isLoop: 1
   fireSwitch:
   - {fileID: 4864762873490408}
   - {fileID: 4874809021290826}

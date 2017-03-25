@@ -6,6 +6,8 @@ using View.LivingRoom;
 using Core.MVC;
 using Model;
 using Tool;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace View.Living
 {
@@ -141,16 +143,20 @@ namespace View.Living
 
         float delayCancelWarningTime = 0;
 
+        bool isWarning = false;
+
         private void ShowWarning(params object[] arg1)
         {
             isDelayCancelWarning = false;
             warningTips.SetActive(true);
+            isWarning = true;
         }
 
         private void CancelWarning(params object[] arg1)
         {
             isDelayCancelWarning = true;
             delayCancelWarningTime = 0.5f;
+            isWarning = false;
         }
 
         void Update()
@@ -167,6 +173,32 @@ namespace View.Living
                     delayCancelWarningTime -= Time.deltaTime;
                 }
             }
+        }
+
+        public void WarningSound()
+        {
+            if (isWarning == false)
+            {
+                LivingRoomCtrl.Instance.ElectricWarning();
+            }
+            else
+            {
+                LivingRoomCtrl.Instance.CancelWarning();
+            }
+        }
+
+        public void InsertPlug()
+        {
+            LivingRoomCtrl.Instance.InsertPlug();
+            testBtn[1].gameObject.SetActive(false);
+            testBtn[2].gameObject.SetActive(true);
+        }
+
+        public void PutPlugOut()
+        {
+            LivingRoomCtrl.Instance.PutPlugOut();
+            testBtn[1].gameObject.SetActive(true);
+            testBtn[2].gameObject.SetActive(false);
         }
     }
 }

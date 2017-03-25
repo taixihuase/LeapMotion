@@ -1,5 +1,6 @@
 ﻿using Core.Manager;
 using Define;
+using Leap.Unity;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,6 +17,9 @@ namespace Core.MVC
 
         [SerializeField]
         protected Image[] btnImage;
+
+        [SerializeField]
+        protected Button[] testBtn;
 
         protected Text[] btnText;
 
@@ -46,6 +50,14 @@ namespace Core.MVC
                     btnText[i] = btnImage[i].transform.GetChild(0).GetComponent<Text>();
                 }
             }
+            if ((LeapMotionManager.Instance.Provider as LeapServiceProvider).IsConnected())
+            {
+                for (int i = 0; i < testBtn.Length; i++)
+                {
+                    testBtn[i].gameObject.SetActive(false);
+                }
+            }
+
             if (pos.Length > 0)
             {
                 for (int i = 0; i < pos.Length; i++)
@@ -71,6 +83,10 @@ namespace Core.MVC
                 btnImage[i].color = normalUIColor;
                 btnText[i].color = normalTextColor;
             }
+            for (int i = 0; i < testBtn.Length; i++)
+            {
+                testBtn[i].image.color = normalUIColor;
+            }
         }
 
         protected void ChangeGreenUIColor()
@@ -81,6 +97,10 @@ namespace Core.MVC
                 {
                     btnImage[i].color = greenUIColor;
                     btnText[i].color = redTextColor;
+                }
+                for (int i = 0; i < testBtn.Length; i++)
+                {
+                    testBtn[i].image.color = greenUIColor;
                 }
             }
         }

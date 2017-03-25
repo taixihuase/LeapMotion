@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Leap.Unity;
+using UnityEngine;
 
 namespace Core.Manager
 {
@@ -6,10 +7,17 @@ namespace Core.Manager
     {
         public void EnableSettings()
         {
-#if !UNITY_EDITOR
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+#if UNITY_EDITOR
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+#else
+            if ((LeapMotionManager.Instance.Provider as LeapServiceProvider).IsConnected())
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
 #endif
+
             Object.DontDestroyOnLoad(CameraManager.Instance.Camera.gameObject);
         }
 
