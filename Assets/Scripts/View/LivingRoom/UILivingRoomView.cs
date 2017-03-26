@@ -92,7 +92,7 @@ namespace View.Living
                 UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.LivingRoom);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
-                    Destroy(livingroom);
+                    DestroyImmediate(livingroom);
                     GameObject obj;
                     if (res is AssetBundle)
                     {
@@ -114,7 +114,7 @@ namespace View.Living
             CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
             {
                 GameObject livingroom = FindObjectOfType<LivingRoomView>().gameObject;
-                Destroy(livingroom);
+                DestroyImmediate(livingroom);
                 if (ResourceManager.Instance.IsResLoaded(Define.ResourceType.Scene, null))
                 {
                     Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, null);

@@ -17,7 +17,7 @@ namespace View.Hallway
                 UIManager.Instance.CloseWindow(SceneType.MainScene, WindowType.Hallway);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
-                    Destroy(hallway);
+                    DestroyImmediate(hallway);
                     GameObject obj;
                     if (res is AssetBundle)
                     {

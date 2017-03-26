@@ -993,7 +993,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2501,6 +2501,7 @@ MonoBehaviour:
   - {fileID: 114541676978011108}
   - {fileID: 114947370313534684}
   btnImage: []
+  testBtn: []
   quitPanel: {fileID: 1088624543850360}
 --- !u!114 &114529589593282076
 MonoBehaviour:

@@ -1299,4 +1299,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos:
   - {fileID: 4210419266832648}
-  sounds: []
+  sounds:
+  - groupName: HallwayT
+    isLoopFromStart: 1
+    audioSourceIndex: -1
+    sounds:
+    - clipName: Main
+      delayTime: 0
+      availableLength: 60.5
+      volumn: 0.75
+      isLoop: 1

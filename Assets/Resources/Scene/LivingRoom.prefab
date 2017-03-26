@@ -7530,6 +7530,15 @@ MonoBehaviour:
     sounds:
     - clipName: Warning
       delayTime: 0
+      availableLength: 60.5
+      volumn: 0.75
+      isLoop: 1
+  - groupName: LivingRoomT
+    isLoopFromStart: 1
+    audioSourceIndex: -1
+    sounds:
+    - clipName: Main
+      delayTime: 0
       availableLength: 0
       volumn: 1
       isLoop: 1

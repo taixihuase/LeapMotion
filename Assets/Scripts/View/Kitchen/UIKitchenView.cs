@@ -90,7 +90,7 @@ namespace View.Kitchen
                 UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.Kitchen);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
-                    Destroy(kitchen);
+                    DestroyImmediate(kitchen);
                     GameObject obj;
                     if (res is AssetBundle)
                     {

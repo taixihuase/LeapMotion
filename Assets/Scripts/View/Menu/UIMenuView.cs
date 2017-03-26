@@ -12,6 +12,18 @@ namespace View.Menu
         [SerializeField]
         GameObject quitPanel;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            SoundManager.Instance.PlayEnvironmentSound("Menu", true);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            SoundManager.Instance.StopEnvironmentSound(true);
+        }
+
         public void OnQuit()
         {
             quitPanel.SetActive(true);

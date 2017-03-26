@@ -62,7 +62,7 @@ namespace View.Bathroom
                 UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.Bathroom);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
-                    Destroy(bathroom);
+                    DestroyImmediate(bathroom);
                     GameObject obj;
                     if (res is AssetBundle)
                     {

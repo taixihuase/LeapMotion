@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 540566832
+CRC: 3129798388
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 945d859837f4d5393d61e67c5e8e388b
+    Hash: 1ed474f0aa82e2864915b4b0e0ec5c3f
   TypeTreeHash:
     serializedVersion: 2
     Hash: c516f2a3b2b6b67ef759f6410a790acd
@@ -13,12 +13,15 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Resources/Sound/Warning.wav
+- Assets/Resources/Sound/Menu.mp3
 - Assets/Resources/Sound/Fire.wav
+- Assets/Resources/Sound/Main.mp3
 - Assets/Resources/Sound/ButtonUp.wav
 - Assets/Resources/Sound/ElfFire.wav
 - Assets/Resources/Sound/HeadIn.wav
 - Assets/Resources/Sound/HeadOut.wav
 - Assets/Resources/Sound/FireToggle.mp3
+- Assets/Resources/Sound/Bubble.mp3
 - Assets/Resources/Sound/WaterIn.wav
 - Assets/Resources/Sound/ButtonDown.wav
 Dependencies: []

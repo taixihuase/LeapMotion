@@ -20,6 +20,7 @@ namespace View.Kitchen
             {
                 fridgeBoxContent[0].SetActive(false);
                 fridgeBoxContent[1].SetActive(true);
+                PlayEnvironmentSounds("KitchenT");
             }
             else
             {
@@ -181,7 +182,7 @@ namespace View.Kitchen
                     ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
                     ps.startColor = new Color(225f / 255, 1f, 150f / 255, 1f);
                 }
-                StopEnvironmentSounds();
+                PlayEnvironmentSounds("KitchenT");
             }
         }
     }

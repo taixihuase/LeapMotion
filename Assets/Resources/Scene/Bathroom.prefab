@@ -3459,6 +3459,24 @@ MonoBehaviour:
       availableLength: 0
       volumn: 1
       isLoop: 1
+  - groupName: Bubble
+    isLoopFromStart: 1
+    audioSourceIndex: 2
+    sounds:
+    - clipName: Bubble
+      delayTime: 0
+      availableLength: 0
+      volumn: 1
+      isLoop: 1
+  - groupName: BathroomT
+    isLoopFromStart: 1
+    audioSourceIndex: -1
+    sounds:
+    - clipName: Main
+      delayTime: 0
+      availableLength: 60.5
+      volumn: 0.75
+      isLoop: 1
   waterInToggle: {fileID: 4401296495122960}
   inToggleUpDownDistance: 0.15
   waterOutToggle: {fileID: 4492161773328000}

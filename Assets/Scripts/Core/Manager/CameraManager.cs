@@ -81,16 +81,15 @@ namespace Core.Manager
                 .OnComplete(() =>
                 {
                     ViewToDark(pauseDuration)
-                    .OnComplete(() =>
-                    {
-                        ViewToDark(pauseDuration)
-                        .OnPlay(() => { if (onComplete != null) onComplete(); })
+                        .OnPlay(() =>
+                        {
+                            if (onComplete != null) onComplete();
+                        })
                         .OnComplete(() =>
                         {
                             ShowView(showDuration)
-                            .OnComplete(() => IsChanging = false);
+                                .OnComplete(() => IsChanging = false);
                         });
-                    });
                 });
         }
     

@@ -18,6 +18,14 @@ namespace View.Bathroom
             smoke.gameObject.SetActive(true);
             wt = water[(int)GlobalManager.Instance.SceneMode];
             wt.gameObject.SetActive(true);
+            if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.PracticeMode)
+            {
+
+            }
+            else
+            {
+                PlayEnvironmentSounds("BathroomT");
+            }
         }
 
         [SerializeField]
@@ -124,6 +132,7 @@ namespace View.Bathroom
                 if(smoke.isPlaying)
                 {
                     smoke.Stop();
+                    StopEffectSounds("Bubble");
                 }
             }
             else
@@ -131,6 +140,7 @@ namespace View.Bathroom
                 if (smoke.isStopped)
                 {
                     smoke.Play();
+                    PlayEffectSounds("Bubble");
                 }
             }
         }

@@ -23,6 +23,11 @@ namespace View.LivingRoom
                 Bind(Define.EventType.ElectricWarning, ShowWarning);
                 Bind(Define.EventType.CancelElectricWarning, CancelWarning);
             }
+            else
+            {
+                PlayEnvironmentSounds("LivingRoomT");
+            }
+
             lightStartColor = dirLight.color;
             lightStartIntensity = dirLight.intensity;
             if (plugInteraction.Manager == null)

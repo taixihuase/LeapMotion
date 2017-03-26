@@ -38,8 +38,8 @@ namespace Core.MVC
             {
                 for(int i = 0; i < btn.Length; i++)
                 {
-                    BindSound(btn[i], EventTriggerType.PointerDown, SoundType.Effect, "ButtonDown");
-                    BindSound(btn[i], EventTriggerType.PointerUp, SoundType.Effect, "ButtonUp");
+                    BindSound(btn[i], EventTriggerType.PointerDown, SoundType.Effect, "ButtonDown", false, 0.5f);
+                    BindSound(btn[i], EventTriggerType.PointerUp, SoundType.Effect, "ButtonUp", false, 0.5f);
                 }
             }
             if (btnImage.Length > 0)
