@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2803714489
+CRC: 1905691370
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7ede3e43bd84290f6f696423f5755eaf
+    Hash: 43e3f72bc81706f2f4b333d826365ca5
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 16068fd80ec0dbdb9d2fb37cc7e2d954
+    Hash: 32bdc38fa231a6e70bea5437c90075b7
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,9 +26,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
+  Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
   Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
@@ -75,6 +79,7 @@ Assets:
 - "Assets/Textures/\u7BAD\u5934\u4E0B.png"
 - Assets/Textures/dangerous.png
 - "Assets/Textures/\u7BAD\u5934\u5DE6.png"
+- Assets/Textures/Menu.jpg
 - Assets/Textures/panel.png
 - "Assets/Textures/\u7BAD\u5934\u53F3.png"
 - Assets/Resources/UI/Window/Kitchen.prefab
@@ -85,4 +90,5 @@ Assets:
 - Assets/Textures/close.png
 - Assets/Resources/UI/Window/Menu.prefab
 - Assets/Resources/UI/Window/LivingRoom.prefab
+- Assets/Textures/u=2204938229,3395434307&fm=23&gp=0.jpg
 Dependencies: []

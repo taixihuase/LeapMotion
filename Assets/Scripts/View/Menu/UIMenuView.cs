@@ -16,6 +16,7 @@ namespace View.Menu
         {
             base.Awake();
             SoundManager.Instance.PlayEnvironmentSound("Menu", true);
+            pos[3].SetActive(true);
         }
 
         protected override void OnDestroy()

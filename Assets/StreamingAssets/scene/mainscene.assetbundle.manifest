@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 966033437
+CRC: 1941946367
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 984b64281dd099fd7389808b52848ffc
+    Hash: 0e772f177aecfbc72b8900efb2f15cc9
   TypeTreeHash:
     serializedVersion: 2
     Hash: b970a8ecda4b7b2259a262df33a320be
@@ -88,8 +88,12 @@ ClassTypes:
 - Class: 199
   Script: {instanceID: 0}
 Assets:
+- Assets/Textures/5724565586f8b.jpg
 - Assets/Resources/Scene/LivingRoom.prefab
 - Assets/Resources/Scene/Kitchen.prefab
+- Assets/Textures/57245422d9139.jpg
+- Assets/Textures/5384fe5ecd76c.jpg
+- Assets/Textures/5384d695ab9d2.jpg
 - Assets/Resources/Scene/Bathroom.prefab
 - Assets/Resources/Scene/Hallway.prefab
 Dependencies: []
