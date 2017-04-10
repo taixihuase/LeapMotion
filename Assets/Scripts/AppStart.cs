@@ -5,6 +5,9 @@ public class AppStart : MonoBehaviour
 {
     private void Start()
     {
-        GlobalManager.Instance.EnableSettings();
+        if (GlobalManager.Instance.InitState == false)
+        {
+            GlobalManager.Instance.Init();
+        }
     }
 }

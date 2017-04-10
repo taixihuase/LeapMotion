@@ -43,6 +43,7 @@ namespace View.LivingRoom
                 plugInteraction.useGravity = false;
                 plug.transform.localPosition = insertPos.transform.localPosition;
                 plug.transform.localRotation = insertPos.transform.localRotation;
+                plugView.IsDrag = false;
                 if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
                 {
                     dirLight.color = lightChangeColor;
@@ -61,6 +62,9 @@ namespace View.LivingRoom
 
         [SerializeField]
         Transform plug;
+
+        [SerializeField]
+        PlugView plugView;
 
         [SerializeField]
         InteractionBehaviour plugInteraction;

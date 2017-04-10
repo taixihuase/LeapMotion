@@ -9,7 +9,7 @@ namespace View.Bathroom
 {
     public class UIBathroomView : UIView
     {
-        void Start()
+        private void Start()
         {
             Init(BathroomCtrl.Instance.Model);
             Bind(Define.EventType.PourWater, PourWater);
@@ -106,6 +106,11 @@ namespace View.Bathroom
         public void ChangeWaterIn()
         {
             BathroomCtrl.Instance.ChangeWaterInToggle();
+        }
+
+        public void ChangeWaterOut()
+        {
+            BathroomCtrl.Instance.ChangeWaterOutToggle();
         }
     }
 }

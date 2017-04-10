@@ -10,7 +10,7 @@ namespace View.Kitchen
 {
     public class UIKitchenView : UIView
     {
-        void Start()
+        private void Start()
         {
             Init(KitchenCtrl.Instance.Model);
             Bind(Define.EventType.KitchenLightChanged, KitchenLightChanged);
@@ -131,9 +131,34 @@ namespace View.Kitchen
             KitchenCtrl.Instance.ChangeFridgeDoor(1);
         }
 
+        private int clickCnt = 0;
+
+        private float delayClear = 0.5f;
+
+        private float doubleClickTimer = 0;
+
         public void LightSound()
         {
-            KitchenCtrl.Instance.ChangeLight();
+            clickCnt++;
+            if (clickCnt == 2)
+            {
+                KitchenCtrl.Instance.ChangeLight();
+                clickCnt = 0;
+                doubleClickTimer = 0;
+            }
+        }
+
+        private void Update()
+        {
+            if(doubleClickTimer > delayClear)
+            {
+                clickCnt = 0;
+                doubleClickTimer = 0;
+            }
+            if (clickCnt > 0)
+            {
+                doubleClickTimer += Time.deltaTime;
+            }
         }
     }
 }

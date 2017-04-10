@@ -159,6 +159,16 @@ namespace View.Kitchen
                 gameObject.transform.localRotation = q;
                 CheckOpenState();
             }
+            else if (isMouseDown)
+            {
+                Vector3 euler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
+                if (mouseAngle < maxAngle || mouseAngle > 0)
+                    return;
+
+                Quaternion q = Quaternion.Euler(euler.x, mouseAngle, euler.z);
+                gameObject.transform.localRotation = q;
+                CheckOpenState();
+            }
         }
 
         private float VectorAngle(Vector2 from, Vector2 to)
@@ -191,6 +201,51 @@ namespace View.Kitchen
         {
             base.OnDestroy();
             CoroutineManager.Instance.StopCoroutine(coroutine);
+        }
+
+        float length = 0;
+
+        [SerializeField]
+        Transform handle;
+
+        bool isMouseDown = false;
+
+        float mouseAngle = 0;
+
+        IEnumerator OnMouseDown()
+        {
+            isMouseDown = true;
+            Vector3 screenSpace = Camera.main.WorldToScreenPoint(fridgePos.position);
+            length = Vector3.Distance(fridgePos.transform.position, handle.position);
+            lastPos = currPos = new Vector3(0, fridgePos.position.y, handle.position.z);
+            lastPos.x = currPos.x = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 0, screenSpace.z)).x;
+            lastPos.z = fridgePos.position.z - Mathf.Sqrt(Mathf.Pow(length, 2) - Mathf.Pow((lastPos.x - fridgePos.position.x), 2));
+            float sin1 = Mathf.Abs(lastPos.x - fridgePos.position.x) / length;
+            if (sin1 >= 1)
+                sin1 = 1f;
+
+            while (Input.GetMouseButton(0))
+            {
+                currPos.x = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 0, screenSpace.z)).x;
+                currPos.z = fridgePos.position.z - Mathf.Sqrt(Mathf.Pow(length, 2) - Mathf.Pow((currPos.x - fridgePos.position.x), 2));
+                if (Mathf.Abs(currPos.x - lastPos.x) < 0.01f)
+                    yield return null;
+
+                int sign = currPos.x > fridgePos.transform.position.x ? 1 : -1;
+                int dir = currPos.x > lastPos.x ? -1 : 1;
+
+                float sin2 = Mathf.Abs(currPos.x - fridgePos.position.x) / length;
+                if (sin2 <= 1f)
+                {
+                    float delta1 = Mathf.Asin(sin1);
+                    float delta2 = Mathf.Asin(sin2);
+                    float temp = Mathf.Rad2Deg * dir * (Mathf.Abs(delta1 + sign * delta2));
+                    if (Mathf.Abs(temp) > 0.01f)
+                        mouseAngle = temp;
+                }
+                yield return null;
+            }
+            isMouseDown = false;
         }
     }
 }

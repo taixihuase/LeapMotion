@@ -7,19 +7,13 @@ namespace Define
         [Description("")]
         None = -1,
 
-        [Description("TestScene")]
-        TestScene = 0,
-
-        [Description("TestLoad")]
-        TestLoad = 1,
-
         [Description("StartScene")]
-        StartScene = 2,
+        StartScene = 1,
 
         [Description("MenuScene")]
-        MenuScene = 3,
+        MenuScene = 2,
 
         [Description("MainScene")]
-        MainScene = 4,
+        MainScene = 3,
     }
 }

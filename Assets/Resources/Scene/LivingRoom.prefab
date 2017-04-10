@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 54564121348589236}
   - component: {fileID: 114235586382092552}
   - component: {fileID: 65397003010957738}
+  - component: {fileID: 114520798219854832}
   m_Layer: 0
   m_Name: "\u63D2\u5934"
   m_TagString: Untagged
@@ -7507,6 +7508,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f0b8429cbc5c948a2ae968491b6c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114520798219854832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1019873901628172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27f64c82ff5adf46827f7ef96ff7e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114740931925255272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7545,6 +7557,7 @@ MonoBehaviour:
   insertPos: {fileID: 4571511350319008}
   plugStartPos: {fileID: 4373764890839106}
   plug: {fileID: 4516249192866286}
+  plugView: {fileID: 114520798219854832}
   plugInteraction: {fileID: 114235586382092552}
   dirLight: {fileID: 108787160616919032}
   greenLight: {fileID: 108250455267874756}

@@ -85,7 +85,7 @@ namespace Core.MVC
             }
             for (int i = 0; i < testBtn.Length; i++)
             {
-                testBtn[i].image.color = normalUIColor;
+                testBtn[i].image.color = Vector4.zero;
             }
         }
 

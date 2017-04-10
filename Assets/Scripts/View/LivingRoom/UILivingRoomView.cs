@@ -13,7 +13,7 @@ namespace View.Living
 {
     public class UILivingRoomView : UIView
     {
-        void Start()
+        private void Start()
         {
             Init(LivingRoomCtrl.Instance.Model);
             Bind(Define.EventType.InsertPlugComplete, OnInsertPlug);

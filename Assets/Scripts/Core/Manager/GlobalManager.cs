@@ -1,4 +1,6 @@
-﻿using Leap.Unity;
+﻿using Define;
+using Leap.Unity;
+using Tool;
 using UnityEngine;
 
 namespace Core.Manager
@@ -17,8 +19,10 @@ namespace Core.Manager
                 Cursor.lockState = CursorLockMode.Locked;
             }
 #endif
-
-            Object.DontDestroyOnLoad(CameraManager.Instance.Camera.gameObject);
+            if (CameraManager.Instance.Camera != null)
+            {
+                Object.DontDestroyOnLoad(CameraManager.Instance.Camera.gameObject);
+            }
         }
 
         public enum Mode
@@ -28,5 +32,18 @@ namespace Core.Manager
         }
 
         public Mode SceneMode { get; set; }
+
+        private bool initState = false;
+
+        public bool InitState
+        {
+            get { return initState; }
+        }
+
+        public void Init()
+        {
+            EnableSettings();
+            initState = true;
+        }
     }
 }
