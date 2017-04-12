@@ -148,8 +148,9 @@ namespace View.Kitchen
             }
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
             if(doubleClickTimer > delayClear)
             {
                 clickCnt = 0;

@@ -2,6 +2,7 @@
 {
     public enum EventType
     {
+        OpModeChanged,
         MoveCameraPos,
         WaterInToggleChanged,
         WaterOutToggleChanged,

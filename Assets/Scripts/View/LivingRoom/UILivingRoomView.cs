@@ -6,8 +6,6 @@ using View.LivingRoom;
 using Core.MVC;
 using Model;
 using Tool;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace View.Living
 {
@@ -159,8 +157,9 @@ namespace View.Living
             isWarning = false;
         }
 
-        void Update()
+        protected override void Update()
         {
+            base.Update();
             if(isDelayCancelWarning == true)
             {
                 if(delayCancelWarningTime <= 0)

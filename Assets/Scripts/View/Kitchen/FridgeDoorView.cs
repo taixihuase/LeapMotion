@@ -44,6 +44,15 @@ namespace View.Kitchen
 
         bool isWaitForClear = false;
 
+        float rotateAngle = 0;
+
+        float length = 0;
+
+        [SerializeField]
+        Transform handle;
+
+        bool isMouseDown = false;
+
         public void ExtendFingers(params object[] arg1)
         {
             int direction = (int)arg1[0];
@@ -112,7 +121,7 @@ namespace View.Kitchen
         {
             coroutine = ReleaseHand();
             CoroutineManager.Instance.StartCoroutine(coroutine);
-
+            length = Vector3.Distance(fridgePos.transform.position, handle.position);
             nVec = (fridgePosY.position - fridgePos.position).normalized;
             Init(KitchenCtrl.Instance.Model);
             Bind(Define.EventType.ExtendFingers, ExtendFingers);
@@ -123,52 +132,94 @@ namespace View.Kitchen
         {
             if (hand != null)
             {
-                if(hand.gameObject.activeInHierarchy == false || isFingerExtended[handType] == true)
-                {
-                    hand = null;
-                    handType = -1;
-                    isWaitForClear = false;
+                if (OnHandOn() == false || RotateFridgeDoor() == false)
                     return;
-                }
-
-                if (timer < startDelay)
-                {
-                    timer += Time.deltaTime;
-                    return;
-                }
-
-                lastPos = currPos;
-                currPos = hand.position;
-
-                Vector3 lastVec = lastPos - fridgePos.position;
-                float lastHeight = Vector3.Dot(lastVec, nVec);
-                Vector3 lastProjVec = new Vector3(lastPos.x, lastPos.y - lastHeight, lastPos.z);
-                Vector3 currVec = currPos - fridgePos.position;
-                float currHeight = Vector3.Dot(currVec, nVec);
-                Vector3 currProjVec = new Vector3(currPos.x, currPos.y - currHeight, currPos.z);
-
-                Vector2 from = new Vector2((fridgePos.position - lastProjVec).x, (fridgePos.position - lastProjVec).z);
-                Vector2 to = new Vector2((fridgePos.position - currProjVec).x, (fridgePos.position - currProjVec).z);
-                float rotateAngle = VectorAngle(from, to);
-             
-                Vector3 euler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
-                if (euler.y - rotateAngle < maxAngle || euler.y - rotateAngle > 0)
-                    return;
-
-                Quaternion q = Quaternion.Euler(euler.x, euler.y - rotateAngle, euler.z);
-                gameObject.transform.localRotation = q;
-                CheckOpenState();
             }
             else if (isMouseDown)
             {
-                Vector3 euler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
-                if (mouseAngle < maxAngle || mouseAngle > 0)
+                if (RotateFridgeDoor() == false)
                     return;
-
-                Quaternion q = Quaternion.Euler(euler.x, mouseAngle, euler.z);
-                gameObject.transform.localRotation = q;
-                CheckOpenState();
             }
+        }
+
+        private bool OnHandOn()
+        {
+            if (hand.gameObject.activeInHierarchy == false || isFingerExtended[handType] == true)
+            {
+                hand = null;
+                handType = -1;
+                isWaitForClear = false;
+                return false;
+            }
+
+            if (timer < startDelay)
+            {
+                timer += Time.deltaTime;
+                return false;
+            }
+
+            lastPos = currPos;
+            currPos = hand.position;
+
+            Vector3 lastVec = lastPos - fridgePos.position;
+            float lastHeight = Vector3.Dot(lastVec, nVec);
+            Vector3 lastProjVec = new Vector3(lastPos.x, lastPos.y - lastHeight, lastPos.z);
+            Vector3 currVec = currPos - fridgePos.position;
+            float currHeight = Vector3.Dot(currVec, nVec);
+            Vector3 currProjVec = new Vector3(currPos.x, currPos.y - currHeight, currPos.z);
+
+            Vector2 from = new Vector2((fridgePos.position - lastProjVec).x, (fridgePos.position - lastProjVec).z);
+            Vector2 to = new Vector2((fridgePos.position - currProjVec).x, (fridgePos.position - currProjVec).z);
+            rotateAngle = VectorAngle(from, to);
+            return true;
+        }
+
+        IEnumerator OnMouseDown()
+        {
+            isMouseDown = true;
+            Vector3 friPos = fridgePos.position;
+            lastPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 0, Camera.main.WorldToScreenPoint(handle.position).z));
+            lastPos.y = friPos.y;
+
+            while (Input.GetMouseButton(0))
+            {
+                currPos = new Vector3(0, friPos.y, handle.position.z);
+                currPos.x = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 0, Camera.main.WorldToScreenPoint(handle.position).z)).x;
+                float z2 = Mathf.Pow(length, 2) - Mathf.Pow((currPos.x - friPos.x), 2);
+                if (z2 < 0)
+                    z2 = 0;
+                currPos.z = friPos.z - Mathf.Sqrt(z2);
+
+                float sin1 = Mathf.Abs(lastPos.z - friPos.z) / length;
+                if (sin1 > 1f)
+                    sin1 = 1;
+                float lastAngle = Mathf.Rad2Deg * Mathf.Asin(sin1);
+                if (lastPos.x > friPos.x)
+                    lastAngle = 180 - lastAngle;
+                float sin2 = Mathf.Abs(currPos.z - friPos.z) / length;
+                if (sin2 > 1f)
+                    sin2 = 1;
+                float currAngle = Mathf.Rad2Deg * Mathf.Asin(sin2);
+                if (currPos.x > friPos.x)
+                    currAngle = 180 - currAngle;
+                rotateAngle = currAngle - lastAngle;
+
+                lastPos = currPos;
+                yield return null;
+            }
+            isMouseDown = false;
+        }
+
+        private bool RotateFridgeDoor()
+        {
+            Vector3 euler = ChangeEulerAngle(gameObject.transform.localRotation.eulerAngles);
+            if (euler.y - rotateAngle < maxAngle || euler.y - rotateAngle > 0)
+                return false;
+
+            Quaternion q = Quaternion.Euler(euler.x, euler.y - rotateAngle, euler.z);
+            gameObject.transform.localRotation = q;
+            CheckOpenState();
+            return true;
         }
 
         private float VectorAngle(Vector2 from, Vector2 to)
@@ -201,51 +252,6 @@ namespace View.Kitchen
         {
             base.OnDestroy();
             CoroutineManager.Instance.StopCoroutine(coroutine);
-        }
-
-        float length = 0;
-
-        [SerializeField]
-        Transform handle;
-
-        bool isMouseDown = false;
-
-        float mouseAngle = 0;
-
-        IEnumerator OnMouseDown()
-        {
-            isMouseDown = true;
-            Vector3 screenSpace = Camera.main.WorldToScreenPoint(fridgePos.position);
-            length = Vector3.Distance(fridgePos.transform.position, handle.position);
-            lastPos = currPos = new Vector3(0, fridgePos.position.y, handle.position.z);
-            lastPos.x = currPos.x = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 0, screenSpace.z)).x;
-            lastPos.z = fridgePos.position.z - Mathf.Sqrt(Mathf.Pow(length, 2) - Mathf.Pow((lastPos.x - fridgePos.position.x), 2));
-            float sin1 = Mathf.Abs(lastPos.x - fridgePos.position.x) / length;
-            if (sin1 >= 1)
-                sin1 = 1f;
-
-            while (Input.GetMouseButton(0))
-            {
-                currPos.x = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 0, screenSpace.z)).x;
-                currPos.z = fridgePos.position.z - Mathf.Sqrt(Mathf.Pow(length, 2) - Mathf.Pow((currPos.x - fridgePos.position.x), 2));
-                if (Mathf.Abs(currPos.x - lastPos.x) < 0.01f)
-                    yield return null;
-
-                int sign = currPos.x > fridgePos.transform.position.x ? 1 : -1;
-                int dir = currPos.x > lastPos.x ? -1 : 1;
-
-                float sin2 = Mathf.Abs(currPos.x - fridgePos.position.x) / length;
-                if (sin2 <= 1f)
-                {
-                    float delta1 = Mathf.Asin(sin1);
-                    float delta2 = Mathf.Asin(sin2);
-                    float temp = Mathf.Rad2Deg * dir * (Mathf.Abs(delta1 + sign * delta2));
-                    if (Mathf.Abs(temp) > 0.01f)
-                        mouseAngle = temp;
-                }
-                yield return null;
-            }
-            isMouseDown = false;
         }
     }
 }

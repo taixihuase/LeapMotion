@@ -76,5 +76,10 @@ namespace Core.MVC
         {
             ClearBind();
         }
+
+        protected virtual void Update()
+        {
+
+        }
     }
 }

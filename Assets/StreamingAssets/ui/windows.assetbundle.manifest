@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1905691370
+CRC: 1819584760
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 43e3f72bc81706f2f4b333d826365ca5
+    Hash: 2dbe2dd94f58a732bc06f665fa67b78d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 32bdc38fa231a6e70bea5437c90075b7
+    Hash: 4f174466882ac6845b37ec4130badae6
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -65,6 +65,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 128
   Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
 - Class: 222
@@ -90,5 +94,5 @@ Assets:
 - Assets/Textures/close.png
 - Assets/Resources/UI/Window/Menu.prefab
 - Assets/Resources/UI/Window/LivingRoom.prefab
-- Assets/Textures/u=2204938229,3395434307&fm=23&gp=0.jpg
+- Assets/Textures/jc1506161_48a.jpg
 Dependencies: []

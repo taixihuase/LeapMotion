@@ -99,10 +99,13 @@ namespace View.LivingRoom
 
         private void InsertPlug(params object[] arg1)
         {
-            plugInteraction.OnHandReleasedEvent += insertFunc;
-            if ((LeapMotionManager.Instance.Provider as LeapServiceProvider).IsConnected() == false)
+            if (plugView.IsDrag)
             {
                 insertFunc.Invoke(null);
+            }
+            else
+            {
+                plugInteraction.OnHandReleasedEvent += insertFunc;
             }
         }
 

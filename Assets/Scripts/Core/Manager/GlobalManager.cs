@@ -1,11 +1,9 @@
-﻿using Define;
-using Leap.Unity;
-using Tool;
+﻿using Leap.Unity;
 using UnityEngine;
 
 namespace Core.Manager
 {
-    public sealed class GlobalManager : Singleton<GlobalManager>
+    public sealed class GlobalManager : MonoSingleton<GlobalManager>
     {
         public void EnableSettings()
         {
@@ -13,7 +11,7 @@ namespace Core.Manager
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 #else
-            if ((LeapMotionManager.Instance.Provider as LeapServiceProvider).IsConnected())
+            if (isConnected)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
@@ -21,7 +19,7 @@ namespace Core.Manager
 #endif
             if (CameraManager.Instance.Camera != null)
             {
-                Object.DontDestroyOnLoad(CameraManager.Instance.Camera.gameObject);
+                DontDestroyOnLoad(CameraManager.Instance.Camera.gameObject);
             }
         }
 
@@ -42,8 +40,37 @@ namespace Core.Manager
 
         public void Init()
         {
+            provider = LeapMotionManager.Instance.Provider as LeapServiceProvider;
+            isConnected = provider.IsConnected();
             EnableSettings();
             initState = true;
+        }
+
+        private LeapServiceProvider provider;
+
+        private bool isConnected = false;
+
+        public bool IsConnected { get { return isConnected; } }
+
+        private void Update()
+        {
+            if (isConnected != provider.IsConnected())
+            {
+                isConnected = !isConnected;
+                EventManager.Instance.RaiseEvent(Define.EventType.OpModeChanged, isConnected);
+                if (isConnected)
+                {
+#if !UNITY_EDITOR
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+#endif
+                }
+                else
+                {
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+            }
         }
     }
 }

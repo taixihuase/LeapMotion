@@ -34,23 +34,24 @@ namespace Core.MVC
         protected override void Awake()
         {
             base.Awake();
-            if(btn.Length > 0)
+            EventManager.Instance.AddEventHandler(Define.EventType.OpModeChanged, OnConnectedStateChanged);
+
+            for (int i = 0; i < btn.Length; i++)
             {
-                for(int i = 0; i < btn.Length; i++)
-                {
-                    BindSound(btn[i], EventTriggerType.PointerDown, SoundType.Effect, "ButtonDown", false, 0.5f);
-                    BindSound(btn[i], EventTriggerType.PointerUp, SoundType.Effect, "ButtonUp", false, 0.5f);
-                }
+                BindSound(btn[i], EventTriggerType.PointerDown, SoundType.Effect, "ButtonDown", false, 0.5f);
+                BindSound(btn[i], EventTriggerType.PointerUp, SoundType.Effect, "ButtonUp", false, 0.5f);
             }
-            if (btnImage.Length > 0)
+            btnText = new Text[btnImage.Length];
+            for (int i = 0; i < btnImage.Length; i++)
             {
-                btnText = new Text[btnImage.Length];
-                for (int i = 0; i < btnImage.Length; i++)
-                {
-                    btnText[i] = btnImage[i].transform.GetChild(0).GetComponent<Text>();
-                }
+                btnText[i] = btnImage[i].transform.GetChild(0).GetComponent<Text>();
             }
-            if ((LeapMotionManager.Instance.Provider as LeapServiceProvider).IsConnected())
+            for (int i = 0; i < testBtn.Length; i++)
+            {
+                testBtn[i].image.color = Vector4.zero;
+            }
+
+            if (GlobalManager.Instance.IsConnected)
             {
                 for (int i = 0; i < testBtn.Length; i++)
                 {
@@ -76,16 +77,20 @@ namespace Core.MVC
             ChangeNormalUIColor();
         }
 
+        private void OnConnectedStateChanged(params object[] arg1)
+        {
+            for (int i = 0; i < testBtn.Length; i++)
+            {
+                testBtn[i].gameObject.SetActive(!(bool)arg1[0]);
+            }
+        }
+
         protected void ChangeNormalUIColor()
         {
             for (int i = 0; i < btnImage.Length; i++)
             {
                 btnImage[i].color = normalUIColor;
                 btnText[i].color = normalTextColor;
-            }
-            for (int i = 0; i < testBtn.Length; i++)
-            {
-                testBtn[i].image.color = Vector4.zero;
             }
         }
 
@@ -98,16 +103,13 @@ namespace Core.MVC
                     btnImage[i].color = greenUIColor;
                     btnText[i].color = redTextColor;
                 }
-                for (int i = 0; i < testBtn.Length; i++)
-                {
-                    testBtn[i].image.color = greenUIColor;
-                }
             }
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            EventManager.Instance.RemoveEventHandler(Define.EventType.OpModeChanged, OnConnectedStateChanged);
         }
 
         protected void BindSound(Button btn, EventTriggerType triggerType, SoundType soundType, string soundName, bool isLoop = false, float volumn = 1f)
