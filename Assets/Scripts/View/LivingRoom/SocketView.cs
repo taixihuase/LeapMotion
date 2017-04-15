@@ -1,9 +1,10 @@
 ﻿using Controller;
+using Core.MVC;
 using UnityEngine;
 
 namespace View.LivingRoom
 {
-    public class SocketView : Core.MVC.EntityView
+    public class SocketView : EntityView
     {
         void OnTriggerEnter(Collider other)
         {

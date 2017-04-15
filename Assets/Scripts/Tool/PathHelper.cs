@@ -122,6 +122,8 @@ namespace Tool
 
         public const string SoundPath = "Sound";
 
+        public const string VideoPath = "Video";
+
         #endregion
 
         #region
@@ -132,6 +134,8 @@ namespace Tool
 
         public const string SoundABPath = "Sound/Sounds";
 
+        public const string VideoABPath = "Video/Videos";
+
         #endregion
 
         private void InitResourcePath()
@@ -139,6 +143,7 @@ namespace Tool
             resPath.Add(ResourceType.Window, WindowPath);
             resPath.Add(ResourceType.Scene, ScenePath);
             resPath.Add(ResourceType.Sound, SoundPath);
+            resPath.Add(ResourceType.Video, VideoPath);
         }
 
         private void InitAssetBundlePath()
@@ -146,6 +151,7 @@ namespace Tool
             abPath.Add(ResourceType.Window, WindowABPath);
             abPath.Add(ResourceType.Scene, SceneABPath);
             abPath.Add(ResourceType.Sound, SoundABPath);
+            abPath.Add(ResourceType.Video, VideoABPath);
         }
     }
 }

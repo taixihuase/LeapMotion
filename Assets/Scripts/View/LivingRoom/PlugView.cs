@@ -1,11 +1,12 @@
 ﻿using System.Collections;
+using Core.MVC;
 using UnityEngine;
 
 namespace View.LivingRoom
 {
-    public class PlugView : Core.MVC.EntityView
+    public class PlugView : EntityView
     {
-        private bool isDrag = false;
+        private bool isDrag;
 
         public bool IsDrag
         {

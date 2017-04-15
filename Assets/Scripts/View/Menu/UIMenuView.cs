@@ -1,6 +1,6 @@
 ﻿using Core.Manager;
 using Core.MVC;
-using Tool;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace View.Menu
@@ -11,6 +11,9 @@ namespace View.Menu
 
         [SerializeField]
         GameObject quitPanel;
+
+        [SerializeField]
+        ScrollRect scrollRect;
 
         protected override void Awake()
         {
@@ -35,6 +38,7 @@ namespace View.Menu
             currentPanel = 1;
             pos[0].SetActive(false);
             pos[1].SetActive(true);
+            scrollRect.verticalScrollbar.value = 1;
         }
       
         public void OnSelectMode()

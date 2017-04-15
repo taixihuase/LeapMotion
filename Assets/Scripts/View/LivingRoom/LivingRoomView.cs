@@ -1,11 +1,12 @@
-﻿using Controller;
+﻿using System;
+using Controller;
+using Core.Manager;
 using Core.MVC;
+using Define;
 using Leap;
 using Leap.Unity.Interaction;
-using System;
-using Core.Manager;
-using Leap.Unity;
 using UnityEngine;
+using EventType = Define.EventType;
 
 namespace View.LivingRoom
 {
@@ -14,14 +15,14 @@ namespace View.LivingRoom
         void Start()
         {
             Init(LivingRoomCtrl.Instance.Model);
-            Bind(Define.EventType.MoveCameraPos, MoveCamera);
-            Bind(Define.EventType.InsertPlug, InsertPlug);
-            Bind(Define.EventType.PutPlugOut, PutPlugOut);
-            Bind(Define.EventType.FixPlugPos, FixPlugPos);
+            Bind(EventType.MoveCameraPos, MoveCamera);
+            Bind(EventType.InsertPlug, InsertPlug);
+            Bind(EventType.PutPlugOut, PutPlugOut);
+            Bind(EventType.FixPlugPos, FixPlugPos);
             if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.PracticeMode)
             {
-                Bind(Define.EventType.ElectricWarning, ShowWarning);
-                Bind(Define.EventType.CancelElectricWarning, CancelWarning);
+                Bind(EventType.ElectricWarning, ShowWarning);
+                Bind(EventType.CancelElectricWarning, CancelWarning);
             }
             else
             {
@@ -35,7 +36,7 @@ namespace View.LivingRoom
                 plugInteraction.Manager = LeapMotionManager.Instance.Interaction;
             }
 
-            insertFunc = (h) =>
+            insertFunc = h =>
             {
                 isInsert = true;
                 timer = 0;
@@ -50,6 +51,34 @@ namespace View.LivingRoom
                     dirLight.intensity = lightChangeIntensity;
                     greenLight.gameObject.SetActive(true);
                 }
+
+                string videoName = "Normal";
+                if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+                {
+
+                }
+                ResourceManager.Instance.LoadAsset(ResourceType.Video, videoName, o =>
+                {
+                    video.gameObject.SetActive(true);
+                    MovieTexture mt;
+                    if (o is AssetBundle)
+                    {
+                        mt = (o as AssetBundle).LoadAsset(videoName) as MovieTexture;
+                    }
+                    else
+                    {
+                        mt = o as MovieTexture;
+                    }
+                    if (mt != null)
+                    {
+                        mt.loop = true;
+                        video.material.mainTexture = mt;
+                        mt.Play();
+                        ResourceManager.Instance.RegistResource(ResourceType.Sound, "Normal", mt.audioClip);
+                        SoundManager.Instance.PlayEffectSound("Normal", true, 1f, 2);
+                    }
+                }, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
+
                 LivingRoomCtrl.Instance.OnInsertPlugComplete();
             };
         }
@@ -85,17 +114,20 @@ namespace View.LivingRoom
         [SerializeField]
         float lightChangeIntensity;
 
-        Action<Hand> insertFunc = null;
+        Action<Hand> insertFunc;
 
-        bool isInsert = false;
+        bool isInsert;
 
         float duration = 1f;
 
-        float timer = 0;
+        float timer;
 
         float fixDuration = 1f;
 
         float fixTimer = 1f;
+
+        [SerializeField]
+        MeshRenderer video;
 
         private void InsertPlug(params object[] arg1)
         {
@@ -106,7 +138,7 @@ namespace View.LivingRoom
             else
             {
                 plugInteraction.OnHandReleasedEvent += insertFunc;
-            }
+            }         
         }
 
         private void PutPlugOut(params object[] arg1)
@@ -120,6 +152,15 @@ namespace View.LivingRoom
                 dirLight.color = lightStartColor;
                 dirLight.intensity = lightStartIntensity;
                 greenLight.gameObject.SetActive(false);
+
+                MovieTexture mt = video.material.mainTexture as MovieTexture;
+                if (mt != null)
+                {
+                    mt.Stop();
+                    video.material.mainTexture = null;
+                    SoundManager.Instance.StopEffectSound(2);
+                }
+                video.gameObject.SetActive(false);
             }
         }
 

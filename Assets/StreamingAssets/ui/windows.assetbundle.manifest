@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1819584760
+CRC: 3398639329
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2dbe2dd94f58a732bc06f665fa67b78d
+    Hash: 7003c8b8dc9556647d9908754fe3ab25
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4f174466882ac6845b37ec4130badae6
+    Hash: 00dcbce4b176c6af507c7290fafeb1a4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -79,20 +79,26 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Textures/button.png
+- Assets/Textures/op6.png
 - Assets/Fonts/font.ttf
 - "Assets/Textures/\u7BAD\u5934\u4E0B.png"
 - Assets/Textures/dangerous.png
 - "Assets/Textures/\u7BAD\u5934\u5DE6.png"
-- Assets/Textures/Menu.jpg
+- Assets/Textures/op3.png
 - Assets/Textures/panel.png
+- Assets/Textures/op4.png
+- Assets/Textures/op2.png
 - "Assets/Textures/\u7BAD\u5934\u53F3.png"
+- Assets/Textures/op5.png
 - Assets/Resources/UI/Window/Kitchen.prefab
 - "Assets/Textures/\u7BAD\u5934\u4E0A.png"
 - Assets/Resources/UI/Window/Bathroom.prefab
 - Assets/Textures/tips.png
 - Assets/Resources/UI/Window/Hallway.prefab
 - Assets/Textures/close.png
+- Assets/Textures/op7.png
 - Assets/Resources/UI/Window/Menu.prefab
+- Assets/Textures/op1.png
 - Assets/Resources/UI/Window/LivingRoom.prefab
 - Assets/Textures/jc1506161_48a.jpg
 Dependencies: []

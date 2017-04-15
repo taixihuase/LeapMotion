@@ -1,11 +1,16 @@
 ﻿using Controller;
 using Core.Manager;
-using UnityEngine;
-using View.Hallway;
-using View.LivingRoom;
 using Core.MVC;
+using Define;
 using Model;
 using Tool;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using View.Hallway;
+using View.LivingRoom;
+using EventType = Define.EventType;
+using SceneManager = Core.Manager.SceneManager;
 
 namespace View.Living
 {
@@ -14,8 +19,8 @@ namespace View.Living
         private void Start()
         {
             Init(LivingRoomCtrl.Instance.Model);
-            Bind(Define.EventType.InsertPlugComplete, OnInsertPlug);
-            Bind(Define.EventType.PutPlugOut, OnPutPlugOut);
+            Bind(EventType.InsertPlugComplete, OnInsertPlug);
+            Bind(EventType.PutPlugOut, OnPutPlugOut);
             if(GlobalManager.Instance.SceneMode == GlobalManager.Mode.PracticeMode)
             {
                 LivingRoomModel m = model as LivingRoomModel;
@@ -23,8 +28,8 @@ namespace View.Living
                 socketTips.SetActive(m.CanShowSocketTips);
                 warningTips.SetActive(false);
 
-                Bind(Define.EventType.ElectricWarning, ShowWarning);
-                Bind(Define.EventType.CancelElectricWarning, CancelWarning);
+                Bind(EventType.ElectricWarning, ShowWarning);
+                Bind(EventType.CancelElectricWarning, CancelWarning);
             }
             else
             {
@@ -38,10 +43,12 @@ namespace View.Living
         {
             (model as LivingRoomModel).SetSocketTips(false);
             socketTips.SetActive(false);
-
             ChangeGreenUIColor();
             pos[3].SetActive(false);
-            LivingRoomCtrl.Instance.MovePos(2, () => pos[2].SetActive(true));
+            LivingRoomCtrl.Instance.MovePos(2, () =>
+            {
+                pos[2].SetActive(true);
+            });
         }
 
         private void OnPutPlugOut(params object[] arg1)
@@ -83,11 +90,12 @@ namespace View.Living
 
         public void OnClickToHallway()
         {
+            LivingRoomCtrl.Instance.PutPlugOut();
             GameObject livingroom = FindObjectOfType<LivingRoomView>().gameObject;
-            Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, "Hallway");
+            Object res = ResourceManager.Instance.GetResource(ResourceType.Scene, "Hallway");
             if (res != null)
             {
-                UIManager.Instance.CloseWindow(Define.SceneType.MainScene, Define.WindowType.LivingRoom);
+                UIManager.Instance.CloseWindow(SceneType.MainScene, WindowType.LivingRoom);
                 CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
                 {
                     DestroyImmediate(livingroom);
@@ -102,29 +110,30 @@ namespace View.Living
                     }
                     Transform startPos = obj.GetComponent<HallwayView>().GetStartPos();
                     CameraManager.Instance.MoveAndRotate(startPos);
-                    UIManager.Instance.OpenWindow(Define.SceneType.MainScene, Define.WindowType.Hallway, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
+                    UIManager.Instance.OpenWindow(SceneType.MainScene, WindowType.Hallway, null, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
                 });
             }
         }
 
         public void OnClickExit()
         {
+            LivingRoomCtrl.Instance.PutPlugOut();
             CameraManager.Instance.ChangeScene(0.5f, 0.2f, 0.5f, () =>
             {
                 GameObject livingroom = FindObjectOfType<LivingRoomView>().gameObject;
                 DestroyImmediate(livingroom);
-                if (ResourceManager.Instance.IsResLoaded(Define.ResourceType.Scene, null))
+                if (ResourceManager.Instance.IsResLoaded(ResourceType.Scene, null))
                 {
-                    Object res = ResourceManager.Instance.GetResource(Define.ResourceType.Scene, null);
+                    Object res = ResourceManager.Instance.GetResource(ResourceType.Scene, null);
                     if (res is AssetBundle)
                     {
-                        string path = PathHelper.Instance.GetAssetBundlePath(Define.ResourceType.Scene);
+                        string path = PathHelper.Instance.GetAssetBundlePath(ResourceType.Scene);
                         ResourceManager.Instance.RemoveLoadedAsset(path);
                         (res as AssetBundle).Unload(true);
                     }
                 }
-                UIManager.Instance.CloseSceneWindows(Define.SceneType.MainScene);
-                SceneManager.Instance.LoadSceneAsync(Define.SceneType.MenuScene, UnityEngine.SceneManagement.LoadSceneMode.Single, null);
+                UIManager.Instance.CloseSceneWindows(SceneType.MainScene);
+                SceneManager.Instance.LoadSceneAsync(SceneType.MenuScene, LoadSceneMode.Single, null);
             });
         }
 
@@ -137,11 +146,11 @@ namespace View.Living
         [SerializeField]
         GameObject warningTips;
 
-        bool isDelayCancelWarning = false;
+        bool isDelayCancelWarning;
 
-        float delayCancelWarningTime = 0;
+        float delayCancelWarningTime;
 
-        bool isWarning = false;
+        bool isWarning;
 
         private void ShowWarning(params object[] arg1)
         {
@@ -160,7 +169,7 @@ namespace View.Living
         protected override void Update()
         {
             base.Update();
-            if(isDelayCancelWarning == true)
+            if(isDelayCancelWarning)
             {
                 if(delayCancelWarningTime <= 0)
                 {
@@ -184,20 +193,6 @@ namespace View.Living
             {
                 LivingRoomCtrl.Instance.CancelWarning();
             }
-        }
-
-        public void InsertPlug()
-        {
-            LivingRoomCtrl.Instance.InsertPlug();
-            testBtn[1].gameObject.SetActive(false);
-            testBtn[2].gameObject.SetActive(true);
-        }
-
-        public void PutPlugOut()
-        {
-            LivingRoomCtrl.Instance.PutPlugOut();
-            testBtn[1].gameObject.SetActive(true);
-            testBtn[2].gameObject.SetActive(false);
         }
     }
 }

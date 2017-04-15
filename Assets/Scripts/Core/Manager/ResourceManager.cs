@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Define;
 using Tool;
 using System;
+using System.IO;
 
 namespace Core.Manager
 {
@@ -23,6 +24,15 @@ namespace Core.Manager
 
         private Dictionary<string, object> loadingAssets = new Dictionary<string, object>();
 
+        public void RegistResource(ResourceType type, string name, UnityEngine.Object res)
+        {
+            if (res != null && !string.IsNullOrEmpty(name))
+            {
+                string path = PathHelper.Instance.GetResourcePath(type, name);
+                loadedAssets[path] = res;
+            }
+        }
+
         public UnityEngine.Object GetResource(ResourceType type, string name)
         {
             UnityEngine.Object obj = null;
@@ -35,17 +45,52 @@ namespace Core.Manager
             {
                 path = PathHelper.Instance.GetResourcePath(type, name);
             }
-            if(string.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path))
             {
                 return null;
             }
 
             if (loadedAssets.TryGetValue(path, out obj) == false)
             {
-                Debug.LogWarning(string.Format("资源 \"{0}\" 尚未加载", name));
-                if (loadingAssets.ContainsKey(name))
+                if (IsDefaultAsync)
                 {
-                    Debug.LogWarning(string.Format("资源 \"{0}\" 仍在加载中", name));
+                    path = PathHelper.Instance.GetResourcePath(type, name);
+                    if (loadedAssets.TryGetValue(path, out obj) == false)
+                    {
+                        Debug.LogWarning(string.Format("资源 \"{0}\" 尚未加载", name));
+                    }
+                    if (loadingAssets.ContainsKey(name))
+                    {
+                        Debug.LogWarning(string.Format("资源 \"{0}\" 仍在加载中", name));
+                        return null;
+                    }
+                }
+                else
+                {
+                    path = PathHelper.Instance.GetAssetBundlePath(type);
+                    if (loadedAssets.TryGetValue(path, out obj) == false)
+                    {
+                        Debug.LogWarning(string.Format("资源 \"{0}\" 尚未加载", name));
+                    }
+                    if (loadingAssets.ContainsKey(name))
+                    {
+                        Debug.LogWarning(string.Format("资源 \"{0}\" 仍在加载中", name));
+                        return null;
+                    }
+                }
+            }
+
+            if (obj is AssetBundle)
+            {
+                AssetBundle ab = obj as AssetBundle;
+                if (!ab.Contains(name))
+                {
+                    path = PathHelper.Instance.GetResourcePath(type, name);
+                    if (loadedAssets.TryGetValue(path, out obj) == false)
+                    {
+                        Debug.LogWarning(string.Format("资源 \"{0}\" 尚未加载", name));
+                        return null;
+                    }
                 }
             }
             return obj;

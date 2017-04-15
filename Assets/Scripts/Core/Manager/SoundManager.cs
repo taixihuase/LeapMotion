@@ -208,7 +208,14 @@ namespace Core.Manager
                 {
                     ResourceManager.Instance.LoadAsset(Define.ResourceType.Sound, soundClips[i].ClipName, (o) =>
                     {
-                        clips[i] = o as AudioClip;
+                        if (o is AssetBundle)
+                        {
+                            clips[i] = (o as AssetBundle).LoadAsset(soundClips[i].ClipName) as AudioClip;
+                        }
+                        else
+                        {
+                            clips[i] = o as AudioClip;
+                        }
                     }, false, false);
 
                     if (clips[i] == null)
