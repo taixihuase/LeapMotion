@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3129798388
+CRC: 2355241060
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -12,16 +12,16 @@ ClassTypes:
 - Class: 83
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/Sound/Warning.wav
-- Assets/Resources/Sound/Menu.mp3
-- Assets/Resources/Sound/Fire.wav
-- Assets/Resources/Sound/Main.mp3
-- Assets/Resources/Sound/ButtonUp.wav
-- Assets/Resources/Sound/ElfFire.wav
-- Assets/Resources/Sound/HeadIn.wav
-- Assets/Resources/Sound/HeadOut.wav
-- Assets/Resources/Sound/FireToggle.mp3
-- Assets/Resources/Sound/Bubble.mp3
-- Assets/Resources/Sound/WaterIn.wav
-- Assets/Resources/Sound/ButtonDown.wav
+- Assets/ResTemplate/Sound/Warning.wav
+- Assets/ResTemplate/Sound/Menu.mp3
+- Assets/ResTemplate/Sound/Fire.wav
+- Assets/ResTemplate/Sound/Main.mp3
+- Assets/ResTemplate/Sound/ButtonUp.wav
+- Assets/ResTemplate/Sound/ElfFire.wav
+- Assets/ResTemplate/Sound/HeadIn.wav
+- Assets/ResTemplate/Sound/HeadOut.wav
+- Assets/ResTemplate/Sound/FireToggle.mp3
+- Assets/ResTemplate/Sound/Bubble.mp3
+- Assets/ResTemplate/Sound/WaterIn.wav
+- Assets/ResTemplate/Sound/ButtonDown.wav
 Dependencies: []

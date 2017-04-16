@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3398639329
+CRC: 3663903138
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7003c8b8dc9556647d9908754fe3ab25
+    Hash: 8f5545bee4dc3e84ff4f10920b9147eb
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 00dcbce4b176c6af507c7290fafeb1a4
+    Hash: cbe0c0b4cb387822d2c633c610e31f02
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -90,15 +90,15 @@ Assets:
 - Assets/Textures/op2.png
 - "Assets/Textures/\u7BAD\u5934\u53F3.png"
 - Assets/Textures/op5.png
-- Assets/Resources/UI/Window/Kitchen.prefab
+- Assets/ResTemplate/UI/Window/Kitchen.prefab
 - "Assets/Textures/\u7BAD\u5934\u4E0A.png"
-- Assets/Resources/UI/Window/Bathroom.prefab
+- Assets/ResTemplate/UI/Window/Bathroom.prefab
 - Assets/Textures/tips.png
-- Assets/Resources/UI/Window/Hallway.prefab
+- Assets/ResTemplate/UI/Window/Hallway.prefab
 - Assets/Textures/close.png
 - Assets/Textures/op7.png
-- Assets/Resources/UI/Window/Menu.prefab
+- Assets/ResTemplate/UI/Window/Menu.prefab
 - Assets/Textures/op1.png
-- Assets/Resources/UI/Window/LivingRoom.prefab
+- Assets/ResTemplate/UI/Window/LivingRoom.prefab
 - Assets/Textures/jc1506161_48a.jpg
 Dependencies: []

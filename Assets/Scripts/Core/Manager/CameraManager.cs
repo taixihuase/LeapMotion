@@ -11,6 +11,10 @@ namespace Core.Manager
 
         public bool IsChanging = false;
 
+        private Vector3 resetPos;
+
+        private Quaternion resetQuaternion;
+
         private void Awake()
         {
             Init();
@@ -20,6 +24,14 @@ namespace Core.Manager
         {
             Camera = Camera.main;
             blackBG = GameObject.Find("BlackBG").GetComponent<Image>();
+            resetPos = Camera.transform.position;
+            resetQuaternion = Camera.transform.rotation;
+        }
+
+        public void ResetCamera()
+        {
+            Camera.transform.position = resetPos;
+            Camera.transform.rotation = resetQuaternion;
         }
 
         private bool isStart = false;

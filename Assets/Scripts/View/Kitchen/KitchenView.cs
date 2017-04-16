@@ -166,14 +166,17 @@ namespace View.Kitchen
         {
             isLightOn = !isLightOn;
             lights[(int)GlobalManager.Instance.SceneMode].SetActive(isLightOn);
-            if(isLightOn && GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+            if(isLightOn)
             {
-                for(int i = 0; i < fire.Length; i++)
+                if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
                 {
-                    ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
-                    ps.startColor = new Color(0, 150f / 255, 1f, 1f);
+                    PlayEnvironmentSounds("ElfFireOn");
+                    for (int i = 0; i < fire.Length; i++)
+                    {
+                        ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
+                        ps.startColor = new Color(0, 150f / 255, 1f, 1f);
+                    }
                 }
-                PlayEnvironmentSounds("ElfFireOn");
             }
             else
             {
@@ -182,7 +185,14 @@ namespace View.Kitchen
                     ParticleSystem ps = fire[i].transform.GetChild(0).GetComponent<ParticleSystem>();
                     ps.startColor = new Color(225f / 255, 1f, 150f / 255, 1f);
                 }
-                PlayEnvironmentSounds("KitchenT");
+                if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
+                {
+                    PlayEnvironmentSounds("KitchenT");
+                }
+                else
+                {
+                    StopEnvironmentSounds();
+                }
             }
         }
     }

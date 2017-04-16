@@ -55,7 +55,7 @@ namespace View.LivingRoom
                 string videoName = "Normal";
                 if (GlobalManager.Instance.SceneMode == GlobalManager.Mode.ThrillingMode)
                 {
-
+                    videoName = "Thrilling";
                 }
                 ResourceManager.Instance.LoadAsset(ResourceType.Video, videoName, o =>
                 {

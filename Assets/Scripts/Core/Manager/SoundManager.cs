@@ -174,6 +174,14 @@ namespace Core.Manager
             }
         }
 
+        public void StopEffectSound(bool breakCoroutine = false)
+        {
+            for (int i = 0; i < effectAmount; i++)
+            {
+                StopEffectSound(i, breakCoroutine);
+            }
+        }
+
         public void PlayScheduledEnvironmentSounds(List<ScheduledSound> soundClips, bool isLoopFromStart = false)
         {
             if(soundClips.Count == 0)
@@ -216,7 +224,7 @@ namespace Core.Manager
                         {
                             clips[i] = o as AudioClip;
                         }
-                    }, false, false);
+                    }, ResourceManager.Instance.IsDefaultAsync, ResourceManager.Instance.IsDefaultFromServer);
 
                     if (clips[i] == null)
                     {

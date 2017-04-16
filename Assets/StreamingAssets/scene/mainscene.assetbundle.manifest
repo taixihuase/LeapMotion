@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 714945957
+CRC: 2435249332
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -90,8 +90,8 @@ ClassTypes:
 - Class: 199
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/Scene/LivingRoom.prefab
-- Assets/Resources/Scene/Kitchen.prefab
-- Assets/Resources/Scene/Bathroom.prefab
-- Assets/Resources/Scene/Hallway.prefab
+- Assets/ResTemplate/Scene/LivingRoom.prefab
+- Assets/ResTemplate/Scene/Kitchen.prefab
+- Assets/ResTemplate/Scene/Bathroom.prefab
+- Assets/ResTemplate/Scene/Hallway.prefab
 Dependencies: []

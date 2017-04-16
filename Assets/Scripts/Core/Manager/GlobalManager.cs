@@ -72,5 +72,11 @@ namespace Core.Manager
                 }
             }
         }
+
+        private void OnApplicationQuit()
+        {
+            SoundManager.Instance.StopEnvironmentSound(true);
+            SoundManager.Instance.StopEffectSound(true);
+        }
     }
 }

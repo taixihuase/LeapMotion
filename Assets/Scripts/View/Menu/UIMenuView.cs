@@ -15,11 +15,16 @@ namespace View.Menu
         [SerializeField]
         ScrollRect scrollRect;
 
+        [SerializeField]
+        ParticleSystem particle;
+
         protected override void Awake()
         {
             base.Awake();
             SoundManager.Instance.PlayEnvironmentSound("Menu", true);
             pos[3].SetActive(true);
+            particle.Play();
+            CameraManager.Instance.ResetCamera();
         }
 
         protected override void OnDestroy()
