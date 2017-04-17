@@ -21,12 +21,7 @@ namespace Core.MVC
 
         public void AddEventHandler(EventType eventType, VariadicDelegate func)
         {
-            if (events.ContainsKey(eventType.ToString()))
-            {
-                events[eventType.ToString()] += func;
-                return;
-            }
-            events[eventType.ToString()] = func;
+            AddEventHandler(eventType.ToString(), func);
         }
 
         public void RemoveEventHandler(string eventName, VariadicDelegate func)
@@ -39,10 +34,7 @@ namespace Core.MVC
 
         public void RemoveEventHandler(EventType eventType, VariadicDelegate func)
         {
-            if (events.ContainsKey(eventType.ToString()))
-            {
-                events[eventType.ToString()] -= func;
-            }
+            RemoveEventHandler(eventType.ToString(), func);
         }
 
         public void RaiseEvent(string eventName, params object[] e)
@@ -59,30 +51,12 @@ namespace Core.MVC
 
         public void RaiseEvent(EventType eventType, params object[] e)
         {
-            VariadicDelegate func = null;
-            if (events.TryGetValue(eventType.ToString(), out func))
-            {
-                if (func != null)
-                {
-                    func(e);
-                }
-            }
+            RaiseEvent(eventType.ToString(), e);
         }
 
         public void RemoveAllEventHandler(EventType eventType)
         {
-            if(events.ContainsKey(eventType.ToString()))
-            {
-                if(events[eventType.ToString()] != null)
-                {
-                    Delegate[] arr = events[eventType.ToString()].GetInvocationList();
-                    for(int i = 0; i < arr.Length; i++)
-                    {
-                        VariadicDelegate func = arr[i] as VariadicDelegate;
-                        RemoveEventHandler(eventType.ToString(), func);
-                    }
-                }
-            }
+            RemoveAllEventHandler(eventType.ToString());
         }
 
         public void RemoveAllEventHandler(string eventName)
