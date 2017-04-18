@@ -17,6 +17,30 @@ namespace Core.Manager
 
         private Dictionary<Action, Dictionary<UpdateType, List<string>>> functionToNameMap = new Dictionary<Action, Dictionary<UpdateType, List<string>>>();
 
+        private void Update()
+        {
+            if(onUpdate != null)
+            {
+                onUpdate();
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (onFixedUpdate != null)
+            {
+                onFixedUpdate();
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (onLateUpdate != null)
+            {
+                onLateUpdate();
+            }
+        }
+
         public bool CheckNameInMap(string name)
         {
             if (name != null)

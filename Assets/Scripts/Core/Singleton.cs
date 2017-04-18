@@ -29,10 +29,7 @@ namespace Core
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new T();
-                }
+                if (instance == null) { instance = new T(); }
                 return instance;
             }
         }
