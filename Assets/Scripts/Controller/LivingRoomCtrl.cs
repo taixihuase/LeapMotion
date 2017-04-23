@@ -1,17 +1,14 @@
-﻿using Core;
-using Define;
+﻿using Define;
 using Model;
-using System;
 
 namespace Controller
 {
-    public class LivingRoomCtrl : Singleton<LivingRoomCtrl>
+    public class LivingRoomCtrl : Core.MVC.Controller<LivingRoomCtrl>
     {
-        public LivingRoomModel Model = new LivingRoomModel();
-
-        public void MovePos(int index, Action callback)
+        protected override void Init()
         {
-            Model.Refresh(EventType.MoveCameraPos, index, callback);
+            base.Init();
+            model = new LivingRoomModel();
         }
 
         public void InsertPlug()

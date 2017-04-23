@@ -1,10 +1,13 @@
-﻿using Core;
-using Model;
+﻿using Model;
 
 namespace Controller
 {
-    public class HallwayCtrl : Singleton<HallwayCtrl>
+    public class HallwayCtrl : Core.MVC.Controller<HallwayCtrl>
     {
-        public HallwayModel Model = new HallwayModel();
+        protected override void Init()
+        {
+            base.Init();
+            model = new HallwayModel();
+        }
     }
 }

@@ -1,17 +1,14 @@
-﻿using Core;
-using Define;
+﻿using Define;
 using Model;
-using System;
 
 namespace Controller
 {
-    public class KitchenCtrl : Singleton<KitchenCtrl>
+    public class KitchenCtrl : Core.MVC.Controller<KitchenCtrl>
     {
-        public KitchenModel Model = new KitchenModel();
-
-        public void MovePos(int index, Action callback)
+        protected override void Init()
         {
-            Model.Refresh(EventType.MoveCameraPos, index, callback);
+            base.Init();
+            model = new KitchenModel();
         }
 
         public void ChangeFire(int index)

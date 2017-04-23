@@ -1,17 +1,14 @@
-﻿using Core;
-using Define;
+﻿using Define;
 using Model;
-using System;
 
 namespace Controller
 {
-    public class BathroomCtrl : Singleton<BathroomCtrl>
+    public class BathroomCtrl : Core.MVC.Controller<BathroomCtrl>
     {
-        public BathroomModel Model = new BathroomModel();
-
-        public void MovePos(int index, Action callback)
+        protected override void Init()
         {
-            Model.Refresh(EventType.MoveCameraPos, index, callback);
+            base.Init();
+            model = new BathroomModel();
         }
 
         public void ChangeWaterInToggle()

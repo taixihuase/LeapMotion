@@ -109,12 +109,7 @@ namespace Core.Manager
             get { return pool; }
         }
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
+        protected override void Init()
         {
             pool = LeapMotionManager.Instance.HandPool;
             HandPool.ModelGroup graphics = pool.GetGroup("Graphics_Hands");

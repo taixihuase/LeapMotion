@@ -19,6 +19,15 @@ namespace Core
                 return instance;
             }
         }
+
+        protected virtual void Awake()
+        {
+            Init();
+        }
+
+        protected virtual void Init()
+        {    
+        }
     }
 
     public abstract class Singleton<T>  where T : class, new()
@@ -32,6 +41,15 @@ namespace Core
                 if (instance == null) { instance = new T(); }
                 return instance;
             }
+        }
+
+        protected Singleton()
+        {
+            Init();
+        }
+
+        protected virtual void Init()
+        {            
         }
     }
 }

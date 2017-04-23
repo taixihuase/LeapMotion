@@ -38,7 +38,12 @@ namespace Core.Manager
             get { return initState; }
         }
 
-        public void Init()
+        public void InitManager()
+        {
+
+        }
+
+        protected override void Init()
         {
             provider = LeapMotionManager.Instance.Provider as LeapServiceProvider;
             isConnected = provider.IsConnected();

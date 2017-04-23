@@ -15,12 +15,7 @@ namespace Core.Manager
 
         private Quaternion resetQuaternion;
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
+        protected override void Init()
         {
             Camera = Camera.main;
             blackBG = GameObject.Find("BlackBG").GetComponent<Image>();
@@ -30,8 +25,9 @@ namespace Core.Manager
 
         public void ResetCamera()
         {
-            Camera.transform.position = resetPos;
-            Camera.transform.rotation = resetQuaternion;
+            isStart = false;
+            toPos = Camera.transform.position = resetPos;
+            toRot = Camera.transform.rotation = resetQuaternion;
         }
 
         private bool isStart = false;
@@ -75,7 +71,6 @@ namespace Core.Manager
 
         public void MoveAndRotate(Transform target, Action callback = null)
         {
-            isStart = false;
             toPos = target.position;
             toRot = target.rotation;
             isStart = true;

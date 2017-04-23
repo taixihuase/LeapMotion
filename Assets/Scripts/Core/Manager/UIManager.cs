@@ -16,12 +16,7 @@ namespace Core.Manager
             get { return root; }
         }
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
+        protected override void Init()
         {
             root = transform;
             root.localPosition = Vector3.zero;

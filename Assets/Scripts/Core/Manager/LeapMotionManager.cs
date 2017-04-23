@@ -34,12 +34,7 @@ namespace Core.Manager
             get { return handPool; }
         }
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
+        protected override void Init()
         {
             handController = FindObjectOfType<LeapHandController>();
             provider = FindObjectOfType<LeapProvider>();

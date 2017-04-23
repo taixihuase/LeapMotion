@@ -14,12 +14,7 @@ namespace Core.Manager
 
         private int effectAmount = 5;
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        private void Init()
+        protected override void Init()
         {
             environmentSound = gameObject.AddComponent<AudioSource>();
             effectSound = new List<AudioSource>();
