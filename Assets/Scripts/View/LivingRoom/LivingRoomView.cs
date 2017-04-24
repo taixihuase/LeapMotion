@@ -131,13 +131,13 @@ namespace View.LivingRoom
 
         private void InsertPlug(params object[] arg1)
         {
-            if (plugView.IsDrag)
+            if (plugView.IsDrag == false)
             {
-                insertFunc.Invoke(null);
+                plugInteraction.OnHandReleasedEvent += insertFunc;
             }
             else
             {
-                plugInteraction.OnHandReleasedEvent += insertFunc;
+                insertFunc.Invoke(null);
             }         
         }
 
