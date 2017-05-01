@@ -129,10 +129,6 @@ namespace Leap.Unity
                                     for(int l = 0; l < TargetObjects[j].Length; l++)
                                     {
                                         GameObject rhs = TargetObjects[j][l];
-                                        if (lhs == null)
-                                            Debug.Log(k);
-                                        if (rhs == null)
-                                            Debug.Log(l);
                                         if (distanceSquared(lhs, rhs) < onSquared)
                                         {
                                             _currentLhsObj = lhs;
