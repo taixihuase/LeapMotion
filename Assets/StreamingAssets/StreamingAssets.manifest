@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 814177126
+CRC: 318811458
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: ui/windows.assetbundle
+      Name: scene/mainscene.assetbundle
       Dependencies: {}
     Info_1:
-      Name: scene/mainscene.assetbundle
+      Name: ui/windows.assetbundle
       Dependencies: {}
     Info_2:
       Name: sound/sounds.assetbundle

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3663903138
+CRC: 2667242414
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8f5545bee4dc3e84ff4f10920b9147eb
+    Hash: fcd5453fdf41ee2627bf32ba55d4ace4
   TypeTreeHash:
     serializedVersion: 2
     Hash: cbe0c0b4cb387822d2c633c610e31f02
@@ -84,6 +84,7 @@ Assets:
 - "Assets/Textures/\u7BAD\u5934\u4E0B.png"
 - Assets/Textures/dangerous.png
 - "Assets/Textures/\u7BAD\u5934\u5DE6.png"
+- Assets/Textures/Menu.jpg
 - Assets/Textures/op3.png
 - Assets/Textures/panel.png
 - Assets/Textures/op4.png
