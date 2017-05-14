@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Controller;
+﻿using Controller;
 using Core.Manager;
 using Core.MVC;
 using Model;

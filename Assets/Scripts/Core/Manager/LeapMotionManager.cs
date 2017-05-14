@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Leap.Unity;
+﻿using Leap.Unity;
 using Leap.Unity.Interaction;
 
 namespace Core.Manager

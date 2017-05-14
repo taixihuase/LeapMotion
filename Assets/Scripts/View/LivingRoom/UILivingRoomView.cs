@@ -6,7 +6,6 @@ using Model;
 using Tool;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using View.Hallway;
 using View.LivingRoom;
 using EventType = Define.EventType;
